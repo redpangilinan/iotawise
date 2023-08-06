@@ -5,7 +5,7 @@ export const navLinks = [
   },
   {
     route: "Features",
-    path: "#features",
+    path: "/#features",
   },
   {
     route: "Dashboard",
