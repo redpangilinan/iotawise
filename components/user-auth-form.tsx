@@ -30,7 +30,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         ) : (
           <AiFillGoogleCircle className="mr-2 h-4 w-4" />
         )}{" "}
-        Google
+        Continue with Google
       </button>
     </div>
   )
