@@ -1,8 +1,6 @@
 import "./globals.css"
 import { siteConfig } from "@/config/site"
 import { Inter } from "next/font/google"
-import Navbar from "@/components/layout/navbar"
-import Footer from "@/components/layout/footer"
 import { ThemeProvider } from "@/components/theme-provider"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -53,16 +51,14 @@ interface RootLayoutProps {
   children: React.ReactNode
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${inter.className} flex min-h-screen flex-col bg-background text-primary`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Navbar />
           {children}
-          <Footer />
         </ThemeProvider>
       </body>
     </html>
