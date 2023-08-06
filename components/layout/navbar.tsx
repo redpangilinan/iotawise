@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { ModeToggle } from "@/components/mode-toggle"
 import { siteConfig } from "@/config/site"
 import { navLinks } from "@/lib/links"
+import { NavUser } from "@/types/auth"
+import Avatar from "./avatar"
 
-export default function Navbar() {
+export default function Navbar({ user }: NavUser) {
   const [navbar, setNavbar] = useState(false)
 
   const handleClick = async () => {
@@ -67,7 +68,7 @@ export default function Navbar() {
                   </svg>
                 )}
               </button>
-              <ModeToggle />
+              <Avatar user={user} />
             </div>
           </div>
         </div>
@@ -94,7 +95,7 @@ export default function Navbar() {
           </div>
         </div>
         <div className="hidden md:block">
-          <ModeToggle />
+          <Avatar user={user} />
         </div>
       </nav>
     </header>
