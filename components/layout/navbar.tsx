@@ -1,13 +1,18 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import Link from "next/link"
+import { User } from "next-auth"
+
+import { useState, useEffect } from "react"
 import { siteConfig } from "@/config/site"
 import { navLinks } from "@/lib/links"
-import { NavUser } from "@/types/auth"
-import Avatar from "./avatar"
+import { UserNavDisplay } from "@/components/user/user-nav-display"
 
-export default function Navbar({ user }: NavUser) {
+interface NavbarProps extends React.HTMLAttributes<HTMLDivElement> {
+  user: Pick<User, "name" | "image" | "email">
+}
+
+export default function Navbar({ user }: NavbarProps) {
   const [navbar, setNavbar] = useState(false)
 
   const handleClick = async () => {
@@ -68,7 +73,13 @@ export default function Navbar({ user }: NavUser) {
                   </svg>
                 )}
               </button>
-              <Avatar user={user} />
+              <UserNavDisplay
+                user={{
+                  name: user?.name,
+                  image: user?.image,
+                  email: user?.email,
+                }}
+              />
             </div>
           </div>
         </div>
@@ -95,7 +106,13 @@ export default function Navbar({ user }: NavUser) {
           </div>
         </div>
         <div className="hidden md:block">
-          <Avatar user={user} />
+          <UserNavDisplay
+            user={{
+              name: user?.name,
+              image: user?.image,
+              email: user?.email,
+            }}
+          />
         </div>
       </nav>
     </header>
