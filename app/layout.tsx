@@ -2,6 +2,7 @@ import "./globals.css"
 import { siteConfig } from "@/config/site"
 import { Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
+import { Toaster } from "@/components/ui/toaster"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -57,6 +58,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       <body className={`${inter.className} flex min-h-screen flex-col`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
