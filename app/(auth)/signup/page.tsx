@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description: "Sign in to your account",
 }
 
-export default function LoginPage() {
+export default function Signup() {
   return (
     <main className="container flex h-screen w-screen flex-col items-center justify-center">
       <Link
