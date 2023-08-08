@@ -5,7 +5,7 @@ import { User } from "next-auth"
 
 import { useState, useEffect } from "react"
 import { siteConfig } from "@/config/site"
-import { navLinks } from "@/lib/links"
+import { navLinks } from "@/config/links"
 import { UserNavDisplay } from "@/components/user/user-nav-display"
 
 interface NavbarProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -91,17 +91,20 @@ export default function Navbar({ user }: NavbarProps) {
             style={{ width: "100%", maxWidth: "20rem" }}
           >
             <ul className="flex flex-col items-center space-y-4 opacity-60 md:flex-row md:space-x-6 md:space-y-0">
-              {navLinks.map((link) => (
-                <li key={link.route}>
-                  <Link
-                    className="hover:underline"
-                    href={link.path}
-                    onClick={handleClick}
-                  >
-                    {link.route}
-                  </Link>
-                </li>
-              ))}
+              {navLinks.data.map((item, index) => {
+                return (
+                  item.href && (
+                    <Link
+                      key={index}
+                      href={item.disabled ? "/" : item.href}
+                      className="hover:underline"
+                      onClick={handleClick}
+                    >
+                      {item.title}
+                    </Link>
+                  )
+                )
+              })}
             </ul>
           </div>
         </div>

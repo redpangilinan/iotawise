@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { siteConfig } from "@/config/site"
-import { navLinks } from "@/lib/links"
+import { navLinks } from "@/config/links"
 import { ModeToggle } from "../mode-toggle"
 
 export default function Footer() {
@@ -14,13 +14,20 @@ export default function Footer() {
             </h1>
           </Link>
           <ul className="mb-6 flex flex-wrap items-center opacity-60 sm:mb-0">
-            {navLinks.map((link) => (
-              <li key={link.route}>
-                <Link href={link.path} className="mr-4 hover:underline md:mr-6">
-                  {link.route}
-                </Link>
-              </li>
-            ))}
+            {navLinks.data.map((item, index) => {
+              return (
+                item.href && (
+                  <li key={index}>
+                    <Link
+                      href={item.disabled ? "/" : item.href}
+                      className="mr-4 hover:underline md:mr-6"
+                    >
+                      {item.title}
+                    </Link>
+                  </li>
+                )
+              )
+            })}
           </ul>
         </div>
         <hr className="my-6 text-muted-foreground sm:mx-auto lg:my-6" />

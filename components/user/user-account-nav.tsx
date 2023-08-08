@@ -4,6 +4,8 @@ import Link from "next/link"
 import { User } from "next-auth"
 import { signOut } from "next-auth/react"
 
+import { dashboardLinks } from "@/config/links"
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -40,15 +42,15 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
           </div>
         </div>
         <DropdownMenuSeparator />
-        <DropdownMenuItem asChild>
-          <Link href="/dashboard">Dashboard</Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href="/dashboard/activity">Activities</Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href="/dashboard/settings">Settings</Link>
-        </DropdownMenuItem>
+        {dashboardLinks.data.map((item, index) => {
+          return (
+            item.href && (
+              <DropdownMenuItem key={index} asChild>
+                <Link href={item.href}>{item.title}</Link>
+              </DropdownMenuItem>
+            )
+          )
+        })}
         <DropdownMenuSeparator />
         <DropdownMenuItem
           className="cursor-pointer"
