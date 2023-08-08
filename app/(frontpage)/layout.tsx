@@ -13,7 +13,13 @@ export default async function FrontPageLayout({
 
   return (
     <>
-      <Navbar user={user} />
+      <Navbar
+        user={{
+          name: user?.name,
+          image: user?.image,
+          email: user?.email,
+        }}
+      />
       {children}
       <Footer />
     </>
