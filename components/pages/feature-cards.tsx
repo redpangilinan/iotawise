@@ -45,7 +45,7 @@ function Cards() {
 
 export default function FeatureCards() {
   return (
-    <section className="bg-slate-50 dark:bg-slate-900" id="features">
+    <section className="bg-secondary" id="features">
       <div className="container space-y-8 py-12 text-center lg:py-20">
         <HeadingText subtext="What does Iotawise offer?">Features</HeadingText>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-4">

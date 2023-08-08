@@ -39,7 +39,7 @@ export default function Navbar({ user }: NavbarProps) {
             </Link>
             <div className="flex gap-1 md:hidden">
               <button
-                className="rounded-md p-2 text-primary outline-none focus:border focus:border-primary"
+                className="rounded-md p-2 text-foreground outline-none focus:border focus:border-primary"
                 aria-label="Hamburger Menu"
                 onClick={() => setNavbar(!navbar)}
               >
@@ -90,7 +90,7 @@ export default function Navbar({ user }: NavbarProps) {
             }`}
             style={{ width: "100%", maxWidth: "20rem" }}
           >
-            <ul className="flex flex-col items-center space-y-4 text-primary opacity-60 md:flex-row md:space-x-6 md:space-y-0">
+            <ul className="flex flex-col items-center space-y-4 opacity-60 md:flex-row md:space-x-6 md:space-y-0">
               {navLinks.map((link) => (
                 <li key={link.route}>
                   <Link

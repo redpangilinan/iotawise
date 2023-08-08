@@ -3,6 +3,8 @@ import Link from "next/link"
 import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
+import { FaGithub } from "react-icons/fa"
+
 export default function OpenSource() {
   return (
     <section className="container py-12 lg:py-20">
@@ -16,8 +18,11 @@ export default function OpenSource() {
         <Link
           href="https://github.com/redpangilinan/iotawise"
           target="_blank"
-          className={`w-[10rem] ${cn(buttonVariants({ size: "sm" }))}`}
+          className={`w-[10rem] gap-2 ${cn(
+            buttonVariants({ variant: "outline", size: "sm" })
+          )}`}
         >
+          <FaGithub />
           Github
         </Link>
       </div>
