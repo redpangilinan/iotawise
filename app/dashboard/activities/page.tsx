@@ -5,7 +5,8 @@ import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
 
 export const metadata: Metadata = {
-  title: "Dashboard",
+  title: "Activities",
+  description: "Manage account activities/hobbies.",
 }
 
 export default async function Dashboard() {
