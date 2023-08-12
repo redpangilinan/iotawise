@@ -4,7 +4,7 @@ import * as z from "zod"
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 
-const postCreateSchema = z.object({
+const activityCreateSchema = z.object({
   name: z.string(),
   description: z.string().optional(),
   colorCode: z.string(),
@@ -48,7 +48,7 @@ export async function POST(req: Request) {
 
     // Create new activity for authenticated user
     const json = await req.json()
-    const body = postCreateSchema.parse(json)
+    const body = activityCreateSchema.parse(json)
 
     const activity = await db.activity.create({
       data: {
