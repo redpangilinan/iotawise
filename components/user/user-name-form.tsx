@@ -109,7 +109,7 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
             {isSaving && (
               <Icon name="spinner" className="mr-2 h-4 w-4 animate-spin" />
             )}
-            <span>Save</span>
+            <span>Save changes</span>
           </button>
         </CardFooter>
       </Card>

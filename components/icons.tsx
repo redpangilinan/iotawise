@@ -5,10 +5,14 @@ import {
   BsChevronRight,
   BsActivity,
 } from "react-icons/bs"
+import {
+  AiOutlineEllipsis,
+  AiOutlineWarning,
+  AiOutlinePlus,
+} from "react-icons/ai"
 import { ImSpinner8 } from "react-icons/im"
 import { FaUserAlt } from "react-icons/fa"
 import { MdDeleteForever } from "react-icons/md"
-import { AiOutlineEllipsis } from "react-icons/ai"
 import { RxDashboard } from "react-icons/rx"
 import { LuSettings } from "react-icons/lu"
 
@@ -35,6 +39,8 @@ const Icons: IconsType = {
   spinner: ImSpinner8,
   userAlt: FaUserAlt,
   ellipsis: AiOutlineEllipsis,
+  warning: AiOutlineWarning,
+  add: AiOutlinePlus,
 }
 
 interface IconProps extends React.HTMLProps<HTMLElement> {
