@@ -34,6 +34,7 @@ export async function PATCH(
         name: body.name,
         description: body.description,
         colorCode: body.colorCode,
+        updatedAt: new Date(),
       },
     })
 
