@@ -21,7 +21,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { toast } from "@/components/ui/use-toast"
-import { ImSpinner4 } from "react-icons/im"
+import { Icon } from "@/components/icons"
 
 interface UserNameFormProps extends React.HTMLAttributes<HTMLFormElement> {
   user: Pick<User, "id" | "name">
@@ -106,7 +106,9 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
             className={cn(buttonVariants(), className)}
             disabled={isSaving}
           >
-            {isSaving && <ImSpinner4 className="mr-2 h-4 w-4 animate-spin" />}
+            {isSaving && (
+              <Icon name="spinner" className="mr-2 h-4 w-4 animate-spin" />
+            )}
             <span>Save</span>
           </button>
         </CardFooter>

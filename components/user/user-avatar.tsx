@@ -3,7 +3,7 @@ import { User } from "@prisma/client"
 import { AvatarProps } from "@radix-ui/react-avatar"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
-import { FaUserAlt } from "react-icons/fa"
+import { Icon } from "@/components/icons"
 
 interface UserAvatarProps extends AvatarProps {
   user: Pick<User, "image" | "name">
@@ -18,7 +18,7 @@ export function UserAvatar({ user, ...props }: UserAvatarProps) {
         ) : (
           <AvatarFallback>
             <span className="sr-only">{user.name}</span>
-            <FaUserAlt />
+            <Icon name="userAlt" />
           </AvatarFallback>
         )}
       </Avatar>

@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { UserAuthForm } from "@/components/user/user-auth-form"
 
-import { BsChevronLeft } from "react-icons/bs"
+import { Icon } from "@/components/icons"
 
 export const metadata: Metadata = {
   title: "Sign in",
@@ -23,7 +23,7 @@ export default function Signin() {
         )}
       >
         <>
-          <BsChevronLeft className="mr-2 h-4 w-4" />
+          <Icon name="back" className="mr-2 h-4 w-4" />
           Back
         </>
       </Link>
