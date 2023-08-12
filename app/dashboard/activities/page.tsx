@@ -9,6 +9,8 @@ import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
 import { Shell } from "@/components/layout/shell"
 import { EmptyPlaceholder } from "@/components/empty-placeholder"
 import { ActivityItem } from "@/components/activity/activity-item"
+import { ActivityAddButton } from "@/components/activity/activity-add-button"
+import { Icon } from "@/components/icons"
 
 export const metadata: Metadata = {
   title: "Activities",
@@ -37,10 +39,9 @@ export default async function Dashboard() {
 
   return (
     <Shell>
-      <DashboardHeader
-        heading="Activities"
-        text="Manage account activities/hobbies."
-      />
+      <DashboardHeader heading="Activities" text="Manage account activities.">
+        <ActivityAddButton />
+      </DashboardHeader>
       <div>
         {activities?.length ? (
           <div className="divide-y divide-border rounded-md border">
@@ -50,12 +51,16 @@ export default async function Dashboard() {
           </div>
         ) : (
           <EmptyPlaceholder>
+            <div className="flex h-20 w-20 items-center justify-center rounded-full bg-muted">
+              <Icon name="activity" className="h-10 w-10" />
+            </div>
             <EmptyPlaceholder.Title>
               No activities created
             </EmptyPlaceholder.Title>
             <EmptyPlaceholder.Description>
               Add an activity to start monitoring your progress.
             </EmptyPlaceholder.Description>
+            <ActivityAddButton variant="outline" />
           </EmptyPlaceholder>
         )}
       </div>

@@ -59,13 +59,16 @@ export function ActivityOperations({ activity }: ActivityOperationsProps) {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuItem>
-            <Link href={`/activities/${activity.id}`} className="flex w-full">
-              Edit
+            <Link
+              href={`/dashboard/activities/${activity.id}/settings`}
+              className="flex w-full"
+            >
+              Settings
             </Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem
-            className="flex cursor-pointer items-center text-destructive focus:text-destructive"
+            className="flex cursor-pointer items-center text-red-600 focus:text-red-600"
             onSelect={() => setShowDeleteAlert(true)}
           >
             Delete

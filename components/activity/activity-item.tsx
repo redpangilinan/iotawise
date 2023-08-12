@@ -15,7 +15,7 @@ interface ActivityItemProps {
 export function ActivityItem({ activity }: ActivityItemProps) {
   return (
     <div className="flex items-center justify-between p-4">
-      <div className="flex flex-col items-center gap-4 md:flex-row md:gap-12">
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:gap-12">
         <div className="flex items-center gap-4">
           <div
             className="h-4 w-4 rounded-full shadow shadow-black dark:shadow-white"
@@ -23,7 +23,7 @@ export function ActivityItem({ activity }: ActivityItemProps) {
           ></div>
           <div>
             <Link
-              href={`/editor/${activity.id}`}
+              href={`/dashboard/activities/${activity.id}`}
               className="font-semibold hover:underline"
             >
               {activity.name}
