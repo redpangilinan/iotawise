@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation"
 
 import { NavItem } from "@/types"
 import { cn } from "@/lib/utils"
+import { Icon } from "@/components/icons"
 
 interface DashboardNavProps {
   items: NavItem[]
@@ -20,6 +21,7 @@ export function DashboardNav({ items }: DashboardNavProps) {
   return (
     <nav className="grid items-start gap-2">
       {items.map((item, index) => {
+        const icon = item.icon || "next"
         return (
           item.href && (
             <Link key={index} href={item.disabled ? "/" : item.href}>
@@ -30,6 +32,7 @@ export function DashboardNav({ items }: DashboardNavProps) {
                   item.disabled && "cursor-not-allowed opacity-80"
                 )}
               >
+                <Icon name={icon} className="mr-2 h-4 w-4" />
                 <span>{item.title}</span>
               </span>
             </Link>

@@ -3,21 +3,38 @@ import {
   BsSun,
   BsChevronLeft,
   BsChevronRight,
+  BsActivity,
 } from "react-icons/bs"
-import { ImSpinner4 } from "react-icons/im"
+import { ImSpinner8 } from "react-icons/im"
 import { FaUserAlt } from "react-icons/fa"
+import { MdDeleteForever } from "react-icons/md"
+import { AiOutlineEllipsis } from "react-icons/ai"
+import { RxDashboard } from "react-icons/rx"
+import { LuSettings } from "react-icons/lu"
 
 interface IconsType {
   [key: string]: React.ElementType
 }
 
 const Icons: IconsType = {
+  // Dashboard Icons
+  dashboard: RxDashboard,
+  activity: BsActivity,
+  settings: LuSettings,
+
+  // Mode Toggle
   moon: BsMoonStars,
   sun: BsSun,
+
+  // Navigation
   back: BsChevronLeft,
   next: BsChevronRight,
-  spinner: ImSpinner4,
+
+  // Common
+  trash: MdDeleteForever,
+  spinner: ImSpinner8,
   userAlt: FaUserAlt,
+  ellipsis: AiOutlineEllipsis,
 }
 
 interface IconProps extends React.HTMLProps<HTMLElement> {
