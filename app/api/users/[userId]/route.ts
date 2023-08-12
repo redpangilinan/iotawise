@@ -17,13 +17,13 @@ export async function PATCH(
 ) {
   try {
     const { params } = routeContextSchema.parse(context)
-
-    // Ensure user is authenticated
     const session = await getServerSession(authOptions)
+
     if (!session?.user || params.userId !== session?.user.id) {
       return new Response(null, { status: 403 })
     }
 
+    // Edit username based on input
     const body = await req.json()
     const payload = userNameSchema.parse(body)
 
@@ -33,6 +33,7 @@ export async function PATCH(
       },
       data: {
         name: payload.name,
+        updatedAt: new Date(),
       },
     })
 
