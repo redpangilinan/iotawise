@@ -3,7 +3,6 @@
 import Link from "next/link"
 import { User } from "next-auth"
 
-import { useState, useEffect } from "react"
 import { siteConfig } from "@/config/site"
 import { navLinks } from "@/config/links"
 import { UserNavDisplay } from "@/components/user/user-nav-display"

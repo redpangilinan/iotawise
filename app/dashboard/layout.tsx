@@ -15,7 +15,7 @@ export default async function DashboardLayout({
   const user = await getCurrentUser()
 
   return (
-    <>
+    <div className="flex min-h-screen flex-col space-y-6">
       <Navbar
         user={{
           name: user?.name,
@@ -32,6 +32,6 @@ export default async function DashboardLayout({
         </main>
       </div>
       <Footer />
-    </>
+    </div>
   )
 }
