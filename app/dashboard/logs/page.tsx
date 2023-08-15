@@ -7,8 +7,8 @@ import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
 import { Shell } from "@/components/layout/shell"
 
 export const metadata: Metadata = {
-  title: "Dashboard",
-  description: "Monitor your progress.",
+  title: "Logs",
+  description: "View and modify activity logs.",
 }
 
 export default async function SettingsPage() {
@@ -20,7 +20,7 @@ export default async function SettingsPage() {
 
   return (
     <Shell>
-      <DashboardHeader heading="Dashboard" text="Monitor your progress." />
+      <DashboardHeader heading="Logs" text="View and modify activity logs." />
       <div className="grid grid-cols-1 gap-10">Work in progress</div>
     </Shell>
   )
