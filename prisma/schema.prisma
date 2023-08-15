@@ -83,7 +83,7 @@ model Activity {
 model ActivityLog {
   id         String   @id @default(cuid())
   activityId String   @map(name: "activity_id")
-  date       DateTime
+  date       DateTime @default(now())
   count      Int      @default(1)
 
   activity Activity @relation(fields: [activityId], references: [id])
