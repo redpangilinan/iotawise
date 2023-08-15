@@ -1,9 +1,7 @@
-import { getServerSession } from "next-auth"
 import * as z from "zod"
-
-import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { activityPatchSchema } from "@/lib/validations/activity"
+import { verifyActivity } from "@/lib/api/activities"
 
 const routeContextSchema = z.object({
   params: z.object({
@@ -74,17 +72,4 @@ export async function DELETE(
 
     return new Response(null, { status: 500 })
   }
-}
-
-// Verify if the user has access to the activity
-async function verifyActivity(activityId: string) {
-  const session = await getServerSession(authOptions)
-  const count = await db.activity.count({
-    where: {
-      id: activityId,
-      userId: session?.user.id,
-    },
-  })
-
-  return count > 0
 }
