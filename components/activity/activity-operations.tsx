@@ -25,6 +25,35 @@ import {
 import { toast } from "@/components/ui/use-toast"
 import { Icon } from "@/components/icons"
 
+async function addActivityLog(activityId: string) {
+  const response = await fetch(`/api/activities/${activityId}/logs`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      date: new Date(),
+      count: 1,
+    }),
+  })
+
+  if (!response?.ok) {
+    toast({
+      title: "Something went wrong.",
+      description: "Your activity was not logged. Please try again.",
+      variant: "destructive",
+    })
+  } else {
+    toast({
+      title: "Operation successful.",
+      description: "Your activity has been logged successfully.",
+      variant: "default",
+    })
+  }
+
+  return true
+}
+
 async function deleteActivity(activityId: string) {
   const response = await fetch(`/api/activities/${activityId}`, {
     method: "DELETE",
@@ -35,6 +64,12 @@ async function deleteActivity(activityId: string) {
       title: "Something went wrong.",
       description: "Your activity was not deleted. Please try again.",
       variant: "destructive",
+    })
+  } else {
+    toast({
+      title: "Item has been deleted.",
+      description: "Your activity has been deleted successfully.",
+      variant: "default",
     })
   }
 
@@ -49,6 +84,8 @@ export function ActivityOperations({ activity }: ActivityOperationsProps) {
   const router = useRouter()
   const [showDeleteAlert, setShowDeleteAlert] = React.useState<boolean>(false)
   const [isDeleteLoading, setIsDeleteLoading] = React.useState<boolean>(false)
+  const [showAddAlert, setShowAddAlert] = React.useState<boolean>(false)
+  const [isAddLoading, setIsAddLoading] = React.useState<boolean>(false)
 
   return (
     <>
@@ -58,6 +95,13 @@ export function ActivityOperations({ activity }: ActivityOperationsProps) {
           <span className="sr-only">Open</span>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
+          <DropdownMenuItem
+            className="flex cursor-pointer items-center"
+            onSelect={() => setShowAddAlert(true)}
+          >
+            Log Activity
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
           <DropdownMenuItem>
             <Link
               href={`/dashboard/activities/${activity.id}/settings`}
@@ -75,6 +119,48 @@ export function ActivityOperations({ activity }: ActivityOperationsProps) {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+
+      {/* Add Alert */}
+      <AlertDialog open={showAddAlert} onOpenChange={setShowAddAlert}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              Are you sure you want to add a log to this activity?
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              This will create an activity log.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={async (
+                event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+              ) => {
+                event.preventDefault()
+                setIsAddLoading(true)
+
+                const added = await addActivityLog(activity.id)
+
+                if (added) {
+                  setIsAddLoading(false)
+                  setShowAddAlert(false)
+                  router.refresh()
+                }
+              }}
+            >
+              {isAddLoading ? (
+                <Icon name="spinner" className="mr-2 h-4 w-4 animate-spin" />
+              ) : (
+                <Icon name="add" className="mr-2 h-4 w-4" />
+              )}
+              <span>Log Activity</span>
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* Delete Alert */}
       <AlertDialog open={showDeleteAlert} onOpenChange={setShowDeleteAlert}>
         <AlertDialogContent>
           <AlertDialogHeader>
