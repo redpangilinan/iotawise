@@ -26,13 +26,16 @@ import { toast } from "@/components/ui/use-toast"
 import { Icon } from "@/components/icons"
 
 async function addActivityLog(activityId: string) {
+  const currentDate = new Date()
+  currentDate.setHours(0, 0, 0, 0)
+
   const response = await fetch(`/api/activities/${activityId}/logs`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      date: new Date(),
+      date: currentDate.toISOString(),
       count: 1,
     }),
   })

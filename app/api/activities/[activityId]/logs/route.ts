@@ -66,10 +66,33 @@ export async function POST(
       return new Response(null, { status: 403 })
     }
 
-    // Create new log for the selected activity
     const json = await req.json()
     const body = activityLogCreateSchema.parse(json)
 
+    // Check if the log exists for the current date
+    const existingLog = await db.activityLog.findFirst({
+      where: {
+        date: body.date,
+        activityId: params.activityId,
+      },
+    })
+
+    // If log already exists, update the count
+    if (existingLog) {
+      const updatedLog = await db.activityLog.update({
+        where: { id: existingLog.id },
+        data: {
+          count: existingLog.count + body.count,
+        },
+        select: {
+          id: true,
+        },
+      })
+
+      return new Response(JSON.stringify(updatedLog))
+    }
+
+    // Create new log for the selected activity if no log exists
     const logs = await db.activityLog.create({
       data: {
         date: body.date,
