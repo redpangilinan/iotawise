@@ -4,6 +4,7 @@ import { redirect } from "next/navigation"
 import { db } from "@/lib/db"
 import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
+import { formatDate } from "@/lib/utils"
 
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
 import { Shell } from "@/components/layout/shell"
@@ -48,7 +49,7 @@ export default async function SettingsPage() {
 
   return (
     <Shell>
-      <DashboardHeader heading="Logs" text="View and modify activity logs." />
+      <DashboardHeader heading="Logs" text="View activity logs. (WIP)" />
       <div className="grid grid-cols-1 gap-10">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y">
@@ -56,7 +57,7 @@ export default async function SettingsPage() {
               {logs.map((log) => (
                 <tr key={log.id}>
                   <td className="whitespace-nowrap px-6 py-4">
-                    {new Date(log.date).toLocaleDateString()}
+                    {formatDate(log.date.toDateString())}
                   </td>
                   <td className="whitespace-nowrap px-6 py-4">
                     {log.activity.name}
