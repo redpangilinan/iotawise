@@ -42,28 +42,24 @@ export default async function Dashboard() {
       <DashboardHeader heading="Activities" text="Manage account activities.">
         <ActivityAddButton />
       </DashboardHeader>
-      <div>
-        {activities?.length ? (
-          <div className="divide-y divide-border rounded-md border">
-            {activities.map((activity) => (
-              <ActivityItem key={activity.id} activity={activity} />
-            ))}
+      {activities?.length ? (
+        <div className="divide-y divide-border rounded-md border">
+          {activities.map((activity) => (
+            <ActivityItem key={activity.id} activity={activity} />
+          ))}
+        </div>
+      ) : (
+        <EmptyPlaceholder>
+          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-muted">
+            <Icon name="activity" className="h-10 w-10" />
           </div>
-        ) : (
-          <EmptyPlaceholder>
-            <div className="flex h-20 w-20 items-center justify-center rounded-full bg-muted">
-              <Icon name="activity" className="h-10 w-10" />
-            </div>
-            <EmptyPlaceholder.Title>
-              No activities created
-            </EmptyPlaceholder.Title>
-            <EmptyPlaceholder.Description>
-              Add an activity to start monitoring your progress.
-            </EmptyPlaceholder.Description>
-            <ActivityAddButton variant="outline" />
-          </EmptyPlaceholder>
-        )}
-      </div>
+          <EmptyPlaceholder.Title>No activities created</EmptyPlaceholder.Title>
+          <EmptyPlaceholder.Description>
+            Add an activity to start monitoring your progress.
+          </EmptyPlaceholder.Description>
+          <ActivityAddButton variant="outline" />
+        </EmptyPlaceholder>
+      )}
     </Shell>
   )
 }
