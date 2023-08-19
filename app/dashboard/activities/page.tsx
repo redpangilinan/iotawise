@@ -42,7 +42,6 @@ export default async function Dashboard() {
       <DashboardHeader heading="Activities" text="Manage account activities.">
         <ActivityAddButton />
       </DashboardHeader>
-      <div>
         {activities?.length ? (
           <div className="divide-y divide-border rounded-md border">
             {activities.map((activity) => (
@@ -63,7 +62,6 @@ export default async function Dashboard() {
             <ActivityAddButton variant="outline" />
           </EmptyPlaceholder>
         )}
-      </div>
     </Shell>
   )
 }

@@ -50,24 +50,22 @@ export default async function SettingsPage() {
   return (
     <Shell>
       <DashboardHeader heading="Logs" text="View activity logs. (WIP)" />
-      <div className="grid grid-cols-1 gap-10">
-        <div className="overflow-x-auto">
-          <table className="min-w-full divide-y">
-            <tbody className="divide-y">
-              {logs.map((log) => (
-                <tr key={log.id}>
-                  <td className="whitespace-nowrap px-6 py-4">
-                    {formatDate(log.date.toDateString())}
-                  </td>
-                  <td className="whitespace-nowrap px-6 py-4">
-                    {log.activity.name}
-                  </td>
-                  <td className="whitespace-nowrap px-6 py-4">{log.count}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+      <div className="overflow-x-auto">
+        <table className="min-w-full divide-y">
+          <tbody className="divide-y">
+            {logs.map((log) => (
+              <tr key={log.id}>
+                <td className="whitespace-nowrap px-6 py-4">
+                  {formatDate(log.date.toDateString())}
+                </td>
+                <td className="whitespace-nowrap px-6 py-4">
+                  {log.activity.name}
+                </td>
+                <td className="whitespace-nowrap px-6 py-4">{log.count}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </Shell>
   )
