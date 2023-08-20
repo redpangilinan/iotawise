@@ -54,43 +54,46 @@ export default async function SettingsPage() {
 
   return (
     <Shell>
-      <DashboardHeader heading="Logs" text="View activity logs. (WIP)" />
-      {logs?.length ? (
-        <div className="overflow-x-auto">
-          <table className="min-w-full divide-y">
-            <tbody className="divide-y">
-              {logs.map((log) => (
-                <tr key={log.id}>
-                  <td className="whitespace-nowrap px-6 py-4">
-                    {formatDate(log.date.toDateString())}
-                  </td>
-                  <td className="whitespace-nowrap px-6 py-4">
-                    {log.activity.name}
-                  </td>
-                  <td className="whitespace-nowrap px-6 py-4">{log.count}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      ) : (
-        <EmptyPlaceholder>
-          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-muted">
-            <Icon name="history" className="h-10 w-10" />
+      <DashboardHeader heading="Logs" text="View activity logs." />
+      <div>
+        <p className="text-lg font-medium">Last 7 days</p>
+        {logs?.length ? (
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y">
+              <tbody className="divide-y">
+                {logs.map((log) => (
+                  <tr key={log.id}>
+                    <td className="whitespace-nowrap px-6 py-4">
+                      {formatDate(log.date.toDateString())}
+                    </td>
+                    <td className="whitespace-nowrap px-6 py-4">
+                      {log.activity.name}
+                    </td>
+                    <td className="whitespace-nowrap px-6 py-4">{log.count}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-          <EmptyPlaceholder.Title>No logs yet</EmptyPlaceholder.Title>
-          <EmptyPlaceholder.Description>
-            You can add logs in the activities page.
-          </EmptyPlaceholder.Description>
-          <Link
-            href="/dashboard/activities"
-            className={`${cn(buttonVariants({ variant: "outline" }))}`}
-          >
-            <Icon name="activity" className="mr-2 h-4 w-4" />
-            Activities
-          </Link>
-        </EmptyPlaceholder>
-      )}
+        ) : (
+          <EmptyPlaceholder>
+            <div className="flex h-20 w-20 items-center justify-center rounded-full bg-muted">
+              <Icon name="history" className="h-10 w-10" />
+            </div>
+            <EmptyPlaceholder.Title>No logs shown</EmptyPlaceholder.Title>
+            <EmptyPlaceholder.Description>
+              You can add logs in the activities page.
+            </EmptyPlaceholder.Description>
+            <Link
+              href="/dashboard/activities"
+              className={`${cn(buttonVariants({ variant: "outline" }))}`}
+            >
+              <Icon name="activity" className="mr-2 h-4 w-4" />
+              Activities
+            </Link>
+          </EmptyPlaceholder>
+        )}
+      </div>
     </Shell>
   )
 }
