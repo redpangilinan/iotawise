@@ -31,19 +31,18 @@ export default function Footer() {
           </ul>
         </div>
         <hr className="my-6 text-muted-foreground sm:mx-auto" />
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-center">
           <div className="block text-sm text-muted-foreground sm:text-center">
             © {new Date().getFullYear()}{" "}
             <a
               target="_blank"
-              href="https://redpangilinan.live/"
+              href="https://github.com/redpangilinan/iotawise"
               className="hover:underline"
             >
-              Red Pangilinan
+              Iotawise App
             </a>
             . All Rights Reserved.
           </div>
-          <ModeToggle />
         </div>
       </div>
     </footer>
