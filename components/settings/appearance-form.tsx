@@ -27,11 +27,8 @@ const appearanceFormSchema = z.object({
 
 type AppearanceFormValues = z.infer<typeof appearanceFormSchema>
 
-const themeValue = localStorage.getItem(
-  "theme"
-) as AppearanceFormValues["theme"]
 const defaultValues: Partial<AppearanceFormValues> = {
-  theme: themeValue,
+  theme: "light",
 }
 
 export function AppearanceForm() {
