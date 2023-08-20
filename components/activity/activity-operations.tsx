@@ -24,38 +24,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { toast } from "@/components/ui/use-toast"
 import { Icon } from "@/components/icons"
-
-async function addActivityLog(activityId: string) {
-  const currentDate = new Date()
-  currentDate.setHours(0, 0, 0, 0)
-
-  const response = await fetch(`/api/activities/${activityId}/logs`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      date: currentDate.toISOString(),
-      count: 1,
-    }),
-  })
-
-  if (!response?.ok) {
-    toast({
-      title: "Something went wrong.",
-      description: "Your activity was not logged. Please try again.",
-      variant: "destructive",
-    })
-  } else {
-    toast({
-      title: "Operation successful.",
-      description: "Your activity has been logged successfully.",
-      variant: "default",
-    })
-  }
-
-  return true
-}
+import { LogsAddForm } from "./logs/logs-add-form"
 
 async function deleteActivity(activityId: string) {
   const response = await fetch(`/api/activities/${activityId}`, {
@@ -88,7 +57,6 @@ export function ActivityOperations({ activity }: ActivityOperationsProps) {
   const [showDeleteAlert, setShowDeleteAlert] = React.useState<boolean>(false)
   const [isDeleteLoading, setIsDeleteLoading] = React.useState<boolean>(false)
   const [showAddAlert, setShowAddAlert] = React.useState<boolean>(false)
-  const [isAddLoading, setIsAddLoading] = React.useState<boolean>(false)
 
   return (
     <>
@@ -127,39 +95,12 @@ export function ActivityOperations({ activity }: ActivityOperationsProps) {
       <AlertDialog open={showAddAlert} onOpenChange={setShowAddAlert}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>
-              Are you sure you want to add a log to this activity?
-            </AlertDialogTitle>
+            <AlertDialogTitle>Log Activity</AlertDialogTitle>
             <AlertDialogDescription>
               This will create an activity log.
             </AlertDialogDescription>
           </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction
-              onClick={async (
-                event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-              ) => {
-                event.preventDefault()
-                setIsAddLoading(true)
-
-                const added = await addActivityLog(activity.id)
-
-                if (added) {
-                  setIsAddLoading(false)
-                  setShowAddAlert(false)
-                  router.refresh()
-                }
-              }}
-            >
-              {isAddLoading ? (
-                <Icon name="spinner" className="mr-2 h-4 w-4 animate-spin" />
-              ) : (
-                <Icon name="add" className="mr-2 h-4 w-4" />
-              )}
-              <span>Log Activity</span>
-            </AlertDialogAction>
-          </AlertDialogFooter>
+          <LogsAddForm activityId={activity.id} />
         </AlertDialogContent>
       </AlertDialog>
 
