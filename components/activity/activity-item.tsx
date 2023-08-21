@@ -52,7 +52,7 @@ export function ActivityItem({ activity }: ActivityItemProps) {
   )
 }
 
-ActivityItem.Skeleton = function PostItemSkeleton() {
+ActivityItem.Skeleton = function ActivityItemSkeleton() {
   return (
     <div className="p-4">
       <div className="space-y-3">
