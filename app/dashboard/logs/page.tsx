@@ -43,6 +43,9 @@ export default async function LogsPage() {
         gte: daysAgo.toISOString(),
         lte: currentDate.toISOString(),
       },
+      activity: {
+        userId: user.id,
+      },
     },
     orderBy: {
       date: "desc",
