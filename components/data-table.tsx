@@ -58,7 +58,7 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div className="p-2">
+    <div className="w-full overflow-x-auto p-2">
       <div className="mb-4 flex items-center">
         {children ? <p className="text-lg font-medium">{children}</p> : null}
         <DropdownMenu>

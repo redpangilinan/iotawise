@@ -52,11 +52,9 @@ export default async function LogsPage() {
   return (
     <Shell>
       <DashboardHeader heading="Logs" text="View activity logs." />
-      <div className="w-full overflow-x-auto">
-        <DataTable columns={logColumns} data={logs}>
-          Last 7 days
-        </DataTable>
-      </div>
+      <DataTable columns={logColumns} data={logs}>
+        Last 7 days
+      </DataTable>
     </Shell>
   )
 }
