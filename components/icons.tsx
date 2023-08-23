@@ -4,6 +4,7 @@ import {
   BsChevronLeft,
   BsChevronRight,
   BsActivity,
+  BsFire,
 } from "react-icons/bs"
 import {
   AiOutlineEllipsis,
@@ -46,6 +47,7 @@ const Icons: IconsType = {
   signout: MdOutlineLogout,
   calendar: BiCalendar,
   sort: FaSort,
+  fire: BsFire,
 }
 
 interface IconProps extends React.HTMLProps<HTMLElement> {
