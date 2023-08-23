@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   description: "Manage account activities/hobbies.",
 }
 
-export default async function Dashboard() {
+export default async function ActivitiesPage() {
   const user = await getCurrentUser()
 
   if (!user) {
