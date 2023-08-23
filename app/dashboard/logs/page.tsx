@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   description: "View and modify activity logs.",
 }
 
-export default async function SettingsPage() {
+export default async function LogsPage() {
   const user = await getCurrentUser()
 
   if (!user) {
