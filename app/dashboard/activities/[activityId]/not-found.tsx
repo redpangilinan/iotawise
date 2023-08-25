@@ -6,7 +6,7 @@ import { Icon } from "@/components/icons"
 
 export default function NotFound() {
   return (
-    <div className="flex h-screen items-center justify-center">
+    <div className="flex items-center justify-center md:p-4 lg:p-8">
       <EmptyPlaceholder className="mx-auto max-w-[800px]">
         <div className="flex h-20 w-20 items-center justify-center rounded-full bg-muted">
           <Icon name="warning" className="h-10 w-10" />
