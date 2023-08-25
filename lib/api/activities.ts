@@ -17,19 +17,25 @@ export async function getUserActivity(
 }
 
 // Fetch all of the activities for the selected user
-export async function getUserActivities(userId: string) {
-  return await db.activity.findMany({
-    select: {
-      id: true,
-      name: true,
-      description: true,
-      colorCode: true,
-      createdAt: true,
-    },
-    where: {
-      userId: userId,
-    },
-  })
+export async function getUserActivities(userId: string): Promise<Activity[]> {
+  return await db.$queryRaw`
+  SELECT
+    A.id,
+    A.name,
+    A.description,
+    A.color_code as 'colorCode',
+    A.created_at as 'createdAt',
+    SUM(AL.count) AS total_count
+  FROM
+    activities A
+  LEFT JOIN
+    activity_log AL ON A.id = AL.activity_id
+  WHERE
+    A.user_id = ${userId}
+  GROUP BY
+    A.id, A.name, A.description, A.color_code
+  ORDER BY
+    total_count DESC;`
 }
 
 // Verify if the user has access to the activity
