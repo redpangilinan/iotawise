@@ -1,15 +1,18 @@
-import { getStreak, getTotalLogs, getMostLoggedActivity } from "@/lib/api/logs"
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Icon } from "@/components/icons"
 
 interface DashboardCardsProps {
-  user: {
-    id: string
+  data: {
+    streak: {
+      currentStreak: number
+      longestStreak: number
+    }
+    totalLogs: number
+    mostLoggedActivity: string | undefined
   }
 }
 
-export async function DashboardCards({ user }: DashboardCardsProps) {
+export async function DashboardCards({ data }: DashboardCardsProps) {
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
       <Card>
@@ -18,9 +21,7 @@ export async function DashboardCards({ user }: DashboardCardsProps) {
           <Icon name="fire" className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">
-            {getStreak(user.id, "current")}
-          </div>
+          <div className="text-2xl font-bold">{data.streak.currentStreak}</div>
         </CardContent>
       </Card>
       <Card>
@@ -29,9 +30,7 @@ export async function DashboardCards({ user }: DashboardCardsProps) {
           <Icon name="fire" className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">
-            {getStreak(user.id, "longest")}
-          </div>
+          <div className="text-2xl font-bold">{data.streak.longestStreak}</div>
         </CardContent>
       </Card>
       <Card>
@@ -40,7 +39,7 @@ export async function DashboardCards({ user }: DashboardCardsProps) {
           <Icon name="history" className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{getTotalLogs(user.id)}</div>
+          <div className="text-2xl font-bold">{data.totalLogs}</div>
         </CardContent>
       </Card>
       <Card>
@@ -52,7 +51,7 @@ export async function DashboardCards({ user }: DashboardCardsProps) {
         </CardHeader>
         <CardContent>
           <div className="overflow-hidden overflow-ellipsis whitespace-nowrap text-2xl font-bold">
-            {getMostLoggedActivity(user.id)}
+            {data.mostLoggedActivity}
           </div>
         </CardContent>
       </Card>

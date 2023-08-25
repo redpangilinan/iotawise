@@ -3,6 +3,8 @@ import { redirect } from "next/navigation"
 
 import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
+import { getDashboardData } from "@/lib/api/dashboard"
+
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
 import { Shell } from "@/components/layout/shell"
 import { DashboardCards } from "@/components/pages/dashboard/dashboard-cards"
@@ -19,11 +21,13 @@ export default async function Dashboard() {
     redirect(authOptions?.pages?.signIn || "/signin")
   }
 
+  const dashboardData = await getDashboardData(user.id)
+
   return (
     <Shell>
       <DashboardHeader heading="Dashboard" text="Monitor your progress." />
       <div>
-        <DashboardCards user={user} />
+        <DashboardCards data={dashboardData} />
       </div>
     </Shell>
   )
