@@ -4,6 +4,17 @@ import * as React from "react"
 import { useRouter } from "next/navigation"
 
 import { cn } from "@/lib/utils"
+
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
 import { ButtonProps, buttonVariants } from "@/components/ui/button"
 import { toast } from "@/components/ui/use-toast"
 import { Icon } from "@/components/icons"
@@ -16,6 +27,7 @@ export function ActivityAddButton({
   ...props
 }: ActivityAddButtonProps) {
   const router = useRouter()
+  const [showAddAlert, setShowAddAlert] = React.useState<boolean>(false)
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
   async function onClick() {
@@ -49,24 +61,42 @@ export function ActivityAddButton({
   }
 
   return (
-    <button
-      onClick={onClick}
-      className={cn(
-        buttonVariants({ variant }),
-        {
-          "cursor-not-allowed opacity-60": isLoading,
-        },
-        className
-      )}
-      disabled={isLoading}
-      {...props}
-    >
-      {isLoading ? (
-        <Icon name="spinner" className="mr-2 h-4 w-4 animate-spin" />
-      ) : (
+    <>
+      <button
+        onClick={() => setShowAddAlert(true)}
+        className={cn(buttonVariants({ variant }), className)}
+      >
         <Icon name="add" className="mr-2 h-4 w-4" />
-      )}
-      New activity
-    </button>
+        New activity
+      </button>
+
+      {/* Add Alert */}
+      <AlertDialog open={showAddAlert} onOpenChange={setShowAddAlert}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              Are you sure you want to create a new activity?
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              This will add a new activity to your account.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={onClick}
+              className="bg-red-600 focus:ring-red-600"
+            >
+              {isLoading ? (
+                <Icon name="spinner" className="mr-2 h-4 w-4 animate-spin" />
+              ) : (
+                <Icon name="add" className="mr-2 h-4 w-4" />
+              )}
+              <span>Add activity</span>
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
   )
 }
