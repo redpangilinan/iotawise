@@ -32,10 +32,10 @@ export async function getUserLogs(userId: string, daysAgo: number) {
   })
 }
 
-export async function getStreak(
-  userId: string,
-  streakType: "longest" | "current"
-): Promise<number> {
+export async function getStreak(userId: string): Promise<{
+  currentStreak: number
+  longestStreak: number
+}> {
   const logs = await db.activityLog.findMany({
     where: { activity: { userId } },
     distinct: "date",
@@ -43,18 +43,19 @@ export async function getStreak(
   })
 
   if (logs.length === 0) {
-    return 0
+    return { longestStreak: 0, currentStreak: 0 }
   }
 
   let currentStreak = 1
   let longestStreak = 1
 
+  const oneDay = 24 * 60 * 60 * 1000
+
   for (let i = 0; i < logs.length - 1; i++) {
-    const currentDate = new Date(logs[i].date).getTime()
+    const latestDate = new Date(logs[i].date).getTime()
     const nextDate = new Date(logs[i + 1].date).getTime()
 
-    const timeDiff = currentDate - nextDate
-    const oneDay = 24 * 60 * 60 * 1000
+    const timeDiff = latestDate - nextDate
 
     if (Math.abs(timeDiff) <= oneDay) {
       currentStreak++
@@ -70,49 +71,52 @@ export async function getStreak(
     longestStreak = currentStreak
   }
 
-  if (streakType === "longest") {
-    return longestStreak
-  } else if (streakType === "current") {
-    return currentStreak
-  } else {
-    throw new Error("Invalid streak type")
+  // Reset streak if user is inactive
+  const lastLogDate = new Date(logs[logs.length - 1].date).getTime()
+  const currentDate = new Date().getTime()
+  const timeDiff = currentDate - lastLogDate
+
+  if (Math.abs(timeDiff) > oneDay * 2) {
+    currentStreak = 0
   }
+
+  return { longestStreak, currentStreak }
 }
 
 export async function getTotalLogs(userId: string) {
   const logs = await db.activityLog.findMany({
     where: {
       activity: {
-        userId: userId
-      }
+        userId: userId,
+      },
     },
     select: {
-      count: true
-    }
-  });
+      count: true,
+    },
+  })
 
   if (logs.length === 0) {
-    return 0;
+    return 0
   }
 
-  let totalCount = 0;
+  let totalCount = 0
 
   for (const log of logs) {
-    totalCount += log.count;
+    totalCount += log.count
   }
 
-  return totalCount;
+  return totalCount
 }
 
 export async function getMostLoggedActivity(userId: string) {
   const logs = await db.activityLog.groupBy({
-    by: ['activityId'],
+    by: ["activityId"],
     _sum: {
       count: true,
     },
     orderBy: {
       _sum: {
-        count: 'desc',
+        count: "desc",
       },
     },
     where: {
@@ -120,18 +124,18 @@ export async function getMostLoggedActivity(userId: string) {
         userId: userId,
       },
     },
-  });
+  })
 
   if (logs.length === 0) {
-    return "N/A";
+    return "N/A"
   }
 
-  const mostLoggedActivityId = logs[0].activityId;
+  const mostLoggedActivityId = logs[0].activityId
   const mostLoggedActivity = await db.activity.findUnique({
     where: {
-      id: mostLoggedActivityId
-    }
-  });
+      id: mostLoggedActivityId,
+    },
+  })
 
-  return mostLoggedActivity?.name;
+  return mostLoggedActivity?.name
 }
