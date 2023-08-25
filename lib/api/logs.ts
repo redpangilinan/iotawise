@@ -1,5 +1,37 @@
 import { db } from "@/lib/db"
 
+export async function getUserLogs(userId: string, daysAgo: number) {
+  const currentDate = new Date()
+  const daysGap = new Date(currentDate)
+  daysGap.setDate(currentDate.getDate() - daysAgo)
+
+  return await db.activityLog.findMany({
+    select: {
+      id: true,
+      date: true,
+      count: true,
+      activity: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+    },
+    where: {
+      date: {
+        gte: daysGap.toISOString(),
+        lte: currentDate.toISOString(),
+      },
+      activity: {
+        userId: userId,
+      },
+    },
+    orderBy: {
+      date: "desc",
+    },
+  })
+}
+
 export async function getStreak(
   userId: string,
   streakType: "longest" | "current"

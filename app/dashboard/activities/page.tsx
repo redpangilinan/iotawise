@@ -1,9 +1,9 @@
 import { Metadata } from "next"
 import { redirect } from "next/navigation"
 
-import { db } from "@/lib/db"
 import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
+import { getUserActivities } from "@/lib/api/activities"
 
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
 import { Shell } from "@/components/layout/shell"
@@ -24,18 +24,7 @@ export default async function ActivitiesPage() {
     redirect(authOptions?.pages?.signIn || "/signin")
   }
 
-  const activities = await db.activity.findMany({
-    select: {
-      id: true,
-      name: true,
-      description: true,
-      colorCode: true,
-      createdAt: true,
-    },
-    where: {
-      userId: user.id,
-    },
-  })
+  const activities = await getUserActivities(user.id)
 
   return (
     <Shell>

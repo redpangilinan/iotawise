@@ -1,9 +1,9 @@
 import { Metadata } from "next"
 import { redirect } from "next/navigation"
 
-import { db } from "@/lib/db"
 import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
+import { getUserLogs } from "@/lib/api/logs"
 
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
 import { Shell } from "@/components/layout/shell"
@@ -22,35 +22,7 @@ export default async function LogsPage() {
     redirect(authOptions?.pages?.signIn || "/signin")
   }
 
-  const currentDate = new Date()
-  const daysAgo = new Date(currentDate)
-  daysAgo.setDate(currentDate.getDate() - 7)
-
-  const logs = await db.activityLog.findMany({
-    select: {
-      id: true,
-      date: true,
-      count: true,
-      activity: {
-        select: {
-          id: true,
-          name: true,
-        },
-      },
-    },
-    where: {
-      date: {
-        gte: daysAgo.toISOString(),
-        lte: currentDate.toISOString(),
-      },
-      activity: {
-        userId: user.id,
-      },
-    },
-    orderBy: {
-      date: "desc",
-    },
-  })
+  const logs = await getUserLogs(user.id, 7)
 
   return (
     <Shell>

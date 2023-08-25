@@ -16,6 +16,22 @@ export async function getUserActivity(
   })
 }
 
+// Fetch all of the activities for the selected user
+export async function getUserActivities(userId: string) {
+  return await db.activity.findMany({
+    select: {
+      id: true,
+      name: true,
+      description: true,
+      colorCode: true,
+      createdAt: true,
+    },
+    where: {
+      userId: userId,
+    },
+  })
+}
+
 // Verify if the user has access to the activity
 export async function verifyActivity(activityId: string) {
   const session = await getServerSession(authOptions)
