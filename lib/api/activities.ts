@@ -23,8 +23,8 @@ export async function getUserActivities(userId: string): Promise<Activity[]> {
     A.id,
     A.name,
     A.description,
-    A.color_code as 'colorCode',
-    A.created_at as 'createdAt',
+    A.color_code AS 'colorCode',
+    A.created_at AS 'createdAt',
     SUM(AL.count) AS total_count
   FROM
     activities A
