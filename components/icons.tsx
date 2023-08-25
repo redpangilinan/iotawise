@@ -14,7 +14,7 @@ import {
 import { MdDeleteForever, MdOutlineLogout } from "react-icons/md"
 import { BiHistory, BiCalendar } from "react-icons/bi"
 import { FaUserAlt, FaSort } from "react-icons/fa"
-import { ImSpinner8 } from "react-icons/im"
+import { ImSpinner8, ImStatsBars } from "react-icons/im"
 import { RxDashboard } from "react-icons/rx"
 import { LuSettings } from "react-icons/lu"
 
@@ -48,6 +48,7 @@ const Icons: IconsType = {
   calendar: BiCalendar,
   sort: FaSort,
   fire: BsFire,
+  statsBar: ImStatsBars,
 }
 
 interface IconProps extends React.HTMLProps<HTMLElement> {

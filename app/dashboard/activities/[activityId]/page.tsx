@@ -4,10 +4,11 @@ import { notFound, redirect } from "next/navigation"
 import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
 import { getUserActivity } from "@/lib/api/activities"
+import { getStatsDashboardData } from "@/lib/api/dashboard"
 
-import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
 import { Shell } from "@/components/layout/shell"
-import { EmptyPlaceholder } from "@/components/empty-placeholder"
+import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
+import { StatsCards } from "@/components/activity/stats/stats-cards"
 
 export const metadata: Metadata = {
   title: "Activity",
@@ -30,13 +31,17 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
     notFound()
   }
 
+  const dashboardData = await getStatsDashboardData(params.activityId)
+
   return (
     <Shell>
       <DashboardHeader
         heading={`${activity.name} Stats`}
         text={activity.description}
       />
-      <div>Work in progress</div>
+      <div>
+        <StatsCards data={dashboardData} />
+      </div>
     </Shell>
   )
 }

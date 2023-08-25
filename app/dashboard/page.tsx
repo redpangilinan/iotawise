@@ -5,8 +5,8 @@ import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
 import { getDashboardData } from "@/lib/api/dashboard"
 
-import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
 import { Shell } from "@/components/layout/shell"
+import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
 import { DashboardCards } from "@/components/pages/dashboard/dashboard-cards"
 
 export const metadata: Metadata = {
@@ -26,9 +26,7 @@ export default async function Dashboard() {
   return (
     <Shell>
       <DashboardHeader heading="Dashboard" text="Monitor your progress." />
-      <div>
-        <DashboardCards data={dashboardData} />
-      </div>
+      <DashboardCards data={dashboardData} />
     </Shell>
   )
 }

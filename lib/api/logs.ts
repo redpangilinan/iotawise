@@ -32,12 +32,18 @@ export async function getUserLogs(userId: string, daysAgo: number) {
   })
 }
 
-export async function getStreak(userId: string): Promise<{
+export async function getStreak(
+  id: string,
+  type: "user" | "activity"
+): Promise<{
   currentStreak: number
   longestStreak: number
 }> {
+  const whereCondition =
+    type === "activity" ? { activityId: id } : { activity: { userId: id } }
+
   const logs = await db.activityLog.findMany({
-    where: { activity: { userId } },
+    where: whereCondition,
     distinct: "date",
     orderBy: { date: "asc" },
   })
@@ -83,13 +89,12 @@ export async function getStreak(userId: string): Promise<{
   return { longestStreak, currentStreak }
 }
 
-export async function getTotalLogs(userId: string) {
+export async function getTotalLogs(id: string, type: "user" | "activity") {
+  const whereCondition =
+    type === "activity" ? { activityId: id } : { activity: { userId: id } }
+
   const logs = await db.activityLog.findMany({
-    where: {
-      activity: {
-        userId: userId,
-      },
-    },
+    where: whereCondition,
     select: {
       count: true,
     },
@@ -138,4 +143,35 @@ export async function getMostLoggedActivity(userId: string) {
   })
 
   return mostLoggedActivity?.name
+}
+
+export async function getDailyAverage(activityId: string): Promise<number> {
+  const logs = await db.activityLog.findMany({
+    where: {
+      activityId: activityId,
+    },
+    orderBy: {
+      date: "asc",
+    },
+  })
+
+  const totalCount = logs.reduce((sum, log) => sum + log.count, 0)
+
+  if (totalCount === 0) {
+    return 0
+  }
+
+  const oldestDate = new Date(logs[0].date)
+  const today = new Date()
+  const timePeriodInDays = Math.ceil(
+    (today.getTime() - oldestDate.getTime()) / (1000 * 60 * 60 * 24)
+  )
+
+  const dailyAverage = totalCount / timePeriodInDays
+
+  if (Number.isInteger(dailyAverage)) {
+    return dailyAverage
+  } else {
+    return parseFloat(dailyAverage.toFixed(2))
+  }
 }
