@@ -50,6 +50,9 @@ dependencies:
   '@types/react':
     specifier: 18.2.15
     version: 18.2.15
+  '@types/react-calendar-heatmap':
+    specifier: ^1.6.3
+    version: 1.6.3
   '@types/react-dom':
     specifier: 18.2.7
     version: 18.2.7
@@ -89,6 +92,9 @@ dependencies:
   react:
     specifier: 18.2.0
     version: 18.2.0
+  react-calendar-heatmap:
+    specifier: ^1.9.0
+    version: 1.9.0(react@18.2.0)
   react-day-picker:
     specifier: ^8.8.1
     version: 8.8.1(date-fns@2.30.0)(react@18.2.0)
@@ -1193,6 +1199,12 @@ packages:
 
   /@types/prop-types@15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
+    dev: false
+
+  /@types/react-calendar-heatmap@1.6.3:
+    resolution: {integrity: sha512-C6hN9Nl0NBqeJEkivwwf/bvWNoPwpwGSNABwYl0yHD20rClSJqRgYoGPKDIn8QqoYHGJsTFJdFbBAZRPlJ/+qg==}
+    dependencies:
+      '@types/react': 18.2.15
     dev: false
 
   /@types/react-dom@18.2.7:
@@ -2747,6 +2759,10 @@ packages:
       yallist: 4.0.0
     dev: false
 
+  /memoize-one@5.2.1:
+    resolution: {integrity: sha512-zYiwtZUcYyXKo/np96AGZAckk+FWWsUdJ3cHGGmld7+AhvcWmQyGCYUh1hc4Q/pkOhb65dQR/pqCyK0cOaHz4Q==}
+    dev: false
+
   /merge-stream@2.0.0:
     resolution: {integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==}
     dev: false
@@ -3325,6 +3341,16 @@ packages:
 
   /queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
+    dev: false
+
+  /react-calendar-heatmap@1.9.0(react@18.2.0):
+    resolution: {integrity: sha512-mGed9any6QLOVckxwxC/eeP9s9wE8mTUW/FCE0V27xF9WOaCGuOftGSRH8DSDoSwgzMSVF6uuH7M1xvc+aZ8sg==}
+    peerDependencies:
+      react: ^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      memoize-one: 5.2.1
+      prop-types: 15.8.1
+      react: 18.2.0
     dev: false
 
   /react-day-picker@8.8.1(date-fns@2.30.0)(react@18.2.0):
