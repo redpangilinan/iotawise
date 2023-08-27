@@ -22,6 +22,7 @@ export const logColumns: ColumnDef<LogsType>[] = [
       return (
         <Button
           variant="ghost"
+          className="px-0"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Date
@@ -36,7 +37,6 @@ export const logColumns: ColumnDef<LogsType>[] = [
         month: "long",
         day: "numeric",
         year: "numeric",
-        timeZoneName: "short",
       }).format(date)
       return formattedDate
     },
@@ -47,6 +47,7 @@ export const logColumns: ColumnDef<LogsType>[] = [
       return (
         <Button
           variant="ghost"
+          className="px-0"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Activity
@@ -61,6 +62,7 @@ export const logColumns: ColumnDef<LogsType>[] = [
       return (
         <Button
           variant="ghost"
+          className="px-0"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Count

@@ -27,6 +27,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
+import { Icon } from "./icons"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -58,13 +59,14 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div className="w-full overflow-x-auto md:p-2">
+    <div className="w-full overflow-x-auto">
       <div className="mb-4 flex items-center">
         {children ? <p className="text-lg font-medium">{children}</p> : null}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
-              Columns
+              <Icon name="mixer" className="mr-2 h-4 w-4" />
+              View
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
