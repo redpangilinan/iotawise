@@ -5,10 +5,13 @@ import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
 import { getUserActivity } from "@/lib/api/activities"
 import { getStatsDashboardData } from "@/lib/api/dashboard"
+import { getLogs } from "@/lib/api/logs"
 
 import { Shell } from "@/components/layout/shell"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
+import { DataTable } from "@/components/data-table"
 import { StatsCards } from "@/components/activity/stats/stats-cards"
+import { logColumns } from "@/components/activity/logs/logs-columns"
 
 export const metadata: Metadata = {
   title: "Activity",
@@ -32,6 +35,7 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
   }
 
   const dashboardData = await getStatsDashboardData(params.activityId)
+  const logs = await getLogs(params.activityId, 7, "activity")
 
   return (
     <Shell>
@@ -39,9 +43,10 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
         heading={`${activity.name} Stats`}
         text={activity.description}
       />
-      <div>
-        <StatsCards data={dashboardData} />
-      </div>
+      <StatsCards data={dashboardData} />
+      <DataTable columns={logColumns} data={logs}>
+        Last 7 days
+      </DataTable>
     </Shell>
   )
 }

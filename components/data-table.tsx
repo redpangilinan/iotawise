@@ -31,7 +31,7 @@ import { Button } from "@/components/ui/button"
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
-  children?: string
+  children?: React.ReactNode
 }
 
 export function DataTable<TData, TValue>({

@@ -1,9 +1,16 @@
 import { db } from "@/lib/db"
 
-export async function getUserLogs(userId: string, daysAgo: number) {
+export async function getLogs(
+  id: string,
+  daysAgo: number,
+  type: "user" | "activity"
+) {
   const currentDate = new Date()
   const daysGap = new Date(currentDate)
   daysGap.setDate(currentDate.getDate() - daysAgo)
+
+  const typeCondition =
+    type === "activity" ? { activityId: id } : { activity: { userId: id } }
 
   return await db.activityLog.findMany({
     select: {
@@ -22,9 +29,7 @@ export async function getUserLogs(userId: string, daysAgo: number) {
         gte: daysGap.toISOString(),
         lte: currentDate.toISOString(),
       },
-      activity: {
-        userId: userId,
-      },
+      ...typeCondition,
     },
     orderBy: {
       date: "desc",
@@ -39,11 +44,11 @@ export async function getStreak(
   currentStreak: number
   longestStreak: number
 }> {
-  const whereCondition =
+  const typeCondition =
     type === "activity" ? { activityId: id } : { activity: { userId: id } }
 
   const logs = await db.activityLog.findMany({
-    where: whereCondition,
+    where: typeCondition,
     distinct: "date",
     orderBy: { date: "asc" },
   })
@@ -90,11 +95,11 @@ export async function getStreak(
 }
 
 export async function getTotalLogs(id: string, type: "user" | "activity") {
-  const whereCondition =
+  const typeCondition =
     type === "activity" ? { activityId: id } : { activity: { userId: id } }
 
   const logs = await db.activityLog.findMany({
-    where: whereCondition,
+    where: typeCondition,
     select: {
       count: true,
     },

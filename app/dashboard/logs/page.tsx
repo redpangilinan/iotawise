@@ -3,7 +3,7 @@ import { redirect } from "next/navigation"
 
 import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
-import { getUserLogs } from "@/lib/api/logs"
+import { getLogs } from "@/lib/api/logs"
 
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
 import { Shell } from "@/components/layout/shell"
@@ -22,7 +22,7 @@ export default async function LogsPage() {
     redirect(authOptions?.pages?.signIn || "/signin")
   }
 
-  const logs = await getUserLogs(user.id, 7)
+  const logs = await getLogs(user.id, 7, "user")
 
   return (
     <Shell>
