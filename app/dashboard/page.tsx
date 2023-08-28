@@ -8,6 +8,8 @@ import { getDashboardData } from "@/lib/api/dashboard"
 import { Shell } from "@/components/layout/shell"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
 import { DashboardCards } from "@/components/pages/dashboard/dashboard-cards"
+import { DataTable } from "@/components/data-table"
+import { logColumns } from "@/components/activity/logs/logs-columns"
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -27,6 +29,9 @@ export default async function Dashboard() {
     <Shell>
       <DashboardHeader heading="Dashboard" text="Monitor your progress." />
       <DashboardCards data={dashboardData} />
+      <DataTable columns={logColumns} data={dashboardData.logs}>
+        Last year
+      </DataTable>
     </Shell>
   )
 }

@@ -60,7 +60,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="w-full overflow-x-auto">
-      <div className="mb-4 flex items-center">
+      <div className="mb-4 flex items-center px-2 pt-1">
         {children ? <p className="text-lg font-medium">{children}</p> : null}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

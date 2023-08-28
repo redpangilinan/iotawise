@@ -1,7 +1,10 @@
 "use client"
 
+import Link from "next/link"
 import { ColumnDef } from "@tanstack/react-table"
-import { Button } from "@/components/ui/button"
+
+import { cn } from "@/lib/utils"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Icon } from "@/components/icons"
 import { LogsDeleteButton } from "./logs-delete-button"
 
@@ -22,7 +25,6 @@ export const logColumns: ColumnDef<LogsType>[] = [
       return (
         <Button
           variant="ghost"
-          className="px-0"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Date
@@ -38,21 +40,34 @@ export const logColumns: ColumnDef<LogsType>[] = [
         day: "numeric",
         year: "numeric",
       }).format(date)
-      return formattedDate
+      return <div className="min-w-[5rem] md:px-4">{formattedDate}</div>
     },
   },
   {
-    accessorKey: "activity.name",
+    accessorKey: "activity",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
-          className="px-0"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Activity
           <Icon name="sort" className="ml-2 h-4 w-4" />
         </Button>
+      )
+    },
+    cell: (row) => {
+      const activity = row.row.original.activity
+      const name = activity.name
+      const id = activity.id
+
+      return (
+        <Link
+          href={`/dashboard/activities/${id}`}
+          className={cn(buttonVariants({ variant: "ghost" }))}
+        >
+          {name}
+        </Link>
       )
     },
   },
@@ -62,13 +77,16 @@ export const logColumns: ColumnDef<LogsType>[] = [
       return (
         <Button
           variant="ghost"
-          className="px-0"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Count
           <Icon name="sort" className="ml-2 h-4 w-4" />
         </Button>
       )
+    },
+    cell: ({ row }) => {
+      const value = row.original.count
+      return <div className="px-4">{value}</div>
     },
   },
   {
