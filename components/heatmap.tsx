@@ -74,17 +74,17 @@ export function Heatmap({ data, params }: HeatmapProps) {
   const getColorClass = (count: number) => {
     if (count < 1) {
       return "fill-zinc-200 dark:fill-zinc-800"
-    } else if (count < 3) {
+    } else if (count < 2) {
       return "fill-green-300 dark:fill-green-900"
-    } else if (count < 6) {
+    } else if (count < 3) {
       return "fill-green-400 dark:fill-green-800"
-    } else if (count < 9) {
+    } else if (count < 5) {
       return "fill-green-500 dark:fill-green-700"
-    } else if (count < 12) {
+    } else if (count < 7) {
       return "fill-green-600 dark:fill-green-600"
-    } else if (count < 15) {
+    } else if (count < 9) {
       return "fill-green-700 dark:fill-green-500"
-    } else if (count < 18) {
+    } else if (count < 11) {
       return "fill-green-800 dark:fill-green-400"
     } else {
       return "fill-green-900 dark:fill-green-300"
