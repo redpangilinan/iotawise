@@ -37,10 +37,9 @@ export function LineChartComponent({ data }: LineChartProps) {
             axisLine={false}
           />
           <Tooltip
-            labelFormatter={(label) => `${label}`}
-            formatter={(value, name, props) => [
-              `Count: ${value}`,
-              `${props.payload.date}`,
+            formatter={(count, name, entry) => [
+              entry.payload.count,
+              entry.payload.date,
             ]}
           />
           <Line
