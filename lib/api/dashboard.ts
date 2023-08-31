@@ -3,15 +3,26 @@ import {
   getStreak,
   getTotalLogs,
   getMostLoggedActivity,
+  getTopActivities,
+  getActivityCountByDate,
   getDailyAverage,
 } from "@/lib/api/logs"
 
 export async function getDashboardData(userId: string) {
-  const [logs, streak, totalLogs, mostLoggedActivity] = await Promise.all([
+  const [
+    logs,
+    streak,
+    totalLogs,
+    mostLoggedActivity,
+    activityCountByDate,
+    topActivities,
+  ] = await Promise.all([
     getLogs(userId, 365, "user"),
     getStreak(userId, "user"),
     getTotalLogs(userId, "user"),
     getMostLoggedActivity(userId),
+    getActivityCountByDate(userId),
+    getTopActivities(userId),
   ])
 
   return {
@@ -19,6 +30,8 @@ export async function getDashboardData(userId: string) {
     streak,
     totalLogs,
     mostLoggedActivity,
+    activityCountByDate,
+    topActivities,
   }
 }
 

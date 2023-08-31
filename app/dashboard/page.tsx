@@ -10,6 +10,8 @@ import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
 import { DashboardCards } from "@/components/pages/dashboard/dashboard-cards"
 import { DataTable } from "@/components/data-table"
 import { logColumns } from "@/components/activity/logs/logs-columns"
+import { LineChartComponent } from "@/components/charts/linechart"
+import { PieChartComponent } from "@/components/charts/piechart"
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -29,6 +31,10 @@ export default async function Dashboard() {
     <Shell>
       <DashboardHeader heading="Dashboard" text="Monitor your progress." />
       <DashboardCards data={dashboardData} />
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <LineChartComponent data={dashboardData.activityCountByDate} />
+        <PieChartComponent data={dashboardData.topActivities} />
+      </div>
       <DataTable columns={logColumns} data={dashboardData.logs}>
         Last year
       </DataTable>

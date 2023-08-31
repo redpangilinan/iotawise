@@ -33,3 +33,14 @@ export type NavItem = {
 export type Navigation = {
   data: NavItem[]
 }
+
+export type ActivityEntry = {
+  name: string
+  count: number | null
+  color: string
+}
+
+export type ActivityByDate = {
+  date: string
+  count: number
+}

@@ -1,4 +1,7 @@
+import { ActivityEntry, ActivityByDate } from "@/types"
+
 import { db } from "@/lib/db"
+import { formatDate } from "@/lib/utils"
 
 export async function getLogs(
   id: string,
@@ -142,12 +145,89 @@ export async function getMostLoggedActivity(userId: string) {
 
   const mostLoggedActivityId = logs[0].activityId
   const mostLoggedActivity = await db.activity.findUnique({
+    select: {
+      name: true,
+    },
     where: {
       id: mostLoggedActivityId,
     },
   })
 
   return mostLoggedActivity?.name
+}
+
+export async function getTopActivities(
+  userId: string
+): Promise<ActivityEntry[]> {
+  const logs = await db.activityLog.groupBy({
+    by: ["activityId"],
+    _sum: {
+      count: true,
+    },
+    orderBy: {
+      _sum: {
+        count: "desc",
+      },
+    },
+    where: {
+      activity: {
+        userId: userId,
+      },
+    },
+  })
+
+  if (logs.length === 0) {
+    return [
+      {
+        name: "N/A",
+        count: 1,
+        color: "#FFFFFF",
+      },
+    ]
+  }
+
+  const topActivities = await Promise.all(
+    logs.slice(0, 10).map(async (log) => {
+      const activity = await db.activity.findUnique({
+        where: {
+          id: log.activityId,
+        },
+      })
+      return {
+        name: activity?.name || "N/A",
+        count: log._sum.count,
+        color: activity?.colorCode || "#FFFFFF",
+      }
+    })
+  )
+
+  return topActivities
+}
+
+export async function getActivityCountByDate(
+  userId: string
+): Promise<ActivityByDate[]> {
+  const logs = await db.activityLog.groupBy({
+    by: ["date"],
+    _sum: {
+      count: true,
+    },
+    orderBy: {
+      date: "asc",
+    },
+    where: {
+      activity: {
+        userId: userId,
+      },
+    },
+  })
+
+  const result = logs.map((log) => ({
+    date: formatDate(log.date.toISOString()),
+    count: log._sum.count ?? 0,
+  }))
+
+  return result
 }
 
 export async function getDailyAverage(activityId: string): Promise<number> {
