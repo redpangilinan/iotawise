@@ -11,7 +11,7 @@ import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
 import { DataTable } from "@/components/data-table"
 import { StatsCards } from "@/components/activity/stats/stats-cards"
 import { logColumns } from "@/components/activity/logs/logs-columns"
-import { Heatmap } from "@/components/heatmap"
+import { Heatmap } from "@/components/charts/heatmap"
 
 export const metadata: Metadata = {
   title: "Activity",

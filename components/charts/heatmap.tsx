@@ -7,7 +7,7 @@ import "react-calendar-heatmap/dist/styles.css"
 
 import { formatDate } from "@/lib/utils"
 
-import { LogsDeleteDialog } from "./activity/logs/logs-delete-dialog"
+import { LogsDeleteDialog } from "../activity/logs/logs-delete-dialog"
 import { Card } from "@/components/ui/card"
 import { toast } from "@/components/ui/use-toast"
 
