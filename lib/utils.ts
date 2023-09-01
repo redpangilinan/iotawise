@@ -8,11 +8,11 @@ export function cn(...inputs: ClassValue[]) {
 
 export function formatDate(input: string | number): string {
   const date = new Date(input)
-  return date.toLocaleDateString("en-US", {
-    month: "long",
+  return Intl.DateTimeFormat("en-US", {
+    month: "short",
     day: "numeric",
     year: "numeric",
-  })
+  }).format(date)
 }
 
 export function absoluteUrl(path: string) {
