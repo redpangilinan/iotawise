@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export function formatDate(input: string | number): string {
   const date = new Date(input)
-  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+  const timeZone = "UTC"
   return Intl.DateTimeFormat("en-US", {
     timeZone,
     month: "short",
