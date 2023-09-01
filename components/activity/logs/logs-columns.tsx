@@ -34,9 +34,7 @@ export const logColumns: ColumnDef<LogsType>[] = [
     },
     cell: (row) => {
       const date = new Date(row.getValue() as string)
-      const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
       const formattedDate = Intl.DateTimeFormat("en-US", {
-        timeZone,
         weekday: "short",
         month: "long",
         day: "numeric",
