@@ -11,6 +11,7 @@ import {
 } from "recharts"
 import { Card } from "@/components/ui/card"
 import { ActivityByDate } from "@/types"
+import { formatDate } from "@/lib/utils"
 
 interface LineChartProps {
   data: ActivityByDate[]
@@ -28,6 +29,7 @@ export function LineChartComponent({ data }: LineChartProps) {
             fontSize={12}
             tickLine={false}
             axisLine={false}
+            tickFormatter={formatDate}
           />
           <YAxis
             dataKey="count"
@@ -37,10 +39,9 @@ export function LineChartComponent({ data }: LineChartProps) {
             axisLine={false}
           />
           <Tooltip
-            formatter={(count, name, entry) => [
-              entry.payload.count,
-              entry.payload.date,
-            ]}
+            formatter={(count, name, entry) => [`Logs: ${entry.payload.count}`]}
+            labelStyle={{ color: "#000" }}
+            labelFormatter={formatDate}
           />
           <Line
             type="monotone"

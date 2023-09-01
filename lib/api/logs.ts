@@ -1,7 +1,6 @@
 import { ActivityEntry, ActivityByDate } from "@/types"
 
 import { db } from "@/lib/db"
-import { formatDate } from "@/lib/utils"
 
 export async function getLogs(
   id: string,
@@ -223,7 +222,7 @@ export async function getActivityCountByDate(
   })
 
   const result = logs.map((log) => ({
-    date: formatDate(log.date.toISOString()),
+    date: log.date.toISOString(),
     count: log._sum.count ?? 0,
   }))
 
