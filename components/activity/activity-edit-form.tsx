@@ -2,9 +2,11 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
+
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Activity } from "@prisma/client"
 import { useForm } from "react-hook-form"
+import { HexColorPicker } from "react-colorful"
 import * as z from "zod"
 
 import { cn } from "@/lib/utils"
@@ -45,10 +47,11 @@ export function ActivityEditForm({
     defaultValues: {
       name: activity?.name || "",
       description: activity?.description || "",
-      colorCode: activity?.colorCode || "",
+      colorCode: "",
     },
   })
   const [isSaving, setIsSaving] = React.useState<boolean>(false)
+  const [color, setColor] = React.useState(activity.colorCode || "#ffffff")
 
   async function onSubmit(data: FormData) {
     setIsSaving(true)
@@ -61,7 +64,7 @@ export function ActivityEditForm({
       body: JSON.stringify({
         name: data.name,
         description: data.description,
-        colorCode: data.colorCode,
+        colorCode: color,
       }),
     })
 
@@ -79,8 +82,8 @@ export function ActivityEditForm({
       description: "Your activity has been updated.",
     })
 
+    router.back()
     router.refresh()
-    router.push(`/dashboard/activities`)
   }
 
   return (
@@ -121,6 +124,10 @@ export function ActivityEditForm({
                 {errors.description.message}
               </p>
             )}
+          </div>
+          <div className="grid gap-3">
+            <Label>Color</Label>
+            <HexColorPicker color={color} onChange={setColor} />
           </div>
         </CardContent>
         <CardFooter>

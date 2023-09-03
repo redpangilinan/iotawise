@@ -40,7 +40,7 @@ export function ActivityAddButton({
       },
       body: JSON.stringify({
         name: "New Activity",
-        colorCode: "#FFFFFF",
+        colorCode: "#ffffff",
       }),
     })
 

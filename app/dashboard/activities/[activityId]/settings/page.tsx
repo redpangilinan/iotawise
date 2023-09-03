@@ -41,7 +41,7 @@ export default async function ActivityEdit({ params }: ActivityEditProps) {
             id: activity.id,
             name: activity.name,
             description: activity.description,
-            colorCode: activity.colorCode || "",
+            colorCode: activity.colorCode,
           }}
         />
       </div>
