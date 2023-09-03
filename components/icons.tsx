@@ -3,6 +3,8 @@ import {
   BsSun,
   BsChevronLeft,
   BsChevronRight,
+  BsChevronUp,
+  BsChevronDown,
   BsActivity,
   BsFire,
 } from "react-icons/bs"
@@ -35,6 +37,8 @@ const Icons: IconsType = {
   // Navigation
   back: BsChevronLeft,
   next: BsChevronRight,
+  up: BsChevronUp,
+  down: BsChevronDown,
 
   // Common
   trash: MdDeleteForever,

@@ -49,10 +49,14 @@ async function deleteActivity(activityId: string) {
 }
 
 interface ActivityOperationsProps {
-  activity: Pick<Activity, "id" | "name" | "colorCode">
+  activity: Pick<Activity, "id">
+  children?: React.ReactNode
 }
 
-export function ActivityOperations({ activity }: ActivityOperationsProps) {
+export function ActivityOperations({
+  activity,
+  children,
+}: ActivityOperationsProps) {
   const router = useRouter()
   const [showDeleteAlert, setShowDeleteAlert] = React.useState<boolean>(false)
   const [isDeleteLoading, setIsDeleteLoading] = React.useState<boolean>(false)
@@ -61,16 +65,24 @@ export function ActivityOperations({ activity }: ActivityOperationsProps) {
   return (
     <>
       <DropdownMenu>
-        <DropdownMenuTrigger className="flex h-8 w-8 items-center justify-center rounded-md border transition-colors hover:bg-muted">
-          <Icon name="ellipsis" className="h-4 w-4" />
-          <span className="sr-only">Open</span>
-        </DropdownMenuTrigger>
+        <DropdownMenuTrigger>
+          {children ? (
+            children
+          ) : (
+            <div className="flex h-8 w-8 items-center justify-center rounded-md border transition-colors hover:bg-muted">
+              <Icon name="ellipsis" className="h-4 w-4" />
+              <span className="sr-only">Open</span>
+            </div>
+          )}
+        </DropdownMenuTrigger>{" "}
+        <></>
         <DropdownMenuContent align="end">
           <DropdownMenuItem
             className="flex cursor-pointer items-center"
             onSelect={() => setShowAddAlert(true)}
           >
-            Log Activity
+            <Icon name="add" className="mr-2 h-4 w-4" />
+            Add Log
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
@@ -78,6 +90,7 @@ export function ActivityOperations({ activity }: ActivityOperationsProps) {
               href={`/dashboard/activities/${activity.id}/settings`}
               className="flex w-full"
             >
+              <Icon name="settings" className="mr-2 h-4 w-4" />
               Settings
             </Link>
           </DropdownMenuItem>
@@ -86,6 +99,7 @@ export function ActivityOperations({ activity }: ActivityOperationsProps) {
             className="flex cursor-pointer items-center text-red-600 focus:text-red-600"
             onSelect={() => setShowDeleteAlert(true)}
           >
+            <Icon name="trash" className="mr-2 h-4 w-4" />
             Delete
           </DropdownMenuItem>
         </DropdownMenuContent>

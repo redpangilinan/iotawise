@@ -46,8 +46,6 @@ export function ActivityItem({ activity }: ActivityItemProps) {
       <ActivityOperations
         activity={{
           id: activity.id,
-          name: activity.name,
-          colorCode: activity.colorCode,
         }}
       />
     </div>
