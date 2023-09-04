@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { ButtonProps, buttonVariants } from "@/components/ui/button"
 import { toast } from "@/components/ui/use-toast"
-import { Icon } from "@/components/icons"
+import { Icons } from "@/components/icons"
 
 interface ActivityAddButtonProps extends ButtonProps {}
 
@@ -66,7 +66,7 @@ export function ActivityAddButton({
         onClick={() => setShowAddAlert(true)}
         className={cn(buttonVariants({ variant }), className)}
       >
-        <Icon name="add" className="mr-2 h-4 w-4" />
+        <Icons.add className="mr-2 h-4 w-4" />
         New activity
       </button>
 
@@ -88,9 +88,9 @@ export function ActivityAddButton({
               className="bg-red-600 focus:ring-red-600"
             >
               {isLoading ? (
-                <Icon name="spinner" className="mr-2 h-4 w-4 animate-spin" />
+                <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
               ) : (
-                <Icon name="add" className="mr-2 h-4 w-4" />
+                <Icons.add className="mr-2 h-4 w-4" />
               )}
               <span>Add activity</span>
             </AlertDialogAction>

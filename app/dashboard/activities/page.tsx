@@ -10,7 +10,7 @@ import { Shell } from "@/components/layout/shell"
 import { EmptyPlaceholder } from "@/components/empty-placeholder"
 import { ActivityItem } from "@/components/activity/activity-item"
 import { ActivityAddButton } from "@/components/activity/activity-add-button"
-import { Icon } from "@/components/icons"
+import { Icons } from "@/components/icons"
 
 export const metadata: Metadata = {
   title: "Activities",
@@ -40,7 +40,7 @@ export default async function ActivitiesPage() {
       ) : (
         <EmptyPlaceholder>
           <div className="flex h-20 w-20 items-center justify-center rounded-full bg-muted">
-            <Icon name="activity" className="h-10 w-10" />
+            <Icons.activity className="h-10 w-10" />
           </div>
           <EmptyPlaceholder.Title>No activities created</EmptyPlaceholder.Title>
           <EmptyPlaceholder.Description>

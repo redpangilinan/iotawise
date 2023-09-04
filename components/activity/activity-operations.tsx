@@ -23,7 +23,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { toast } from "@/components/ui/use-toast"
-import { Icon } from "@/components/icons"
+import { Icons } from "@/components/icons"
 import { LogsAddForm } from "./logs/logs-add-form"
 
 async function deleteActivity(activityId: string) {
@@ -70,7 +70,7 @@ export function ActivityOperations({
             children
           ) : (
             <div className="flex h-8 w-8 items-center justify-center rounded-md border transition-colors hover:bg-muted">
-              <Icon name="ellipsis" className="h-4 w-4" />
+              <Icons.ellipsis className="h-4 w-4" />
               <span className="sr-only">Open</span>
             </div>
           )}
@@ -81,7 +81,7 @@ export function ActivityOperations({
             className="flex cursor-pointer items-center"
             onSelect={() => setShowAddAlert(true)}
           >
-            <Icon name="add" className="mr-2 h-4 w-4" />
+            <Icons.add className="mr-2 h-4 w-4" />
             Add Log
           </DropdownMenuItem>
           <DropdownMenuSeparator />
@@ -90,7 +90,7 @@ export function ActivityOperations({
               href={`/dashboard/activities/${activity.id}/settings`}
               className="flex w-full"
             >
-              <Icon name="settings" className="mr-2 h-4 w-4" />
+              <Icons.settings className="mr-2 h-4 w-4" />
               Settings
             </Link>
           </DropdownMenuItem>
@@ -99,7 +99,7 @@ export function ActivityOperations({
             className="flex cursor-pointer items-center text-red-600 focus:text-red-600"
             onSelect={() => setShowDeleteAlert(true)}
           >
-            <Icon name="trash" className="mr-2 h-4 w-4" />
+            <Icons.trash className="mr-2 h-4 w-4" />
             Delete
           </DropdownMenuItem>
         </DropdownMenuContent>
@@ -149,9 +149,9 @@ export function ActivityOperations({
               className="bg-red-600 focus:ring-red-600"
             >
               {isDeleteLoading ? (
-                <Icon name="spinner" className="mr-2 h-4 w-4 animate-spin" />
+                <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
               ) : (
-                <Icon name="trash" className="mr-2 h-4 w-4" />
+                <Icons.trash className="mr-2 h-4 w-4" />
               )}
               <span>Delete</span>
             </AlertDialogAction>

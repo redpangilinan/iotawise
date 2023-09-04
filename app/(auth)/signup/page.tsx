@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { UserAuthForm } from "@/components/user/user-auth-form"
 
-import { Icon } from "@/components/icons"
+import { Icons } from "@/components/icons"
 
 export const metadata: Metadata = {
   title: "Sign in",
@@ -23,7 +23,7 @@ export default function Signup() {
         )}
       >
         <>
-          <Icon name="back" className="mr-2 h-4 w-4" />
+          <Icons.back className="mr-2 h-4 w-4" />
           Back
         </>
       </Link>

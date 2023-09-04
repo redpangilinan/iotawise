@@ -11,7 +11,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
-import { Icon } from "@/components/icons"
+import { Icons } from "@/components/icons"
 
 import { formatDate } from "@/lib/utils"
 
@@ -60,9 +60,9 @@ export function LogsDeleteDialog({
             className="bg-red-600 focus:ring-red-600"
           >
             {isLoading ? (
-              <Icon name="spinner" className="mr-2 h-4 w-4 animate-spin" />
+              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             ) : (
-              <Icon name="trash" className="mr-2 h-4 w-4" />
+              <Icons.trash className="mr-2 h-4 w-4" />
             )}
             <span>Delete</span>
           </AlertDialogAction>

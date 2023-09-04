@@ -24,7 +24,7 @@ interface IconsType {
   [key: string]: React.ElementType
 }
 
-const Icons: IconsType = {
+export const Icons: IconsType = {
   // Dashboard Icons
   dashboard: RxDashboard,
   activity: BsActivity,
@@ -54,18 +54,4 @@ const Icons: IconsType = {
   fire: BsFire,
   statsBar: ImStatsBars,
   mixer: RxMixerHorizontal,
-}
-
-interface IconProps extends React.HTMLProps<HTMLElement> {
-  name: string
-}
-
-export const Icon: React.FC<IconProps> = ({ name, ...props }) => {
-  const SelectedIcon = Icons[name] || null
-
-  if (!SelectedIcon) {
-    return null
-  }
-
-  return <SelectedIcon {...props} />
 }

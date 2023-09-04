@@ -21,7 +21,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { toast } from "@/components/ui/use-toast"
-import { Icon } from "@/components/icons"
+import { Icons } from "@/components/icons"
 
 interface UserNameFormProps extends React.HTMLAttributes<HTMLFormElement> {
   user: Pick<User, "id" | "name">
@@ -107,7 +107,7 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
             disabled={isSaving}
           >
             {isSaving && (
-              <Icon name="spinner" className="mr-2 h-4 w-4 animate-spin" />
+              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
             <span>Save changes</span>
           </button>

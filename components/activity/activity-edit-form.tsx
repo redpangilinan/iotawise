@@ -24,7 +24,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { toast } from "@/components/ui/use-toast"
-import { Icon } from "@/components/icons"
+import { Icons } from "@/components/icons"
 
 interface ActivityEditFormProps extends React.HTMLAttributes<HTMLFormElement> {
   activity: Pick<Activity, "id" | "name" | "description" | "colorCode">
@@ -137,7 +137,7 @@ export function ActivityEditForm({
             disabled={isSaving}
           >
             {isSaving && (
-              <Icon name="spinner" className="mr-2 h-4 w-4 animate-spin" />
+              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
             <span>Save changes</span>
           </button>

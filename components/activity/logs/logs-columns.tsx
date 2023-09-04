@@ -5,7 +5,7 @@ import { ColumnDef } from "@tanstack/react-table"
 
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
-import { Icon } from "@/components/icons"
+import { Icons } from "@/components/icons"
 import { LogsDeleteButton } from "./logs-delete-button"
 
 export type LogsType = {
@@ -28,7 +28,7 @@ export const logColumns: ColumnDef<LogsType>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Date
-          <Icon name="sort" className="ml-2 h-4 w-4" />
+          <Icons.sort className="ml-2 h-4 w-4" />
         </Button>
       )
     },
@@ -52,7 +52,7 @@ export const logColumns: ColumnDef<LogsType>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Activity
-          <Icon name="sort" className="ml-2 h-4 w-4" />
+          <Icons.sort className="ml-2 h-4 w-4" />
         </Button>
       )
     },
@@ -80,7 +80,7 @@ export const logColumns: ColumnDef<LogsType>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Count
-          <Icon name="sort" className="ml-2 h-4 w-4" />
+          <Icons.sort className="ml-2 h-4 w-4" />
         </Button>
       )
     },

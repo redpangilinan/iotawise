@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 
 import { AiFillGoogleCircle } from "react-icons/ai"
-import { Icon } from "@/components/icons"
+import { Icons } from "@/components/icons"
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -26,7 +26,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         disabled={isLoading || isLoading}
       >
         {isLoading ? (
-          <Icon name="spinner" className="mr-2 h-4 w-4 animate-spin" />
+          <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
         ) : (
           <AiFillGoogleCircle className="mr-2 h-4 w-4" />
         )}{" "}

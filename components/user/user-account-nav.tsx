@@ -5,7 +5,7 @@ import { User } from "next-auth"
 import { signOut } from "next-auth/react"
 
 import { dashboardLinks } from "@/config/links"
-import { Icon } from "@/components/icons"
+import { Icons } from "@/components/icons"
 
 import {
   DropdownMenu,
@@ -44,11 +44,12 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
         </div>
         <DropdownMenuSeparator />
         {dashboardLinks.data.map((item, index) => {
+          const Icon = Icons[item.icon || "next"]
           return (
             item.href && (
               <DropdownMenuItem key={index} className="cursor-pointer" asChild>
                 <Link href={item.href}>
-                  <Icon name={item.icon || "next"} className="mr-2 h-4 w-4" />
+                  <Icon className="mr-2 h-4 w-4" />
                   <span>{item.title}</span>
                 </Link>
               </DropdownMenuItem>
@@ -65,7 +66,7 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
             })
           }}
         >
-          <Icon name="signout" className="mr-2 h-4 w-4" />
+          <Icons.signout className="mr-2 h-4 w-4" />
           <span>Sign out</span>
         </DropdownMenuItem>
       </DropdownMenuContent>

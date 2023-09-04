@@ -5,7 +5,7 @@ import * as React from "react"
 import { LogsDeleteDialog } from "./logs-delete-dialog"
 import { Button } from "@/components/ui/button"
 import { toast } from "@/components/ui/use-toast"
-import { Icon } from "@/components/icons"
+import { Icons } from "@/components/icons"
 
 interface LogsDeleteButtonProps {
   logs: {
@@ -62,7 +62,7 @@ export function LogsDeleteButton({ logs }: LogsDeleteButtonProps) {
         className="h-8 w-8 p-0"
         onClick={() => setShowDeleteAlert(true)}
       >
-        <Icon name="trash" className="h-4 w-4" />
+        <Icons.trash className="h-4 w-4" />
         <span className="sr-only">Delete</span>
       </Button>
       <LogsDeleteDialog

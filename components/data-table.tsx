@@ -27,7 +27,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
-import { Icon } from "./icons"
+import { Icons } from "./icons"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -65,7 +65,7 @@ export function DataTable<TData, TValue>({
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
-              <Icon name="mixer" className="mr-2 h-4 w-4" />
+              <Icons.mixer className="mr-2 h-4 w-4" />
               View
             </Button>
           </DropdownMenuTrigger>

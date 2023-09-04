@@ -30,7 +30,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { toast } from "@/components/ui/use-toast"
-import { Icon } from "@/components/icons"
+import { Icons } from "@/components/icons"
 
 interface LogsAddFormProps {
   activityId: string
@@ -109,10 +109,7 @@ export function LogsAddForm({ activityId }: LogsAddFormProps) {
                       ) : (
                         <span>Pick a date</span>
                       )}
-                      <Icon
-                        name="calendar"
-                        className="ml-auto h-4 w-4 opacity-50"
-                      />
+                      <Icons.calendar className="ml-auto h-4 w-4 opacity-50" />
                     </Button>
                   </FormControl>
                 </PopoverTrigger>

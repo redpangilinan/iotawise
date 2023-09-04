@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Icon } from "@/components/icons"
+import { Icons } from "@/components/icons"
 
 interface StatsCardsProps {
   data: {
@@ -18,7 +18,7 @@ export async function StatsCards({ data }: StatsCardsProps) {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Current Streak</CardTitle>
-          <Icon name="fire" className="h-4 w-4 text-muted-foreground" />
+          <Icons.fire className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{data.streak.currentStreak}</div>
@@ -27,7 +27,7 @@ export async function StatsCards({ data }: StatsCardsProps) {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Longest Streak</CardTitle>
-          <Icon name="fire" className="h-4 w-4 text-muted-foreground" />
+          <Icons.fire className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{data.streak.longestStreak}</div>
@@ -36,7 +36,7 @@ export async function StatsCards({ data }: StatsCardsProps) {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Total Logs</CardTitle>
-          <Icon name="history" className="h-4 w-4 text-muted-foreground" />
+          <Icons.history className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{data.totalLogs}</div>
@@ -45,7 +45,7 @@ export async function StatsCards({ data }: StatsCardsProps) {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Daily Average</CardTitle>
-          <Icon name="statsBar" className="h-4 w-4 text-muted-foreground" />
+          <Icons.statsBar className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{data.dailyAverage}</div>

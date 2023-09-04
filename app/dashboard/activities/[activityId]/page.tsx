@@ -15,7 +15,7 @@ import { StatsCards } from "@/components/activity/stats/stats-cards"
 import { logColumns } from "@/components/activity/logs/logs-columns"
 import { Heatmap } from "@/components/charts/heatmap"
 import { buttonVariants } from "@/components/ui/button"
-import { Icon } from "@/components/icons"
+import { Icons } from "@/components/icons"
 
 export const metadata: Metadata = {
   title: "Activity",
@@ -52,7 +52,7 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
           }}
         >
           <div className={cn(buttonVariants({ variant: "outline" }))}>
-            <Icon name="down" className="mr-2 h-4 w-4" />
+            <Icons.down className="mr-2 h-4 w-4" />
             Actions
           </div>
         </ActivityOperations>
