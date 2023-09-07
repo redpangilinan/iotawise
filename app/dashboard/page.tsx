@@ -12,6 +12,7 @@ import { DataTable } from "@/components/data-table"
 import { logColumns } from "@/components/activity/logs/logs-columns"
 import { LineChartComponent } from "@/components/charts/linechart"
 import { PieChartComponent } from "@/components/charts/piechart"
+import { DateRangePicker } from "@/components/date-range-picker"
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -29,7 +30,9 @@ export default async function Dashboard() {
 
   return (
     <Shell>
-      <DashboardHeader heading="Dashboard" text="Monitor your progress." />
+      <DashboardHeader heading="Dashboard" text="Monitor your progress.">
+        <DateRangePicker />
+      </DashboardHeader>
       <DashboardCards data={dashboardData} />
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <LineChartComponent data={dashboardData.activityCountByDate} />

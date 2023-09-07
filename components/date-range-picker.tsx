@@ -13,24 +13,26 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { useToast } from "@/components/ui/use-toast"
 
 export function DateRangePicker({
   className,
 }: React.HTMLAttributes<HTMLDivElement>) {
+  const { toast } = useToast()
   const [date, setDate] = React.useState<DateRange | undefined>({
-    from: new Date(),
+    from: addDays(new Date(), -365),
     to: new Date(),
   })
 
   return (
-    <div className={cn("grid gap-2", className)}>
+    <div className={cn("flex gap-1", className)}>
       <Popover>
         <PopoverTrigger asChild>
           <Button
             id="date"
             variant={"outline"}
             className={cn(
-              "w-[260px] justify-start text-left font-normal",
+              "w-[16.25rem] justify-start text-left font-normal",
               !date && "text-muted-foreground"
             )}
           >
@@ -60,6 +62,17 @@ export function DateRangePicker({
           />
         </PopoverContent>
       </Popover>
+      <Button
+        variant="outline"
+        onClick={() => {
+          toast({
+            title: "Work in progress",
+            description: "Date range filter is still being worked on.",
+          })
+        }}
+      >
+        <Icons.check className="h-4 w-4" />
+      </Button>
     </div>
   )
 }

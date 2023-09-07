@@ -16,6 +16,7 @@ import { logColumns } from "@/components/activity/logs/logs-columns"
 import { Heatmap } from "@/components/charts/heatmap"
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
+import { DateRangePicker } from "@/components/date-range-picker"
 
 export const metadata: Metadata = {
   title: "Activity",
@@ -46,16 +47,19 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
         heading={`${activity.name} Stats`}
         text={activity.description}
       >
-        <ActivityOperations
-          activity={{
-            id: activity.id,
-          }}
-        >
-          <div className={cn(buttonVariants({ variant: "outline" }))}>
-            <Icons.down className="mr-2 h-4 w-4" />
-            Actions
-          </div>
-        </ActivityOperations>
+        <div className="flex flex-col items-center gap-2 md:items-end">
+          <DateRangePicker />
+          <ActivityOperations
+            activity={{
+              id: activity.id,
+            }}
+          >
+            <div className={cn(buttonVariants({ variant: "outline" }))}>
+              <Icons.down className="mr-2 h-4 w-4" />
+              Actions
+            </div>
+          </ActivityOperations>
+        </div>
       </DashboardHeader>
       <Heatmap data={dashboardData.logs} params={params} />
       <StatsCards data={dashboardData} />
