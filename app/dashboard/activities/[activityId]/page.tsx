@@ -18,12 +18,25 @@ import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 import { DateRangePicker } from "@/components/date-range-picker"
 
-export const metadata: Metadata = {
-  title: "Activity",
-}
-
 interface ActivityPageProps {
   params: { activityId: string }
+}
+
+export async function generateMetadata({
+  params,
+}: ActivityPageProps): Promise<Metadata> {
+  const user = await getCurrentUser()
+
+  if (!user) {
+    redirect(authOptions?.pages?.signIn || "/signin")
+  }
+
+  const activity = await getUserActivity(params.activityId, user.id)
+
+  return {
+    title: activity?.name || "Not Found",
+    description: activity?.description,
+  }
 }
 
 export default async function ActivityPage({ params }: ActivityPageProps) {
