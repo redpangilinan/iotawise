@@ -60,14 +60,16 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
         heading={`${activity.name} Stats`}
         text={activity.description}
       >
-        <div className="flex flex-col items-center gap-2 md:items-end">
+        <div className="flex flex-col items-stretch gap-2 md:items-end">
           <DateRangePicker />
           <ActivityOperations
             activity={{
               id: activity.id,
             }}
           >
-            <div className={cn(buttonVariants({ variant: "outline" }))}>
+            <div
+              className={cn(buttonVariants({ variant: "outline" }), "w-full")}
+            >
               <Icons.down className="mr-2 h-4 w-4" />
               Actions
             </div>

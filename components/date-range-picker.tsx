@@ -62,19 +62,23 @@ export function DateRangePicker({
             onSelect={setDate}
             numberOfMonths={2}
           />
+          <div className="flex flex-row-reverse px-2 pb-2">
+            <Button
+              variant="outline"
+              onClick={() => {
+                toast({
+                  title: "Work in progress",
+                  description: "Date range filter is still being worked on.",
+                })
+              }}
+              className="w-full"
+            >
+              <Icons.check className="mr-2 h-4 w-4" />
+              Confirm
+            </Button>
+          </div>
         </PopoverContent>
       </Popover>
-      <Button
-        variant="outline"
-        onClick={() => {
-          toast({
-            title: "Work in progress",
-            description: "Date range filter is still being worked on.",
-          })
-        }}
-      >
-        <Icons.check className="h-4 w-4" />
-      </Button>
     </div>
   )
 }
