@@ -1,3 +1,6 @@
+import { SearchParams } from "@/types"
+import { formatDate } from "@/lib/utils"
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Icons } from "@/components/icons"
 
@@ -10,9 +13,25 @@ interface DashboardCardsProps {
     totalLogs: number
     mostLoggedActivity: string | undefined
   }
+  searchParams: SearchParams
 }
 
-export async function DashboardCards({ data }: DashboardCardsProps) {
+function displayDateRange(searchParams: SearchParams) {
+  return (
+    <>
+      {searchParams.from && searchParams.to
+        ? `${formatDate(
+            new Date(searchParams.from).toISOString()
+          )} - ${formatDate(new Date(searchParams.to).toISOString())}`
+        : "Last year"}
+    </>
+  )
+}
+
+export async function DashboardCards({
+  data,
+  searchParams,
+}: DashboardCardsProps) {
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
       <Card>
@@ -22,6 +41,7 @@ export async function DashboardCards({ data }: DashboardCardsProps) {
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{data.streak.currentStreak}</div>
+          <p className="text-xs text-muted-foreground">All time</p>
         </CardContent>
       </Card>
       <Card>
@@ -31,6 +51,7 @@ export async function DashboardCards({ data }: DashboardCardsProps) {
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{data.streak.longestStreak}</div>
+          <p className="text-xs text-muted-foreground">All time</p>
         </CardContent>
       </Card>
       <Card>
@@ -40,6 +61,9 @@ export async function DashboardCards({ data }: DashboardCardsProps) {
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{data.totalLogs}</div>
+          <p className="text-xs text-muted-foreground">
+            {displayDateRange(searchParams)}
+          </p>
         </CardContent>
       </Card>
       <Card>
@@ -53,6 +77,9 @@ export async function DashboardCards({ data }: DashboardCardsProps) {
           <div className="overflow-hidden overflow-ellipsis whitespace-nowrap text-2xl font-bold">
             {data.mostLoggedActivity}
           </div>
+          <p className="text-xs text-muted-foreground">
+            {displayDateRange(searchParams)}
+          </p>
         </CardContent>
       </Card>
     </div>

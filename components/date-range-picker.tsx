@@ -1,19 +1,20 @@
 "use client"
 
 import * as React from "react"
-import { useRouter } from "next/navigation"
+import { useRouter, usePathname } from "next/navigation"
 
-import { addDays, format } from "date-fns"
+import { format } from "date-fns"
 import { Icons } from "./icons"
 import { DateRange } from "react-day-picker"
 
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
+  PopoverClose,
 } from "@/components/ui/popover"
 
 function urlDate(input: string): string {
@@ -32,27 +33,8 @@ export function DateRangePicker({
   className,
 }: React.HTMLAttributes<HTMLDivElement>) {
   const router = useRouter()
-  const [date, setDate] = React.useState<DateRange | undefined>({
-    from: addDays(new Date(), -365),
-    to: new Date(),
-  })
-
-  function handleButtonClick() {
-    if (!date || date === undefined) {
-      return null
-    }
-
-    if (date.to === undefined || date.from === undefined) {
-      return null
-    }
-
-    router.push(
-      `?from=${urlDate(date.from.toISOString())}&to=${urlDate(
-        date.to.toISOString()
-      )}`
-    )
-    router.refresh()
-  }
+  const pathname = usePathname()
+  const [date, setDate] = React.useState<DateRange | undefined>()
 
   return (
     <div className={cn("flex gap-1", className)}>
@@ -62,7 +44,7 @@ export function DateRangePicker({
             id="date"
             variant={"outline"}
             className={cn(
-              "w-full justify-start text-left font-normal md:w-[16.25rem]",
+              "w-[16.25rem] justify-start text-left font-normal",
               !date && "text-muted-foreground"
             )}
           >
@@ -88,19 +70,47 @@ export function DateRangePicker({
             initialFocus
             mode="range"
             defaultMonth={date?.from}
+            disabled={(date) =>
+              date > new Date() || date < new Date("1900-01-01")
+            }
             selected={date}
             onSelect={setDate}
             numberOfMonths={2}
           />
-          <div className="flex flex-row-reverse px-2 pb-2">
-            <Button
-              variant="outline"
-              onClick={handleButtonClick}
-              className="w-full"
+          <div className="grid grid-cols-1 gap-2 px-2 pb-2 md:grid-cols-2">
+            <PopoverClose
+              onClick={() => {
+                if (!date || date === undefined) {
+                  return null
+                }
+
+                if (date.to === undefined || date.from === undefined) {
+                  return null
+                }
+
+                router.push(
+                  `?from=${urlDate(date.from.toISOString())}&to=${urlDate(
+                    date.to.toISOString()
+                  )}`
+                )
+                router.refresh()
+              }}
+              className={cn(buttonVariants({ variant: "outline" }), "w-full")}
             >
               <Icons.check className="mr-2 h-4 w-4" />
-              Confirm
-            </Button>
+              Confirm Filter
+            </PopoverClose>
+            <PopoverClose
+              onClick={() => {
+                router.push(`${pathname}`)
+                router.refresh()
+                setDate(undefined)
+              }}
+              className={cn(buttonVariants({ variant: "outline" }), "w-full")}
+            >
+              <Icons.close className="mr-2 h-4 w-4" />
+              Clear Filter
+            </PopoverClose>
           </div>
         </PopoverContent>
       </Popover>

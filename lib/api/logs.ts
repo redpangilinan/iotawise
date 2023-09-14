@@ -1,16 +1,12 @@
-import { ActivityEntry, ActivityByDate } from "@/types"
+import { ActivityEntry, ActivityByDate, DateRange } from "@/types"
 
 import { db } from "@/lib/db"
 
 export async function getLogs(
   id: string,
-  daysAgo: number,
+  dateRange: DateRange,
   type: "user" | "activity"
 ) {
-  const currentDate = new Date()
-  const daysGap = new Date(currentDate)
-  daysGap.setDate(currentDate.getDate() - daysAgo)
-
   const typeCondition =
     type === "activity" ? { activityId: id } : { activity: { userId: id } }
 
@@ -28,8 +24,8 @@ export async function getLogs(
     },
     where: {
       date: {
-        gte: daysGap.toISOString(),
-        lte: currentDate.toISOString(),
+        gte: dateRange.from.toISOString(),
+        lte: dateRange.to.toISOString(),
       },
       ...typeCondition,
     },
@@ -96,12 +92,22 @@ export async function getStreak(
   return { longestStreak, currentStreak }
 }
 
-export async function getTotalLogs(id: string, type: "user" | "activity") {
+export async function getTotalLogs(
+  id: string,
+  dateRange: DateRange,
+  type: "user" | "activity"
+) {
   const typeCondition =
     type === "activity" ? { activityId: id } : { activity: { userId: id } }
 
   const logs = await db.activityLog.findMany({
-    where: typeCondition,
+    where: {
+      date: {
+        gte: dateRange.from.toISOString(),
+        lte: dateRange.to.toISOString(),
+      },
+      ...typeCondition,
+    },
     select: {
       count: true,
     },
@@ -120,7 +126,10 @@ export async function getTotalLogs(id: string, type: "user" | "activity") {
   return totalCount
 }
 
-export async function getMostLoggedActivity(userId: string) {
+export async function getMostLoggedActivity(
+  userId: string,
+  dateRange: DateRange
+) {
   const logs = await db.activityLog.groupBy({
     by: ["activityId"],
     _sum: {
@@ -134,6 +143,10 @@ export async function getMostLoggedActivity(userId: string) {
     where: {
       activity: {
         userId: userId,
+      },
+      date: {
+        gte: dateRange.from.toISOString(),
+        lte: dateRange.to.toISOString(),
       },
     },
   })
@@ -156,7 +169,8 @@ export async function getMostLoggedActivity(userId: string) {
 }
 
 export async function getTopActivities(
-  userId: string
+  userId: string,
+  dateRange: DateRange
 ): Promise<ActivityEntry[]> {
   const logs = await db.activityLog.groupBy({
     by: ["activityId"],
@@ -171,6 +185,10 @@ export async function getTopActivities(
     where: {
       activity: {
         userId: userId,
+      },
+      date: {
+        gte: dateRange.from.toISOString(),
+        lte: dateRange.to.toISOString(),
       },
     },
   })
@@ -204,7 +222,8 @@ export async function getTopActivities(
 }
 
 export async function getActivityCountByDate(
-  userId: string
+  userId: string,
+  dateRange: DateRange
 ): Promise<ActivityByDate[]> {
   const logs = await db.activityLog.groupBy({
     by: ["date"],
@@ -218,6 +237,10 @@ export async function getActivityCountByDate(
       activity: {
         userId: userId,
       },
+      date: {
+        gte: dateRange.from.toISOString(),
+        lte: dateRange.to.toISOString(),
+      },
     },
   })
 
@@ -229,10 +252,17 @@ export async function getActivityCountByDate(
   return result
 }
 
-export async function getDailyAverage(activityId: string): Promise<number> {
+export async function getDailyAverage(
+  activityId: string,
+  dateRange: DateRange
+): Promise<number> {
   const logs = await db.activityLog.findMany({
     where: {
       activityId: activityId,
+      date: {
+        gte: dateRange.from.toISOString(),
+        lte: dateRange.to.toISOString(),
+      },
     },
     orderBy: {
       date: "asc",

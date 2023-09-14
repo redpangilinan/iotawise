@@ -5,7 +5,7 @@ import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
 import { getUserActivity } from "@/lib/api/activities"
 import { getStatsDashboardData } from "@/lib/api/dashboard"
-import { cn } from "@/lib/utils"
+import { cn, formatDate, dateRangeParams } from "@/lib/utils"
 
 import { Shell } from "@/components/layout/shell"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
@@ -20,6 +20,7 @@ import { DateRangePicker } from "@/components/date-range-picker"
 
 interface ActivityPageProps {
   params: { activityId: string }
+  searchParams: { from: string; to: string }
 }
 
 export async function generateMetadata({
@@ -39,7 +40,10 @@ export async function generateMetadata({
   }
 }
 
-export default async function ActivityPage({ params }: ActivityPageProps) {
+export default async function ActivityPage({
+  params,
+  searchParams,
+}: ActivityPageProps) {
   const user = await getCurrentUser()
 
   if (!user) {
@@ -52,7 +56,9 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
     notFound()
   }
 
-  const dashboardData = await getStatsDashboardData(activity.id)
+  const dateRange = dateRangeParams(searchParams)
+
+  const dashboardData = await getStatsDashboardData(activity.id, dateRange)
 
   return (
     <Shell>
@@ -77,9 +83,9 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
         </div>
       </DashboardHeader>
       <Heatmap data={dashboardData.logs} params={params} />
-      <StatsCards data={dashboardData} />
+      <StatsCards data={dashboardData} searchParams={searchParams} />
       <DataTable columns={logColumns} data={dashboardData.logs}>
-        Last year
+        Log History
       </DataTable>
     </Shell>
   )

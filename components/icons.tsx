@@ -13,6 +13,7 @@ import {
   AiOutlineEllipsis,
   AiOutlineWarning,
   AiOutlinePlus,
+  AiOutlineClose,
 } from "react-icons/ai"
 import { MdDeleteForever, MdOutlineLogout } from "react-icons/md"
 import { BiHistory, BiCalendar } from "react-icons/bi"
@@ -40,6 +41,7 @@ export const Icons: IconsType = {
   next: BsChevronRight,
   up: BsChevronUp,
   down: BsChevronDown,
+  close: AiOutlineClose,
 
   // Common
   trash: MdDeleteForever,

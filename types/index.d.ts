@@ -44,3 +44,13 @@ export type ActivityByDate = {
   date: string
   count: number
 }
+
+export type DateRange = {
+  from: Date
+  to: Date
+}
+
+export type SearchParams = {
+  from: string
+  to: string
+}

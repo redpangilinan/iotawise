@@ -8,7 +8,15 @@ import {
   getDailyAverage,
 } from "@/lib/api/logs"
 
-export async function getDashboardData(userId: string) {
+type DateRangeType = {
+  from: Date
+  to: Date
+}
+
+export async function getDashboardData(
+  userId: string,
+  dateRange: DateRangeType
+) {
   const [
     logs,
     streak,
@@ -17,12 +25,12 @@ export async function getDashboardData(userId: string) {
     activityCountByDate,
     topActivities,
   ] = await Promise.all([
-    getLogs(userId, 365, "user"),
+    getLogs(userId, dateRange, "user"),
     getStreak(userId, "user"),
-    getTotalLogs(userId, "user"),
-    getMostLoggedActivity(userId),
-    getActivityCountByDate(userId),
-    getTopActivities(userId),
+    getTotalLogs(userId, dateRange, "user"),
+    getMostLoggedActivity(userId, dateRange),
+    getActivityCountByDate(userId, dateRange),
+    getTopActivities(userId, dateRange),
   ])
 
   return {
@@ -35,12 +43,15 @@ export async function getDashboardData(userId: string) {
   }
 }
 
-export async function getStatsDashboardData(activityId: string) {
+export async function getStatsDashboardData(
+  activityId: string,
+  dateRange: DateRangeType
+) {
   const [logs, streak, totalLogs, dailyAverage] = await Promise.all([
-    getLogs(activityId, 365, "activity"),
+    getLogs(activityId, dateRange, "activity"),
     getStreak(activityId, "activity"),
-    getTotalLogs(activityId, "activity"),
-    getDailyAverage(activityId),
+    getTotalLogs(activityId, dateRange, "activity"),
+    getDailyAverage(activityId, dateRange),
   ])
 
   return {
