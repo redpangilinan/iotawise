@@ -1,6 +1,8 @@
 "use client"
 
 import * as React from "react"
+import { useRouter } from "next/navigation"
+
 import { addDays, format } from "date-fns"
 import { Icons } from "./icons"
 import { DateRange } from "react-day-picker"
@@ -13,16 +15,44 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import { useToast } from "@/components/ui/use-toast"
+
+function urlDate(input: string): string {
+  const date = new Date(input)
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+
+  const formattedMonth = month < 10 ? `0${month}` : `${month}`
+  const formattedDay = day < 10 ? `0${day}` : `${day}`
+
+  return `${year}-${formattedMonth}-${formattedDay}`
+}
 
 export function DateRangePicker({
   className,
 }: React.HTMLAttributes<HTMLDivElement>) {
-  const { toast } = useToast()
+  const router = useRouter()
   const [date, setDate] = React.useState<DateRange | undefined>({
     from: addDays(new Date(), -365),
     to: new Date(),
   })
+
+  function handleButtonClick() {
+    if (!date || date === undefined) {
+      return null
+    }
+
+    if (date.to === undefined || date.from === undefined) {
+      return null
+    }
+
+    router.push(
+      `?from=${urlDate(date.from.toISOString())}&to=${urlDate(
+        date.to.toISOString()
+      )}`
+    )
+    router.refresh()
+  }
 
   return (
     <div className={cn("flex gap-1", className)}>
@@ -65,12 +95,7 @@ export function DateRangePicker({
           <div className="flex flex-row-reverse px-2 pb-2">
             <Button
               variant="outline"
-              onClick={() => {
-                toast({
-                  title: "Work in progress",
-                  description: "Date range filter is still being worked on.",
-                })
-              }}
+              onClick={handleButtonClick}
               className="w-full"
             >
               <Icons.check className="mr-2 h-4 w-4" />
