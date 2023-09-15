@@ -11,6 +11,10 @@ export const navLinks: Navigation = {
       href: "/#features",
     },
     {
+      title: "Overview",
+      href: "/#overview",
+    },
+    {
       title: "Dashboard",
       href: "/dashboard",
     },
