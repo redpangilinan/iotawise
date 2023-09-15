@@ -12,7 +12,7 @@ Iotawise is an open-source habit tracking app that lets you track daily habits a
 - Activity Streak Monitoring
 - Dashboard Analytics
 - Google Authentication
-- Web Push Notifications
+- Web Push Notifications (coming soon)
 - Cross-platform Support (PWA)
 
 ## Stack
