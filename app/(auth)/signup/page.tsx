@@ -33,7 +33,7 @@ export default function Signup() {
             Create an account
           </h1>
           <p className="text-sm text-muted-foreground">
-            Sign up with your google account
+            Select a provider to create your account
           </p>
         </div>
         <UserAuthForm />

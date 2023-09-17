@@ -37,3 +37,4 @@ next-env.d.ts
 
 # extra
 /private_docs
+.vercel

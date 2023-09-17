@@ -31,7 +31,7 @@ export default function Signin() {
         <div className="flex flex-col space-y-2 text-center">
           <h1 className="text-2xl font-semibold tracking-tight">Sign in</h1>
           <p className="text-sm text-muted-foreground">
-            Sign in to your google account
+            Sign in to your account
           </p>
         </div>
         <UserAuthForm />

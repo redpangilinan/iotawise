@@ -14,6 +14,8 @@ import {
   AiOutlineWarning,
   AiOutlinePlus,
   AiOutlineClose,
+  AiFillGoogleCircle,
+  AiFillGithub,
 } from "react-icons/ai"
 import { MdDeleteForever, MdOutlineLogout } from "react-icons/md"
 import { BiHistory, BiCalendar } from "react-icons/bi"
@@ -27,6 +29,10 @@ interface IconsType {
 }
 
 export const Icons: IconsType = {
+  // Providers
+  google: AiFillGoogleCircle,
+  github: AiFillGithub,
+
   // Dashboard Icons
   dashboard: RxDashboard,
   activity: BsActivity,
