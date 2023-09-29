@@ -1,15 +1,9 @@
-import Hero from "@/components/pages/hero"
-import FeatureCards from "@/components/pages/feature-cards"
-import Overview from "@/components/pages/overview"
-import OpenSource from "@/components/pages/opensource"
+import { Icons } from "@/components/icons"
 
-export default function Home() {
+export default function HomeLoading() {
   return (
-    <main>
-      <Hero />
-      <FeatureCards />
-      <Overview />
-      <OpenSource />
+    <main className="flex justify-center p-8">
+      <Icons.spinner className="animate-spin text-4xl" />
     </main>
   )
 }
