@@ -3,11 +3,8 @@
 import * as React from "react"
 import { useRouter } from "next/navigation"
 
-import { cn } from "@/lib/utils"
-
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -15,7 +12,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
-import { ButtonProps, buttonVariants } from "@/components/ui/button"
+import { Button, ButtonProps } from "@/components/ui/button"
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
 
@@ -44,9 +41,10 @@ export function ActivityAddButton({
       }),
     })
 
-    setIsLoading(false)
-
     if (!response?.ok) {
+      setIsLoading(false)
+      setShowAddAlert(false)
+
       return toast({
         title: "Something went wrong.",
         description: "Your activity was not created. Please try again.",
@@ -54,21 +52,25 @@ export function ActivityAddButton({
       })
     }
 
+    toast({
+      description: "A new activity has been created successfully.",
+    })
+
     const activity = await response.json()
 
-    router.refresh()
+    setIsLoading(false)
+    setShowAddAlert(false)
+
     router.push(`/dashboard/activities/${activity.id}/settings`)
+    router.refresh()
   }
 
   return (
     <>
-      <button
-        onClick={() => setShowAddAlert(true)}
-        className={cn(buttonVariants({ variant }), className)}
-      >
+      <Button onClick={() => setShowAddAlert(true)}>
         <Icons.add className="mr-2 h-4 w-4" />
         New activity
-      </button>
+      </Button>
 
       {/* Add Alert */}
       <AlertDialog open={showAddAlert} onOpenChange={setShowAddAlert}>
@@ -83,17 +85,14 @@ export function ActivityAddButton({
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction
-              onClick={onClick}
-              className="bg-red-600 focus:ring-red-600"
-            >
+            <Button onClick={onClick} disabled={isLoading}>
               {isLoading ? (
                 <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
               ) : (
                 <Icons.add className="mr-2 h-4 w-4" />
               )}
               <span>Add activity</span>
-            </AlertDialogAction>
+            </Button>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

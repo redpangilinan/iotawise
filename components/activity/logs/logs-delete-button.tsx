@@ -27,14 +27,12 @@ async function deleteActivity(activityId: string, logsId: string) {
   if (!response?.ok) {
     toast({
       title: "Something went wrong.",
-      description: "Your activity was not deleted. Please try again.",
+      description: "Your log was not deleted. Please try again.",
       variant: "destructive",
     })
   } else {
     toast({
-      title: "Item has been deleted.",
-      description: "Your activity has been deleted successfully.",
-      variant: "default",
+      description: "Your log has been deleted successfully.",
     })
   }
 
@@ -61,6 +59,7 @@ export function LogsDeleteButton({ logs }: LogsDeleteButtonProps) {
         variant="outline"
         className="h-8 w-8 p-0"
         onClick={() => setShowDeleteAlert(true)}
+        disabled={isDeleteLoading}
       >
         <Icons.trash className="h-4 w-4" />
         <span className="sr-only">Delete</span>

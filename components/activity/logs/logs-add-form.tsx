@@ -11,10 +11,7 @@ import * as z from "zod"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
-import {
-  AlertDialogAction,
-  AlertDialogCancel,
-} from "@/components/ui/alert-dialog"
+import { AlertDialogCancel } from "@/components/ui/alert-dialog"
 import {
   Form,
   FormControl,
@@ -34,6 +31,7 @@ import { Icons } from "@/components/icons"
 
 interface LogsAddFormProps {
   activityId: string
+  setShowLogAlert: (active: boolean) => void
 }
 
 const FormSchema = z.object({
@@ -51,14 +49,17 @@ const defaultValues: Partial<FormValues> = {
   date: currentDate,
 }
 
-export function LogsAddForm({ activityId }: LogsAddFormProps) {
+export function LogsAddForm({ activityId, setShowLogAlert }: LogsAddFormProps) {
   const router = useRouter()
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues,
   })
+  const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
+    setIsLoading(true)
+
     const response = await fetch(`/api/activities/${activityId}/logs`, {
       method: "POST",
       headers: {
@@ -81,6 +82,9 @@ export function LogsAddForm({ activityId }: LogsAddFormProps) {
         description: "Your activity has been logged successfully.",
       })
     }
+
+    setIsLoading(false)
+    setShowLogAlert(false)
 
     router.refresh()
   }
@@ -133,7 +137,14 @@ export function LogsAddForm({ activityId }: LogsAddFormProps) {
           )}
         />
         <div className="grid md:flex md:gap-2">
-          <AlertDialogAction type="submit">Add log</AlertDialogAction>
+          <Button type="submit" disabled={isLoading}>
+            {isLoading ? (
+              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+            ) : (
+              <Icons.add className="mr-2 h-4 w-4" />
+            )}
+            <span>Add log</span>
+          </Button>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
         </div>
       </form>

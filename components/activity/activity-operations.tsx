@@ -39,9 +39,7 @@ async function deleteActivity(activityId: string) {
     })
   } else {
     toast({
-      title: "Item has been deleted.",
       description: "Your activity has been deleted successfully.",
-      variant: "default",
     })
   }
 
@@ -60,7 +58,7 @@ export function ActivityOperations({
   const router = useRouter()
   const [showDeleteAlert, setShowDeleteAlert] = React.useState<boolean>(false)
   const [isDeleteLoading, setIsDeleteLoading] = React.useState<boolean>(false)
-  const [showAddAlert, setShowAddAlert] = React.useState<boolean>(false)
+  const [showLogAlert, setShowLogAlert] = React.useState<boolean>(false)
 
   return (
     <>
@@ -79,7 +77,7 @@ export function ActivityOperations({
         <DropdownMenuContent align="end">
           <DropdownMenuItem
             className="flex cursor-pointer items-center"
-            onSelect={() => setShowAddAlert(true)}
+            onSelect={() => setShowLogAlert(true)}
           >
             <Icons.add className="mr-2 h-4 w-4" />
             Add Log
@@ -106,7 +104,7 @@ export function ActivityOperations({
       </DropdownMenu>
 
       {/* Add Alert */}
-      <AlertDialog open={showAddAlert} onOpenChange={setShowAddAlert}>
+      <AlertDialog open={showLogAlert} onOpenChange={setShowLogAlert}>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Log Activity</AlertDialogTitle>
@@ -114,7 +112,10 @@ export function ActivityOperations({
               This will create an activity log.
             </AlertDialogDescription>
           </AlertDialogHeader>
-          <LogsAddForm activityId={activity.id} />
+          <LogsAddForm
+            activityId={activity.id}
+            setShowLogAlert={setShowLogAlert}
+          />
         </AlertDialogContent>
       </AlertDialog>
 
@@ -147,6 +148,7 @@ export function ActivityOperations({
                 }
               }}
               className="bg-red-600 focus:ring-red-600"
+              disabled={isDeleteLoading}
             >
               {isDeleteLoading ? (
                 <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
