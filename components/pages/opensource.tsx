@@ -1,7 +1,9 @@
 import HeadingText from "@/components/heading-text"
 import Link from "next/link"
-import { buttonVariants } from "@/components/ui/button"
+
 import { cn } from "@/lib/utils"
+import { siteConfig } from "@/config/site"
+import { buttonVariants } from "@/components/ui/button"
 
 import { FaGithub } from "react-icons/fa"
 
@@ -16,7 +18,7 @@ export default function OpenSource() {
           Fully Open Source
         </HeadingText>
         <Link
-          href="https://github.com/redpangilinan/iotawise"
+          href={siteConfig.links.github}
           target="_blank"
           className={`w-[10rem] gap-2 ${cn(
             buttonVariants({ variant: "outline", size: "sm" })

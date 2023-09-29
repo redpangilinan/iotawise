@@ -7,11 +7,10 @@ export type SiteConfig = {
     base: string
     author: string
   }
+  links: {
+    github: string
+  }
   ogImage: string
-}
-
-export type ContactConfig = {
-  email: string
 }
 
 export type NavItem = {

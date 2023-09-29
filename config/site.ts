@@ -1,4 +1,4 @@
-import { SiteConfig, ContactConfig } from "@/types"
+import { SiteConfig } from "@/types"
 import { env } from "@/env.mjs"
 
 export const siteConfig: SiteConfig = {
@@ -21,9 +21,8 @@ export const siteConfig: SiteConfig = {
     base: env.NEXT_PUBLIC_APP_URL,
     author: "https://redpangilinan.live",
   },
+  links: {
+    github: "https://github.com/redpangilinan/iotawise",
+  },
   ogImage: `${env.NEXT_PUBLIC_APP_URL}/og.jpg`,
-}
-
-export const contactConfig: ContactConfig = {
-  email: "janreynald.pangilinan@gmail.com",
 }

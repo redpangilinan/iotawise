@@ -5,7 +5,7 @@ import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
 import { getUserActivity } from "@/lib/api/activities"
 import { getStatsDashboardData } from "@/lib/api/dashboard"
-import { cn, formatDate, dateRangeParams } from "@/lib/utils"
+import { cn, dateRangeParams } from "@/lib/utils"
 
 import { Shell } from "@/components/layout/shell"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
