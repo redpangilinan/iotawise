@@ -1,13 +1,7 @@
 import Image from "next/image"
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
 import HeadingText from "@/components/heading-text"
+import { ImageFrame } from "@/components/image-frame"
 
 export default function Overview() {
   return (
@@ -16,107 +10,61 @@ export default function Overview() {
         <HeadingText subtext="Get started with the app">
           Discover what you can do
         </HeadingText>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-center">Add your activities</CardTitle>
-            </CardHeader>
-            <CardContent className="flex items-center">
-              <Image
-                src="/images/activities.jpg"
-                width="600"
-                height="400"
-                priority={true}
-                alt="Showcase image"
-                className="rounded border"
-              />
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-center">
-                Track activities by logging
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <Image
-                src="/images/logging.jpg"
-                width="600"
-                height="400"
-                priority={true}
-                alt="Showcase image"
-                className="rounded border"
-              />
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-center">
-                Monitor all your activities
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <Image
-                src="/images/dashboard.jpg"
-                width="600"
-                height="400"
-                priority={true}
-                alt="Showcase image"
-                className="rounded border"
-              />
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-center">
-                Statistics for each activity
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <Image
-                src="/images/activity-stats.jpg"
-                width="600"
-                height="400"
-                priority={true}
-                alt="Showcase image"
-                className="rounded border"
-              />
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-center">
-                View your log history
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <Image
-                src="/images/log-history.jpg"
-                width="600"
-                height="400"
-                priority={true}
-                alt="Showcase image"
-                className="rounded border"
-              />
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-center">
-                Personalize your activities
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <Image
-                src="/images/personalize.jpg"
-                width="600"
-                height="400"
-                priority={true}
-                alt="Showcase image"
-                className="rounded border"
-              />
-            </CardContent>
-          </Card>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8">
+          <ImageFrame>
+            <Image
+              className="rounded-lg"
+              src="/images/activities.jpg"
+              width="1280"
+              height="720"
+              alt="Showcase image"
+            />
+          </ImageFrame>
+          <ImageFrame>
+            <Image
+              className="rounded-lg"
+              src="/images/logging.jpg"
+              width="1280"
+              height="720"
+              alt="Showcase image"
+            />
+          </ImageFrame>
+          <ImageFrame>
+            <Image
+              className="rounded-lg"
+              src="/images/dashboard.jpg"
+              width="1280"
+              height="720"
+              alt="Showcase image"
+            />
+          </ImageFrame>
+          <ImageFrame>
+            <Image
+              className="rounded-lg"
+              src="/images/activity-stats.jpg"
+              width="1280"
+              height="720"
+              alt="Showcase image"
+            />
+          </ImageFrame>
+          <ImageFrame>
+            <Image
+              className="rounded-lg"
+              src="/images/log-history.jpg"
+              width="1280"
+              height="720"
+              alt="Showcase image"
+            />
+          </ImageFrame>
+          <ImageFrame>
+            <Image
+              className="rounded-lg"
+              src="/images/personalize.jpg"
+              width="1280"
+              height="720"
+              alt="Showcase image"
+            />
+          </ImageFrame>
         </div>
       </div>
     </section>

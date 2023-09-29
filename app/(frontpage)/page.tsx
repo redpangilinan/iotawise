@@ -6,12 +6,12 @@ import OpenSource from "@/components/pages/opensource"
 
 export default function Home() {
   return (
-    <>
+    <main>
       <Hero />
       <FeatureCards />
       <Overview />
       <OpenSource />
       <PWARedirect />
-    </>
+    </main>
   )
 }
