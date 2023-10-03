@@ -47,7 +47,7 @@ export function LogsDeleteDialog({
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>
-            Delete the logs from {formatDate(logDate.toLocaleDateString())}?
+            Delete logs from {formatDate(logDate.toLocaleDateString())}?
           </AlertDialogTitle>
           <AlertDialogDescription>
             This action cannot be undone.
