@@ -244,10 +244,35 @@ export async function getActivityCountByDate(
     },
   })
 
-  const result = logs.map((log) => ({
-    date: log.date.toISOString(),
-    count: log._sum.count ?? 0,
-  }))
+  const dateMap = new Map<string, number>()
+
+  logs.forEach((log) => {
+    dateMap.set(log.date.toISOString(), log._sum.count ?? 0)
+  })
+
+  let earliestNonZeroDate = null
+  for (const log of logs) {
+    if (log._sum.count !== 0) {
+      earliestNonZeroDate = log.date
+      break
+    }
+  }
+
+  const result: ActivityByDate[] = []
+
+  if (earliestNonZeroDate) {
+    let currentDate = new Date(earliestNonZeroDate)
+
+    while (currentDate <= new Date(dateRange.to)) {
+      const currentDateISOString = currentDate.toISOString()
+      result.push({
+        date: currentDateISOString,
+        count: dateMap.get(currentDateISOString) ?? 0,
+      })
+
+      currentDate.setDate(currentDate.getDate() + 1)
+    }
+  }
 
   return result
 }
