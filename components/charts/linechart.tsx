@@ -47,6 +47,7 @@ export function LineChartComponent({ data }: LineChartProps) {
             type="monotone"
             dataKey="count"
             stroke="#DC2626"
+            dot={false}
             activeDot={{ r: 8 }}
           />
         </LineChart>
