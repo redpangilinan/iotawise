@@ -2,8 +2,7 @@
 
 Iotawise is an open-source habit tracking app that lets you track daily habits and monitor your activity streaks and progress with little effort.
 
-> **Notice**
-> This app is currently work in progress.
+![og image](/public/og.jpg)
 
 ## Features
 
@@ -16,6 +15,7 @@ Iotawise is an open-source habit tracking app that lets you track daily habits a
 - Cross-platform Support (PWA)
 
 ## Stack
+
 - [Next.js](https://nextjs.org) `/app` dir
 - [TypeScript](https://www.typescriptlang.org)
 - [Tailwind CSS](https://tailwindcss.com)
