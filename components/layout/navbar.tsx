@@ -18,7 +18,7 @@ export default function Navbar({ user }: NavbarProps) {
         <div>
           <div className="flex items-center justify-between py-3 md:block md:py-5">
             <Link href="/">
-              <h1 className="text-2xl font-bold duration-200 lg:hover:scale-[1.10]">
+              <h1 className="text-2xl font-bold duration-200">
                 {siteConfig.name}
               </h1>
             </Link>
