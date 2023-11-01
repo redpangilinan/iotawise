@@ -8,8 +8,8 @@ import { UserAuthForm } from "@/components/user/user-auth-form"
 import { Icons } from "@/components/icons"
 
 export const metadata: Metadata = {
-  title: "Sign in",
-  description: "Sign in to your account",
+  title: "Sign up",
+  description: "Create an account",
 }
 
 export default function Signup() {
