@@ -24,11 +24,13 @@ import { ImSpinner8, ImStatsBars } from "react-icons/im"
 import { RxDashboard, RxMixerHorizontal } from "react-icons/rx"
 import { LuSettings } from "react-icons/lu"
 
-interface IconsType {
-  [key: string]: React.ElementType
+type IconKeys = keyof typeof icons
+
+type IconsType = {
+  [key in IconKeys]: React.ElementType
 }
 
-export const Icons: IconsType = {
+const icons = {
   // Providers
   google: AiFillGoogleCircle,
   github: AiFillGithub,
@@ -65,3 +67,5 @@ export const Icons: IconsType = {
   mixer: RxMixerHorizontal,
   check: BsCheck2,
 }
+
+export const Icons: IconsType = icons
