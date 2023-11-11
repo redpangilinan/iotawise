@@ -1,3 +1,5 @@
+import { IconKeys } from "@/components/icons"
+
 export type SiteConfig = {
   name: string
   author: string
@@ -17,7 +19,7 @@ export type NavItem = {
   title: string
   disabled?: boolean
   external?: boolean
-  icon?: string
+  icon?: IconKeys
 } & (
   | {
       href: string
