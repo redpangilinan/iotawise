@@ -104,7 +104,7 @@ export function LogsAddForm({ activityId, setShowLogAlert }: LogsAddFormProps) {
                     <Button
                       variant={"outline"}
                       className={cn(
-                        "w-[240px] pl-3 text-left font-normal",
+                        "w-full pl-3 text-left font-normal sm:w-[240px]",
                         !field.value && "text-muted-foreground"
                       )}
                     >
