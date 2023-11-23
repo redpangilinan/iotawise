@@ -28,10 +28,7 @@ function displayDateRange(searchParams: SearchParams) {
   )
 }
 
-export async function DashboardCards({
-  data,
-  searchParams,
-}: DashboardCardsProps) {
+export function DashboardCards({ data, searchParams }: DashboardCardsProps) {
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
       <Card>
