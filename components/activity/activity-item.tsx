@@ -21,6 +21,7 @@ export function ActivityItem({ activity }: ActivityItemProps) {
         <div className="flex items-center gap-4">
           <div
             className="h-4 w-4 rounded-full shadow shadow-black dark:shadow-white"
+            data-testid="color-code"
             style={{ backgroundColor: `${activity.colorCode}` }}
           ></div>
           <div>
