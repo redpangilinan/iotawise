@@ -301,7 +301,7 @@ export async function getDailyAverage(
   }
 
   const oldestDate = new Date(logs[0].date)
-  const today = new Date()
+  const today = new Date(dateRange.to.toISOString())
   const timePeriodInDays = Math.ceil(
     (today.getTime() - oldestDate.getTime()) / (1000 * 60 * 60 * 24)
   )
