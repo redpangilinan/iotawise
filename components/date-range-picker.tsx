@@ -7,7 +7,7 @@ import { format } from "date-fns"
 import { Icons } from "./icons"
 import { DateRange } from "react-day-picker"
 
-import { cn } from "@/lib/utils"
+import { cn, dateRangeParams } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import {
@@ -29,25 +29,6 @@ function urlDate(input: string): string {
   return `${year}-${formattedMonth}-${formattedDay}`
 }
 
-function getDateRangeFromUrl(searchParams: URLSearchParams): DateRange | undefined {
-  const from = searchParams.get('from');
-  const to = searchParams.get('to');
-
-  if (!from) {
-    return undefined;
-  }
-
-  const dateRange: DateRange = {
-    from: new Date(from),
-  };
-
-  if (to) {
-    dateRange.to = new Date(to);
-  }
-
-  return dateRange;
-}
-
 export function DateRangePicker({
   className,
 }: React.HTMLAttributes<HTMLDivElement>) {
@@ -55,7 +36,15 @@ export function DateRangePicker({
   const pathname = usePathname()
   const searchParams = useSearchParams();
 
-  const [date, setDate] = React.useState<DateRange | undefined>(getDateRangeFromUrl(searchParams))
+  const from = searchParams.get('from');
+  const to = searchParams.get('to');
+
+  const dateRange =  from && to ? dateRangeParams({
+    from,
+    to,
+  }): undefined;
+
+  const [date, setDate] = React.useState<DateRange | undefined>(dateRange)
 
   return (
     <div className={cn("flex gap-1", className)}>
