@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { useRouter, usePathname } from "next/navigation"
+import { useRouter, usePathname, useSearchParams } from "next/navigation"
 
 import { format } from "date-fns"
 import { Icons } from "./icons"
@@ -29,12 +29,33 @@ function urlDate(input: string): string {
   return `${year}-${formattedMonth}-${formattedDay}`
 }
 
+function getDateRangeFromUrl(searchParams: URLSearchParams): DateRange | undefined {
+  const from = searchParams.get('from');
+  const to = searchParams.get('to');
+
+  if (!from) {
+    return undefined;
+  }
+
+  const dateRange: DateRange = {
+    from: new Date(from),
+  };
+
+  if (to) {
+    dateRange.to = new Date(to);
+  }
+
+  return dateRange;
+}
+
 export function DateRangePicker({
   className,
 }: React.HTMLAttributes<HTMLDivElement>) {
   const router = useRouter()
   const pathname = usePathname()
-  const [date, setDate] = React.useState<DateRange | undefined>()
+  const searchParams = useSearchParams();
+
+  const [date, setDate] = React.useState<DateRange | undefined>(getDateRangeFromUrl(searchParams))
 
   return (
     <div className={cn("flex gap-1", className)}>
