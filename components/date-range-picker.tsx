@@ -1,13 +1,13 @@
 "use client"
 
 import * as React from "react"
-import { useRouter, usePathname } from "next/navigation"
+import { useRouter, usePathname, useSearchParams } from "next/navigation"
 
 import { format } from "date-fns"
 import { Icons } from "./icons"
 import { DateRange } from "react-day-picker"
 
-import { cn } from "@/lib/utils"
+import { cn, dateRangeParams } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import {
@@ -34,7 +34,17 @@ export function DateRangePicker({
 }: React.HTMLAttributes<HTMLDivElement>) {
   const router = useRouter()
   const pathname = usePathname()
-  const [date, setDate] = React.useState<DateRange | undefined>()
+  const searchParams = useSearchParams();
+
+  const from = searchParams.get('from');
+  const to = searchParams.get('to');
+
+  const dateRange =  from && to ? dateRangeParams({
+    from,
+    to,
+  }): undefined;
+
+  const [date, setDate] = React.useState<DateRange | undefined>(dateRange)
 
   return (
     <div className={cn("flex gap-1", className)}>
