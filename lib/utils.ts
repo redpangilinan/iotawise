@@ -37,24 +37,22 @@ export function dateRangeParams(searchParams: {
     dateRange.from = oneYearAgo
 
     if (searchParams.utc) {
-      dateRange.from.setUTCHours(0, 0, 0, 0)
-      dateRange.to.setUTCHours(23, 59, 59, 999)
+      dateRange.from.toISOString()
+      dateRange.to.toISOString()
     }
 
     return dateRange
   }
-
-  const fromUTC = new Date(searchParams.from)
-  const toUTC = new Date(searchParams.to)
-
   if (searchParams.utc) {
-    fromUTC.setUTCHours(0, 0, 0, 0)
-    toUTC.setUTCHours(23, 59, 59, 999)
+    return {
+      from: new Date(searchParams.from).toISOString(),
+      to: new Date(searchParams.to).toISOString(),
+    }
   }
 
   return {
-    from: fromUTC,
-    to: toUTC,
+    from: new Date(searchParams.from),
+    to: new Date(searchParams.to),
   }
 }
 
