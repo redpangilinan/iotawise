@@ -1,0 +1,6 @@
+dist
+node_modules
+.next
+package.json
+pnpm-lock.yaml
+*.md
