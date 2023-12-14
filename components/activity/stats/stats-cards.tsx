@@ -1,6 +1,6 @@
 import { SearchParams } from "@/types"
-import { formatDate } from "@/lib/utils"
 
+import { formatDate } from "@/lib/utils"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Icons } from "@/components/icons"
 

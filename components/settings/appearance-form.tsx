@@ -1,12 +1,11 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useTheme } from "next-themes"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
-import { useTheme } from "next-themes"
 
 import { Button } from "@/components/ui/button"
-import { toast } from "@/components/ui/use-toast"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   Form,
@@ -18,6 +17,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { toast } from "@/components/ui/use-toast"
 
 const appearanceFormSchema = z.object({
   theme: z.enum(["light", "dark"], {

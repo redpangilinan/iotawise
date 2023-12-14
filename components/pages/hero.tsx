@@ -1,9 +1,8 @@
-import Link from "next/link"
 import Image from "next/image"
+import Link from "next/link"
 
-import { cn } from "@/lib/utils"
 import { siteConfig } from "@/config/site"
-
+import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { ImageFrame } from "@/components/image-frame"
 

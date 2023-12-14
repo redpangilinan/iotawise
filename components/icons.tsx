@@ -1,28 +1,28 @@
 import {
-  BsMoonStars,
-  BsSun,
+  AiFillGithub,
+  AiFillGoogleCircle,
+  AiOutlineClose,
+  AiOutlineEllipsis,
+  AiOutlinePlus,
+  AiOutlineWarning,
+} from "react-icons/ai"
+import { BiCalendar, BiHistory } from "react-icons/bi"
+import {
+  BsActivity,
+  BsCheck2,
+  BsChevronDown,
   BsChevronLeft,
   BsChevronRight,
   BsChevronUp,
-  BsChevronDown,
-  BsActivity,
   BsFire,
-  BsCheck2,
+  BsMoonStars,
+  BsSun,
 } from "react-icons/bs"
-import {
-  AiOutlineEllipsis,
-  AiOutlineWarning,
-  AiOutlinePlus,
-  AiOutlineClose,
-  AiFillGoogleCircle,
-  AiFillGithub,
-} from "react-icons/ai"
-import { MdDeleteForever, MdOutlineLogout } from "react-icons/md"
-import { BiHistory, BiCalendar } from "react-icons/bi"
-import { FaUserAlt, FaSort } from "react-icons/fa"
+import { FaSort, FaUserAlt } from "react-icons/fa"
 import { ImSpinner8, ImStatsBars } from "react-icons/im"
-import { RxDashboard, RxMixerHorizontal } from "react-icons/rx"
 import { LuSettings } from "react-icons/lu"
+import { MdDeleteForever, MdOutlineLogout } from "react-icons/md"
+import { RxDashboard, RxMixerHorizontal } from "react-icons/rx"
 
 export type IconKeys = keyof typeof icons
 

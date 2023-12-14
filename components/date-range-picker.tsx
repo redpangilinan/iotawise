@@ -1,10 +1,8 @@
 "use client"
 
 import * as React from "react"
-import { useRouter, usePathname, useSearchParams } from "next/navigation"
-
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { format } from "date-fns"
-import { Icons } from "./icons"
 import { DateRange } from "react-day-picker"
 
 import { cn, dateRangeParams } from "@/lib/utils"
@@ -12,10 +10,12 @@ import { Button, buttonVariants } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import {
   Popover,
+  PopoverClose,
   PopoverContent,
   PopoverTrigger,
-  PopoverClose,
 } from "@/components/ui/popover"
+
+import { Icons } from "./icons"
 
 function urlDate(input: string): string {
   const date = new Date(input)

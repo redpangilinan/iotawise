@@ -1,15 +1,15 @@
 "use client"
 
 import * as React from "react"
-
 import CalendarHeatmap from "react-calendar-heatmap"
+
 import "react-calendar-heatmap/dist/styles.css"
 
 import { formatDate } from "@/lib/utils"
-
-import { LogsDeleteDialog } from "../activity/logs/logs-delete-dialog"
 import { Card } from "@/components/ui/card"
 import { toast } from "@/components/ui/use-toast"
+
+import { LogsDeleteDialog } from "../activity/logs/logs-delete-dialog"
 
 interface Value {
   id: string

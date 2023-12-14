@@ -5,8 +5,6 @@ import { User } from "next-auth"
 import { signOut } from "next-auth/react"
 
 import { dashboardLinks } from "@/config/links"
-import { Icons } from "@/components/icons"
-
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,6 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { Icons } from "@/components/icons"
 import { UserAvatar } from "@/components/user/user-avatar"
 
 interface UserAccountNavProps extends React.HTMLAttributes<HTMLDivElement> {

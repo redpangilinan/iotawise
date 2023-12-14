@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react"
+
 import { ActivityItem } from "@/components/activity/activity-item"
 
 jest.mock("next/navigation", () => ({

@@ -1,8 +1,8 @@
 import { getServerSession } from "next-auth/next"
 import * as z from "zod"
 
-import { authOptions } from "@/lib/auth"
 import { verifyActivity } from "@/lib/api/activities"
+import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 
 const activityLogCreateSchema = z.object({

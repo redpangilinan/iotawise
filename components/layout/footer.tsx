@@ -1,6 +1,8 @@
 import Link from "next/link"
-import { siteConfig } from "@/config/site"
+
 import { navLinks } from "@/config/links"
+import { siteConfig } from "@/config/site"
+
 import { ModeToggle } from "../mode-toggle"
 
 export default function Footer() {

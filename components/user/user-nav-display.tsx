@@ -1,9 +1,10 @@
 import Link from "next/link"
 import { User } from "next-auth"
 
-import { UserAccountNav } from "./user-account-nav"
-import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
+
+import { UserAccountNav } from "./user-account-nav"
 
 interface UserNavDisplayProps extends React.HTMLAttributes<HTMLDivElement> {
   user: Pick<User, "name" | "image" | "email">

@@ -1,16 +1,15 @@
 import { Metadata } from "next"
 import { redirect } from "next/navigation"
 
+import { getUserActivities } from "@/lib/api/activities"
 import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
-import { getUserActivities } from "@/lib/api/activities"
-
-import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
-import { Shell } from "@/components/layout/shell"
-import { EmptyPlaceholder } from "@/components/empty-placeholder"
-import { ActivityItem } from "@/components/activity/activity-item"
 import { ActivityAddButton } from "@/components/activity/activity-add-button"
+import { ActivityItem } from "@/components/activity/activity-item"
+import { EmptyPlaceholder } from "@/components/empty-placeholder"
 import { Icons } from "@/components/icons"
+import { Shell } from "@/components/layout/shell"
+import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
 
 export const metadata: Metadata = {
   title: "Activities",

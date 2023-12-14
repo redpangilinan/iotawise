@@ -1,11 +1,11 @@
 import {
-  getLogs,
-  getStreak,
-  getTotalLogs,
-  getMostLoggedActivity,
-  getTopActivities,
   getActivityCountByDate,
   getDailyAverage,
+  getLogs,
+  getMostLoggedActivity,
+  getStreak,
+  getTopActivities,
+  getTotalLogs,
 } from "@/lib/api/logs"
 
 type DateRangeType = {

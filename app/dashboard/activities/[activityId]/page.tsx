@@ -1,22 +1,21 @@
 import { Metadata } from "next"
 import { notFound, redirect } from "next/navigation"
 
-import { authOptions } from "@/lib/auth"
-import { getCurrentUser } from "@/lib/session"
 import { getUserActivity } from "@/lib/api/activities"
 import { getStatsDashboardData } from "@/lib/api/dashboard"
+import { authOptions } from "@/lib/auth"
+import { getCurrentUser } from "@/lib/session"
 import { cn, dateRangeParams } from "@/lib/utils"
-
+import { buttonVariants } from "@/components/ui/button"
+import { ActivityOperations } from "@/components/activity/activity-operations"
+import { logColumns } from "@/components/activity/logs/logs-columns"
+import { StatsCards } from "@/components/activity/stats/stats-cards"
+import { Heatmap } from "@/components/charts/heatmap"
+import { DataTable } from "@/components/data-table"
+import { DateRangePicker } from "@/components/date-range-picker"
+import { Icons } from "@/components/icons"
 import { Shell } from "@/components/layout/shell"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
-import { DataTable } from "@/components/data-table"
-import { ActivityOperations } from "@/components/activity/activity-operations"
-import { StatsCards } from "@/components/activity/stats/stats-cards"
-import { logColumns } from "@/components/activity/logs/logs-columns"
-import { Heatmap } from "@/components/charts/heatmap"
-import { buttonVariants } from "@/components/ui/button"
-import { Icons } from "@/components/icons"
-import { DateRangePicker } from "@/components/date-range-picker"
 
 interface ActivityPageProps {
   params: { activityId: string }

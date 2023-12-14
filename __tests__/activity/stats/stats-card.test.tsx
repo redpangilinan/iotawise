@@ -1,4 +1,5 @@
 import { render, RenderResult } from "@testing-library/react"
+
 import { StatsCards } from "@/components/activity/stats/stats-cards"
 
 describe("StatsCards", () => {

@@ -1,8 +1,9 @@
-import HeadingText from "@/components/heading-text"
-import { Card, CardDescription, CardTitle } from "@/components/ui/card"
-import { RxActivityLog } from "react-icons/rx"
 import { BsFire, BsLayoutTextWindowReverse } from "react-icons/bs"
+import { RxActivityLog } from "react-icons/rx"
 import { TbDeviceAnalytics } from "react-icons/tb"
+
+import { Card, CardDescription, CardTitle } from "@/components/ui/card"
+import HeadingText from "@/components/heading-text"
 
 function Cards() {
   return (

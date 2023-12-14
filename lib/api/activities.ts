@@ -1,6 +1,7 @@
-import { getServerSession } from "next-auth"
-import { authOptions } from "@/lib/auth"
 import { Activity, User } from "@prisma/client"
+import { getServerSession } from "next-auth"
+
+import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 
 type UserActivities = Activity & {

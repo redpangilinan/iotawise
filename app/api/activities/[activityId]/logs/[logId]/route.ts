@@ -1,6 +1,7 @@
 import * as z from "zod"
-import { db } from "@/lib/db"
+
 import { verifyActivity } from "@/lib/api/activities"
+import { db } from "@/lib/db"
 
 const routeContextSchema = z.object({
   params: z.object({

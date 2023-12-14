@@ -1,5 +1,5 @@
-import { Shell } from "@/components/layout/shell"
 import { Icons } from "@/components/icons"
+import { Shell } from "@/components/layout/shell"
 
 export default async function DashboardLoading() {
   return (

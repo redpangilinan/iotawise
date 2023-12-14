@@ -1,9 +1,8 @@
-import { getCurrentUser } from "@/lib/session"
 import { dashboardLinks } from "@/config/links"
-
-import { DashboardNav } from "@/components/pages/dashboard/dashboard-nav"
-import Navbar from "@/components/layout/navbar"
+import { getCurrentUser } from "@/lib/session"
 import Footer from "@/components/layout/footer"
+import Navbar from "@/components/layout/navbar"
+import { DashboardNav } from "@/components/pages/dashboard/dashboard-nav"
 
 interface DashboardLayoutProps {
   children: React.ReactNode

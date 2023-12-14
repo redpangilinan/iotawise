@@ -2,10 +2,11 @@
 
 import * as React from "react"
 
-import { LogsDeleteDialog } from "./logs-delete-dialog"
 import { Button } from "@/components/ui/button"
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
+
+import { LogsDeleteDialog } from "./logs-delete-dialog"
 
 interface LogsDeleteButtonProps {
   logs: {

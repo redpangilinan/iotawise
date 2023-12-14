@@ -1,19 +1,18 @@
 import { Metadata } from "next"
 import { redirect } from "next/navigation"
 
+import { getDashboardData } from "@/lib/api/dashboard"
 import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
-import { getDashboardData } from "@/lib/api/dashboard"
 import { dateRangeParams } from "@/lib/utils"
-
-import { Shell } from "@/components/layout/shell"
-import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
-import { DashboardCards } from "@/components/pages/dashboard/dashboard-cards"
-import { DataTable } from "@/components/data-table"
 import { logColumns } from "@/components/activity/logs/logs-columns"
 import { LineChartComponent } from "@/components/charts/linechart"
 import { PieChartComponent } from "@/components/charts/piechart"
+import { DataTable } from "@/components/data-table"
 import { DateRangePicker } from "@/components/date-range-picker"
+import { Shell } from "@/components/layout/shell"
+import { DashboardCards } from "@/components/pages/dashboard/dashboard-cards"
+import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
 
 export const metadata: Metadata = {
   title: "Dashboard",

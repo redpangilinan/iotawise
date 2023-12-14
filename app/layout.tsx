@@ -1,9 +1,11 @@
 import "./globals.css"
-import { siteConfig } from "@/config/site"
+
 import { Inter } from "next/font/google"
-import { ThemeProvider } from "@/components/theme-provider"
-import { Toaster } from "@/components/ui/toaster"
 import NextTopLoader from "nextjs-toploader"
+
+import { siteConfig } from "@/config/site"
+import { Toaster } from "@/components/ui/toaster"
+import { ThemeProvider } from "@/components/theme-provider"
 
 const inter = Inter({ subsets: ["latin"] })
 

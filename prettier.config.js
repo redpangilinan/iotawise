@@ -1,7 +1,25 @@
-// prettier.config.js or .prettierrc.js
+/** @type {import('prettier').Config} */
 module.exports = {
-  trailingComma: "es5",
-  tabWidth: 2,
+  endOfLine: "lf",
   semi: false,
-  plugins: ["prettier-plugin-tailwindcss"],
+  singleQuote: false,
+  tabWidth: 2,
+  trailingComma: "es5",
+  importOrder: [
+    "^(react/(.*)$)|^(react$)",
+    "^(next/(.*)$)|^(next$)",
+    "<THIRD_PARTY_MODULES>",
+    "",
+    "^types$",
+    "^@/env(.*)$",
+    "^@/types/(.*)$",
+    "^@/config/(.*)$",
+    "^@/lib/(.*)$",
+    "^@/components/ui/(.*)$",
+    "^@/components/(.*)$",
+    "^@/app/(.*)$",
+    "",
+    "^[./]",
+  ],
+  plugins: ["@ianvs/prettier-plugin-sort-imports"],
 }

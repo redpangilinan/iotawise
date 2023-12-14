@@ -2,11 +2,10 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Activity } from "@prisma/client"
-import { useForm } from "react-hook-form"
 import { HexColorPicker } from "react-colorful"
+import { useForm } from "react-hook-form"
 import * as z from "zod"
 
 import { cn } from "@/lib/utils"
@@ -21,8 +20,8 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
 

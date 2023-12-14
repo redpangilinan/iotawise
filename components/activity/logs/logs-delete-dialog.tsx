@@ -1,6 +1,7 @@
 import * as React from "react"
 import { useRouter } from "next/navigation"
 
+import { formatDate } from "@/lib/utils"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,8 +13,6 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
 import { Icons } from "@/components/icons"
-
-import { formatDate } from "@/lib/utils"
 
 interface LogsDeleteDialogProps {
   logDate?: Date

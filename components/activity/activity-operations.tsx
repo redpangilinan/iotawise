@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
+
 import { LogsAddForm } from "./logs/logs-add-form"
 
 async function deleteActivity(activityId: string) {

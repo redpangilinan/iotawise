@@ -6,6 +6,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
+
 import { LogsDeleteButton } from "./logs-delete-button"
 
 export type LogsType = {

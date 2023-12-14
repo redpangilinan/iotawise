@@ -1,11 +1,10 @@
-import HeadingText from "@/components/heading-text"
 import Link from "next/link"
-
-import { cn } from "@/lib/utils"
-import { siteConfig } from "@/config/site"
-import { buttonVariants } from "@/components/ui/button"
-
 import { FaGithub } from "react-icons/fa"
+
+import { siteConfig } from "@/config/site"
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
+import HeadingText from "@/components/heading-text"
 
 export default function OpenSource() {
   return (

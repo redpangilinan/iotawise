@@ -3,8 +3,8 @@
 import Link from "next/link"
 import { User } from "next-auth"
 
-import { siteConfig } from "@/config/site"
 import { navLinks } from "@/config/links"
+import { siteConfig } from "@/config/site"
 import { UserNavDisplay } from "@/components/user/user-nav-display"
 
 interface NavbarProps extends React.HTMLAttributes<HTMLDivElement> {

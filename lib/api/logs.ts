@@ -1,4 +1,4 @@
-import { ActivityEntry, ActivityByDate, DateRange } from "@/types"
+import { ActivityByDate, ActivityEntry, DateRange } from "@/types"
 
 import { db } from "@/lib/db"
 

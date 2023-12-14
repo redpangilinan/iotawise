@@ -1,7 +1,8 @@
 import * as z from "zod"
+
+import { verifyActivity } from "@/lib/api/activities"
 import { db } from "@/lib/db"
 import { activityPatchSchema } from "@/lib/validations/activity"
-import { verifyActivity } from "@/lib/api/activities"
 
 const routeContextSchema = z.object({
   params: z.object({
