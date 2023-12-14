@@ -26,7 +26,7 @@ export async function DELETE(
         id: params.logId as string,
         activity: {
           id: params.activityId as string,
-        }
+        },
       },
     })
 

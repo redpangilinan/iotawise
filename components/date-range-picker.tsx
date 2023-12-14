@@ -34,15 +34,18 @@ export function DateRangePicker({
 }: React.HTMLAttributes<HTMLDivElement>) {
   const router = useRouter()
   const pathname = usePathname()
-  const searchParams = useSearchParams();
+  const searchParams = useSearchParams()
 
-  const from = searchParams.get('from');
-  const to = searchParams.get('to');
+  const from = searchParams.get("from")
+  const to = searchParams.get("to")
 
-  const dateRange =  from && to ? dateRangeParams({
-    from,
-    to,
-  }): undefined;
+  const dateRange =
+    from && to
+      ? dateRangeParams({
+          from,
+          to,
+        })
+      : undefined
 
   const [date, setDate] = React.useState<DateRange | undefined>(dateRange)
 
