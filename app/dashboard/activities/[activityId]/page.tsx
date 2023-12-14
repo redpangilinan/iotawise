@@ -55,8 +55,7 @@ export default async function ActivityPage({
     notFound()
   }
 
-  const dateRange = dateRangeParams({ ...searchParams, utc: true })
-
+  const dateRange = dateRangeParams(searchParams)
   const dashboardData = await getStatsDashboardData(activity.id, dateRange)
 
   return (

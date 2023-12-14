@@ -101,6 +101,13 @@ export function DateRangePicker({
                   return null
                 }
 
+                const urlDate = (dateString: string) => {
+                  const date = new Date(dateString)
+                  const utcString = date.toISOString()
+
+                  return encodeURIComponent(utcString)
+                }
+
                 router.push(
                   `?from=${urlDate(date.from.toISOString())}&to=${urlDate(
                     date.to.toISOString()

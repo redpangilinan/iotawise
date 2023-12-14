@@ -17,11 +17,7 @@ export function formatDate(input: string | number): string {
   }).format(date)
 }
 
-export function dateRangeParams(searchParams: {
-  from: string
-  to: string
-  utc?: boolean
-}) {
+export function dateRangeParams(searchParams: { from: string; to: string }) {
   if (
     !searchParams.from ||
     isNaN(Date.parse(searchParams.from)) ||
@@ -32,30 +28,11 @@ export function dateRangeParams(searchParams: {
       from: new Date(),
       to: new Date(),
     }
-
     const oneYearAgo = new Date()
     oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1)
     dateRange.from = oneYearAgo
 
-    if (searchParams.utc) {
-      dateRange.from = utcToZonedTime(dateRange.from, "UTC")
-      dateRange.to = utcToZonedTime(dateRange.to, "UTC")
-    }
-
     return dateRange
-  }
-
-  if (searchParams.utc) {
-    console.log(searchParams.from, searchParams.to)
-    console.log({
-      from: utcToZonedTime(searchParams.from, "UTC"),
-      to: utcToZonedTime(searchParams.to, "UTC"),
-    })
-
-    return {
-      from: utcToZonedTime(searchParams.from, "UTC"),
-      to: utcToZonedTime(searchParams.to, "UTC"),
-    }
   }
 
   return {
