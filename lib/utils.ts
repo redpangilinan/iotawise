@@ -1,4 +1,5 @@
 import { clsx, type ClassValue } from "clsx"
+import { utcToZonedTime } from "date-fns-tz"
 import { twMerge } from "tailwind-merge"
 
 import { env } from "@/env.mjs"
@@ -37,26 +38,29 @@ export function dateRangeParams(searchParams: {
     dateRange.from = oneYearAgo
 
     if (searchParams.utc) {
-      dateRange.from = new Date(dateRange.from.toISOString())
-      dateRange.to = new Date(dateRange.to.toISOString())
+      dateRange.from = utcToZonedTime(dateRange.from, "UTC")
+      dateRange.to = utcToZonedTime(dateRange.to, "UTC")
     }
 
     return dateRange
   }
 
-  const from = new Date(searchParams.from)
-  const to = new Date(searchParams.to)
-
   if (searchParams.utc) {
+    console.log(searchParams.from, searchParams.to)
+    console.log({
+      from: utcToZonedTime(searchParams.from, "UTC"),
+      to: utcToZonedTime(searchParams.to, "UTC"),
+    })
+
     return {
-      from: new Date(from.toISOString()),
-      to: new Date(to.toISOString()),
+      from: utcToZonedTime(searchParams.from, "UTC"),
+      to: utcToZonedTime(searchParams.to, "UTC"),
     }
   }
 
   return {
-    from,
-    to,
+    from: new Date(searchParams.from),
+    to: new Date(searchParams.to),
   }
 }
 

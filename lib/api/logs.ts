@@ -1,6 +1,4 @@
 import { ActivityByDate, ActivityEntry, DateRange } from "@/types"
-import { format } from "date-fns"
-import { utcToZonedTime } from "date-fns-tz"
 
 import { db } from "@/lib/db"
 
@@ -11,12 +9,6 @@ export async function getLogs(
 ) {
   const typeCondition =
     type === "activity" ? { activityId: id } : { activity: { userId: id } }
-
-  const from = utcToZonedTime(dateRange.from, "UTC")
-  const to = utcToZonedTime(dateRange.to, "UTC")
-
-  console.log("from: ", from)
-  console.log("to: ", to)
 
   return await db.activityLog.findMany({
     select: {
@@ -32,8 +24,8 @@ export async function getLogs(
     },
     where: {
       date: {
-        gte: format(from, "yyyy-MM-dd'T'HH:mm:ssXXX"),
-        lte: format(to, "yyyy-MM-dd'T'HH:mm:ssXXX"),
+        gte: dateRange.from,
+        lte: dateRange.to,
       },
       ...typeCondition,
     },
@@ -108,14 +100,11 @@ export async function getTotalLogs(
   const typeCondition =
     type === "activity" ? { activityId: id } : { activity: { userId: id } }
 
-  const from = utcToZonedTime(dateRange.from, "UTC")
-  const to = utcToZonedTime(dateRange.to, "UTC")
-
   const logs = await db.activityLog.findMany({
     where: {
       date: {
-        gte: format(from, "yyyy-MM-dd'T'HH:mm:ssXXX"),
-        lte: format(to, "yyyy-MM-dd'T'HH:mm:ssXXX"),
+        gte: dateRange.from,
+        lte: dateRange.to,
       },
       ...typeCondition,
     },
@@ -141,9 +130,6 @@ export async function getMostLoggedActivity(
   userId: string,
   dateRange: DateRange
 ) {
-  const from = utcToZonedTime(dateRange.from, "UTC")
-  const to = utcToZonedTime(dateRange.to, "UTC")
-
   const logs = await db.activityLog.groupBy({
     by: ["activityId"],
     _sum: {
@@ -159,8 +145,8 @@ export async function getMostLoggedActivity(
         userId: userId,
       },
       date: {
-        gte: format(from, "yyyy-MM-dd'T'HH:mm:ssXXX"),
-        lte: format(to, "yyyy-MM-dd'T'HH:mm:ssXXX"),
+        gte: dateRange.from,
+        lte: dateRange.to,
       },
     },
   })
@@ -186,9 +172,6 @@ export async function getTopActivities(
   userId: string,
   dateRange: DateRange
 ): Promise<ActivityEntry[]> {
-  const from = utcToZonedTime(dateRange.from, "UTC")
-  const to = utcToZonedTime(dateRange.to, "UTC")
-
   const logs = await db.activityLog.groupBy({
     by: ["activityId"],
     _sum: {
@@ -204,8 +187,8 @@ export async function getTopActivities(
         userId: userId,
       },
       date: {
-        gte: format(from, "yyyy-MM-dd'T'HH:mm:ssXXX"),
-        lte: format(to, "yyyy-MM-dd'T'HH:mm:ssXXX"),
+        gte: dateRange.from,
+        lte: dateRange.to,
       },
     },
   })
@@ -242,9 +225,6 @@ export async function getActivityCountByDate(
   userId: string,
   dateRange: DateRange
 ): Promise<ActivityByDate[]> {
-  const from = utcToZonedTime(dateRange.from, "UTC")
-  const to = utcToZonedTime(dateRange.to, "UTC")
-
   const logs = await db.activityLog.groupBy({
     by: ["date"],
     _sum: {
@@ -258,8 +238,8 @@ export async function getActivityCountByDate(
         userId: userId,
       },
       date: {
-        gte: format(from, "yyyy-MM-dd'T'HH:mm:ssXXX"),
-        lte: format(to, "yyyy-MM-dd'T'HH:mm:ssXXX"),
+        gte: dateRange.from,
+        lte: dateRange.to,
       },
     },
   })
@@ -301,15 +281,12 @@ export async function getDailyAverage(
   activityId: string,
   dateRange: DateRange
 ): Promise<number> {
-  const from = utcToZonedTime(dateRange.from, "UTC")
-  const to = utcToZonedTime(dateRange.to, "UTC")
-
   const logs = await db.activityLog.findMany({
     where: {
       activityId: activityId,
       date: {
-        gte: format(from, "yyyy-MM-dd'T'HH:mm:ssXXX"),
-        lte: format(to, "yyyy-MM-dd'T'HH:mm:ssXXX"),
+        gte: dateRange.from,
+        lte: dateRange.to,
       },
     },
     orderBy: {
