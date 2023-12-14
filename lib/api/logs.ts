@@ -1,6 +1,4 @@
 import { ActivityByDate, ActivityEntry, DateRange } from "@/types"
-import { format } from "date-fns"
-import { utcToZonedTime } from "date-fns-tz"
 
 import { db } from "@/lib/db"
 
@@ -26,8 +24,8 @@ export async function getLogs(
     },
     where: {
       date: {
-        gte: dateRange.from,
-        lte: dateRange.to,
+        gte: dateRange.from.toISOString(),
+        lte: dateRange.to.toISOString(),
       },
       ...typeCondition,
     },
@@ -105,8 +103,8 @@ export async function getTotalLogs(
   const logs = await db.activityLog.findMany({
     where: {
       date: {
-        gte: dateRange.from,
-        lte: dateRange.to,
+        gte: dateRange.from.toISOString(),
+        lte: dateRange.to.toISOString(),
       },
       ...typeCondition,
     },
@@ -147,8 +145,8 @@ export async function getMostLoggedActivity(
         userId: userId,
       },
       date: {
-        gte: dateRange.from,
-        lte: dateRange.to,
+        gte: dateRange.from.toISOString(),
+        lte: dateRange.to.toISOString(),
       },
     },
   })
@@ -189,8 +187,8 @@ export async function getTopActivities(
         userId: userId,
       },
       date: {
-        gte: dateRange.from,
-        lte: dateRange.to,
+        gte: dateRange.from.toISOString(),
+        lte: dateRange.to.toISOString(),
       },
     },
   })
@@ -240,8 +238,8 @@ export async function getActivityCountByDate(
         userId: userId,
       },
       date: {
-        gte: dateRange.from,
-        lte: dateRange.to,
+        gte: dateRange.from.toISOString(),
+        lte: dateRange.to.toISOString(),
       },
     },
   })
@@ -287,8 +285,8 @@ export async function getDailyAverage(
     where: {
       activityId: activityId,
       date: {
-        gte: dateRange.from,
-        lte: dateRange.to,
+        gte: dateRange.from.toISOString(),
+        lte: dateRange.to.toISOString(),
       },
     },
     orderBy: {
