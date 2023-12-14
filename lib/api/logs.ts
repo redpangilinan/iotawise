@@ -15,6 +15,9 @@ export async function getLogs(
   const from = utcToZonedTime(dateRange.from, "UTC")
   const to = utcToZonedTime(dateRange.to, "UTC")
 
+  console.log("from: ", from)
+  console.log("to: ", to)
+
   return await db.activityLog.findMany({
     select: {
       id: true,
