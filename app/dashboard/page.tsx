@@ -31,7 +31,6 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
   }
 
   const dateRange = dateRangeParams(searchParams)
-
   const dashboardData = await getDashboardData(user.id, dateRange)
 
   return (

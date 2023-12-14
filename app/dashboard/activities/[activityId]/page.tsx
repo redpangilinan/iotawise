@@ -56,7 +56,6 @@ export default async function ActivityPage({
   }
 
   const dateRange = dateRangeParams(searchParams)
-
   const dashboardData = await getStatsDashboardData(activity.id, dateRange)
 
   return (
