@@ -37,22 +37,26 @@ export function dateRangeParams(searchParams: {
     dateRange.from = oneYearAgo
 
     if (searchParams.utc) {
-      dateRange.from.toISOString()
-      dateRange.to.toISOString()
+      dateRange.from = new Date(dateRange.from.toISOString())
+      dateRange.to = new Date(dateRange.to.toISOString())
     }
 
     return dateRange
   }
+
+  const from = new Date(searchParams.from)
+  const to = new Date(searchParams.to)
+
   if (searchParams.utc) {
     return {
-      from: new Date(searchParams.from).toISOString(),
-      to: new Date(searchParams.to).toISOString(),
+      from: new Date(from.toISOString()),
+      to: new Date(to.toISOString()),
     }
   }
 
   return {
-    from: new Date(searchParams.from),
-    to: new Date(searchParams.to),
+    from,
+    to,
   }
 }
 
