@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 }
 
 interface DashboardProps {
-  searchParams: { from: string; to: string }
+  searchParams: { from: string; to: string; utc?: boolean }
 }
 
 export default async function Dashboard({ searchParams }: DashboardProps) {
@@ -30,7 +30,7 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
     redirect(authOptions?.pages?.signIn || "/signin")
   }
 
-  const dateRange = dateRangeParams(searchParams)
+  const dateRange = dateRangeParams({ ...searchParams, utc: true })
 
   const dashboardData = await getDashboardData(user.id, dateRange)
 
