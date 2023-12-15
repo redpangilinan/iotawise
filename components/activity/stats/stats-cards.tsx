@@ -1,3 +1,5 @@
+"use client"
+
 import { SearchParams } from "@/types"
 
 import { formatDate } from "@/lib/utils"
