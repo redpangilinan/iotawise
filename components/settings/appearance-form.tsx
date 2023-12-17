@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTheme } from "next-themes"
 import { useForm } from "react-hook-form"
@@ -28,11 +29,11 @@ const appearanceFormSchema = z.object({
 type AppearanceFormValues = z.infer<typeof appearanceFormSchema>
 
 const defaultValues: Partial<AppearanceFormValues> = {
-  theme: "light",
+  theme: "dark", // dark mode is default theme in `ThemeProvider`
 }
 
 export function AppearanceForm() {
-  const { setTheme } = useTheme()
+  const { theme, setTheme } = useTheme()
   const form = useForm<AppearanceFormValues>({
     resolver: zodResolver(appearanceFormSchema),
     defaultValues,
@@ -44,6 +45,11 @@ export function AppearanceForm() {
       description: "Your theme has been updated.",
     })
   }
+
+  useEffect(() => {
+    // sync current theme with form state
+    form.setValue("theme", theme as "light" | "dark")
+  }, [theme, form])
 
   return (
     <Card>
@@ -63,7 +69,7 @@ export function AppearanceForm() {
                   <FormMessage />
                   <RadioGroup
                     onValueChange={field.onChange}
-                    defaultValue={field.value}
+                    value={field.value}
                     className="grid max-w-md grid-cols-1 pt-2 md:grid-cols-2 md:gap-8"
                   >
                     <FormItem>
