@@ -28,15 +28,10 @@ const appearanceFormSchema = z.object({
 
 type AppearanceFormValues = z.infer<typeof appearanceFormSchema>
 
-const defaultValues: Partial<AppearanceFormValues> = {
-  theme: "dark", // dark mode is default theme in `ThemeProvider`
-}
-
 export function AppearanceForm() {
   const { theme, setTheme } = useTheme()
   const form = useForm<AppearanceFormValues>({
     resolver: zodResolver(appearanceFormSchema),
-    defaultValues,
   })
 
   function onSubmit(data: AppearanceFormValues) {
