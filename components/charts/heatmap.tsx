@@ -1,15 +1,25 @@
 "use client"
 
 import * as React from "react"
+import { useRouter } from "next/navigation"
 import CalendarHeatmap from "react-calendar-heatmap"
 
 import "react-calendar-heatmap/dist/styles.css"
 
 import { formatDate } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
+import {
+  Credenza,
+  CredenzaClose,
+  CredenzaContent,
+  CredenzaDescription,
+  CredenzaFooter,
+  CredenzaHeader,
+  CredenzaTitle,
+} from "@/components/ui/credenza"
 import { toast } from "@/components/ui/use-toast"
-
-import { LogsDeleteDialog } from "../activity/logs/logs-delete-dialog"
+import { Icons } from "@/components/icons"
 
 interface Value {
   id: string
@@ -53,6 +63,7 @@ async function deleteActivity(activityId: string, logsId: string) {
 }
 
 export function Heatmap({ data, params }: HeatmapProps) {
+  const router = useRouter()
   const [showDeleteAlert, setShowDeleteAlert] = React.useState<boolean>(false)
   const [isDeleteLoading, setIsDeleteLoading] = React.useState<boolean>(false)
   const [selectedLog, setSelectedLog] = React.useState<Value | null>(null)
@@ -67,6 +78,7 @@ export function Heatmap({ data, params }: HeatmapProps) {
         setIsDeleteLoading(false)
         setShowDeleteAlert(false)
         setSelectedLog(null)
+        router.refresh()
       }
     }
   }
@@ -121,13 +133,39 @@ export function Heatmap({ data, params }: HeatmapProps) {
             }
           }}
         />
-        <LogsDeleteDialog
-          logDate={selectedDate || undefined}
-          open={showDeleteAlert}
-          onClose={() => setShowDeleteAlert(false)}
-          onDelete={handleDelete}
-          isLoading={isDeleteLoading}
-        />
+        <Credenza open={showDeleteAlert} onOpenChange={setShowDeleteAlert}>
+          <CredenzaContent>
+            <CredenzaHeader>
+              <CredenzaTitle>
+                Delete logs from{" "}
+                {selectedDate
+                  ? formatDate(selectedDate.toLocaleDateString())
+                  : ""}
+                ?
+              </CredenzaTitle>
+              <CredenzaDescription>
+                This action cannot be undone.
+              </CredenzaDescription>
+            </CredenzaHeader>
+            <CredenzaFooter className="flex flex-col-reverse">
+              <CredenzaClose asChild>
+                <Button variant="outline">Cancel</Button>
+              </CredenzaClose>
+              <Button
+                onClick={handleDelete}
+                disabled={isDeleteLoading}
+                className="bg-red-600 focus:ring-red-600"
+              >
+                {isDeleteLoading ? (
+                  <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                ) : (
+                  <Icons.trash className="mr-2 h-4 w-4" />
+                )}
+                <span>Delete</span>
+              </Button>
+            </CredenzaFooter>
+          </CredenzaContent>
+        </Credenza>
       </div>
     </Card>
   )

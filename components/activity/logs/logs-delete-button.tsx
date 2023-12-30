@@ -1,12 +1,21 @@
 "use client"
 
 import * as React from "react"
+import { useRouter } from "next/navigation"
 
+import { formatDate } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import {
+  Credenza,
+  CredenzaClose,
+  CredenzaContent,
+  CredenzaDescription,
+  CredenzaFooter,
+  CredenzaHeader,
+  CredenzaTitle,
+} from "@/components/ui/credenza"
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
-
-import { LogsDeleteDialog } from "./logs-delete-dialog"
 
 interface LogsDeleteButtonProps {
   logs: {
@@ -41,6 +50,7 @@ async function deleteActivity(activityId: string, logsId: string) {
 }
 
 export function LogsDeleteButton({ logs }: LogsDeleteButtonProps) {
+  const router = useRouter()
   const [showDeleteAlert, setShowDeleteAlert] = React.useState<boolean>(false)
   const [isDeleteLoading, setIsDeleteLoading] = React.useState<boolean>(false)
 
@@ -51,6 +61,7 @@ export function LogsDeleteButton({ logs }: LogsDeleteButtonProps) {
     if (deleted) {
       setIsDeleteLoading(false)
       setShowDeleteAlert(false)
+      router.refresh()
     }
   }
 
@@ -65,13 +76,35 @@ export function LogsDeleteButton({ logs }: LogsDeleteButtonProps) {
         <Icons.trash className="h-4 w-4" />
         <span className="sr-only">Delete</span>
       </Button>
-      <LogsDeleteDialog
-        logDate={logs.date}
-        open={showDeleteAlert}
-        onClose={() => setShowDeleteAlert(false)}
-        onDelete={handleDelete}
-        isLoading={isDeleteLoading}
-      />
+      <Credenza open={showDeleteAlert} onOpenChange={setShowDeleteAlert}>
+        <CredenzaContent>
+          <CredenzaHeader>
+            <CredenzaTitle>
+              Delete logs from {formatDate(logs.date.toLocaleDateString())}?
+            </CredenzaTitle>
+            <CredenzaDescription>
+              This action cannot be undone.
+            </CredenzaDescription>
+          </CredenzaHeader>
+          <CredenzaFooter className="flex flex-col-reverse">
+            <CredenzaClose asChild>
+              <Button variant="outline">Cancel</Button>
+            </CredenzaClose>
+            <Button
+              onClick={handleDelete}
+              disabled={isDeleteLoading}
+              className="bg-red-600 focus:ring-red-600"
+            >
+              {isDeleteLoading ? (
+                <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+              ) : (
+                <Icons.trash className="mr-2 h-4 w-4" />
+              )}
+              <span>Delete</span>
+            </Button>
+          </CredenzaFooter>
+        </CredenzaContent>
+      </Credenza>
     </>
   )
 }

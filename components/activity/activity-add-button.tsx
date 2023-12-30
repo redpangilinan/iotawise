@@ -3,16 +3,16 @@
 import * as React from "react"
 import { useRouter } from "next/navigation"
 
-import {
-  AlertDialog,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog"
 import { Button, ButtonProps } from "@/components/ui/button"
+import {
+  Credenza,
+  CredenzaClose,
+  CredenzaContent,
+  CredenzaDescription,
+  CredenzaFooter,
+  CredenzaHeader,
+  CredenzaTitle,
+} from "@/components/ui/credenza"
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
 
@@ -73,18 +73,20 @@ export function ActivityAddButton({
       </Button>
 
       {/* Add Alert */}
-      <AlertDialog open={showAddAlert} onOpenChange={setShowAddAlert}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>
+      <Credenza open={showAddAlert} onOpenChange={setShowAddAlert}>
+        <CredenzaContent>
+          <CredenzaHeader>
+            <CredenzaTitle>
               Are you sure you want to create a new activity?
-            </AlertDialogTitle>
-            <AlertDialogDescription>
+            </CredenzaTitle>
+            <CredenzaDescription>
               This will add a new activity to your account.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            </CredenzaDescription>
+          </CredenzaHeader>
+          <CredenzaFooter className="flex flex-col-reverse">
+            <CredenzaClose asChild>
+              <Button variant="outline">Cancel</Button>
+            </CredenzaClose>
             <Button onClick={onClick} disabled={isLoading}>
               {isLoading ? (
                 <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
@@ -93,9 +95,9 @@ export function ActivityAddButton({
               )}
               <span>Add activity</span>
             </Button>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+          </CredenzaFooter>
+        </CredenzaContent>
+      </Credenza>
     </>
   )
 }

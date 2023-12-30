@@ -8,9 +8,9 @@ import { useForm } from "react-hook-form"
 import * as z from "zod"
 
 import { cn } from "@/lib/utils"
-import { AlertDialogCancel } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
+import { CredenzaClose, CredenzaFooter } from "@/components/ui/credenza"
 import {
   Form,
   FormControl,
@@ -90,20 +90,23 @@ export function LogsAddForm({ activityId, setShowLogAlert }: LogsAddFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-8 px-4 md:px-0"
+      >
         <FormField
           control={form.control}
           name="date"
           render={({ field }) => (
             <FormItem className="flex flex-col">
               <FormLabel>Date</FormLabel>
-              <Popover>
+              <Popover modal={true}>
                 <PopoverTrigger asChild>
                   <FormControl>
                     <Button
                       variant={"outline"}
                       className={cn(
-                        "w-full pl-3 text-left font-normal sm:w-[240px]",
+                        "w-full pl-3 text-left font-normal sm:w-[320px]",
                         !field.value && "text-muted-foreground"
                       )}
                     >
@@ -135,7 +138,10 @@ export function LogsAddForm({ activityId, setShowLogAlert }: LogsAddFormProps) {
             </FormItem>
           )}
         />
-        <div className="grid md:flex md:gap-2">
+        <CredenzaFooter className="flex flex-col-reverse">
+          <CredenzaClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </CredenzaClose>
           <Button type="submit" disabled={isLoading}>
             {isLoading ? (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
@@ -144,8 +150,7 @@ export function LogsAddForm({ activityId, setShowLogAlert }: LogsAddFormProps) {
             )}
             <span>Add log</span>
           </Button>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-        </div>
+        </CredenzaFooter>
       </form>
     </Form>
   )
