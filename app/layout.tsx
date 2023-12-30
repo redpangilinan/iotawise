@@ -71,10 +71,13 @@ interface RootLayoutProps {
 export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn("flex min-h-screen flex-col", inter.className)}>
+      <body className={cn("antialiased", inter.className)}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <NextTopLoader color="#DC2645" height={2.5} showSpinner={false} />
-          <div vaul-drawer-wrapper="" className="bg-background">
+          <div
+            vaul-drawer-wrapper=""
+            className="flex min-h-screen flex-col bg-background"
+          >
             {children}
           </div>
           <Toaster />
