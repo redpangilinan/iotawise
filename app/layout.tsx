@@ -1,15 +1,17 @@
 import "./globals.css"
 
+import { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
 import NextTopLoader from "nextjs-toploader"
 
 import { siteConfig } from "@/config/site"
+import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from "@/components/theme-provider"
 
 const inter = Inter({ subsets: ["latin"] })
 
-export const metadata = {
+export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url.base),
   title: {
     default: siteConfig.name,
@@ -55,7 +57,7 @@ export const metadata = {
   manifest: `${siteConfig.url.base}/site.webmanifest`,
 }
 
-export const viewport = {
+export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },
@@ -69,10 +71,12 @@ interface RootLayoutProps {
 export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} flex min-h-screen flex-col`}>
+      <body className={cn("flex min-h-screen flex-col", inter.className)}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <NextTopLoader color="#DC2645" height={2.5} showSpinner={false} />
-          {children}
+          <div vaul-drawer-wrapper="" className="bg-background">
+            {children}
+          </div>
           <Toaster />
         </ThemeProvider>
       </body>
