@@ -18,7 +18,7 @@ import {
   BsMoonStars,
   BsSun,
 } from "react-icons/bs"
-import { FaSort, FaUserAlt } from "react-icons/fa"
+import { FaRegStar, FaSort, FaUserAlt } from "react-icons/fa"
 import { ImSpinner8, ImStatsBars } from "react-icons/im"
 import { LuSettings } from "react-icons/lu"
 import { MdDeleteForever, MdOutlineLogout } from "react-icons/md"
@@ -66,6 +66,7 @@ const icons = {
   statsBar: ImStatsBars,
   mixer: RxMixerHorizontal,
   check: BsCheck2,
+  star: FaRegStar,
 }
 
 export const Icons: IconsType = icons
