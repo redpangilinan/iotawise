@@ -4,6 +4,7 @@ import Link from "next/link"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
+import { Icons } from "@/components/icons"
 import { ImageFrame } from "@/components/image-frame"
 
 export default function HeroHeader() {
@@ -25,9 +26,20 @@ export default function HeroHeader() {
             Monitor your activities, streaks, and progress with little effort.
             Integrate statistics to your life!
           </p>
-          <div className="space-x-4">
-            <Link href="/signin" className={cn(buttonVariants({ size: "lg" }))}>
+          <div className="flex gap-4">
+            <Link
+              href="/signin"
+              className={cn(buttonVariants({ variant: "default" }))}
+            >
               Get Started
+            </Link>
+            <Link
+              href={siteConfig.links.github}
+              target="_blank"
+              className={cn(buttonVariants({ variant: "outline" }))}
+            >
+              <Icons.github className="mr-2 h-4 w-4" />
+              <span>GitHub</span>
             </Link>
           </div>
         </div>
