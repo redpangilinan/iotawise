@@ -7,8 +7,7 @@ import { env } from "@/env.mjs"
 import { db } from "@/lib/db"
 
 export const authOptions: NextAuthOptions = {
-  // @see https://github.com/prisma/prisma/issues/16117
-  adapter: PrismaAdapter(db as any),
+  adapter: PrismaAdapter(db),
   session: {
     strategy: "jwt",
   },
