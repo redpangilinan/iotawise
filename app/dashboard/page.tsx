@@ -41,8 +41,10 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
         <DateRangePicker />
       </DashboardHeader>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <ScrollArea className="h-[17rem] border-b">
-          <ActivityList activities={dashboardData.userActivities} />
+        <ScrollArea className="h-[17rem] rounded-lg border">
+          <div className="divide-y divide-border">
+            <ActivityList activities={dashboardData.userActivities} />
+          </div>
         </ScrollArea>
         <DashboardCards data={dashboardData} searchParams={searchParams} />
         <LineChartComponent data={dashboardData.activityCountByDate} />

@@ -28,7 +28,9 @@ export default async function ActivitiesPage() {
       <DashboardHeader heading="Activities" text="Manage account activities.">
         <ActivityAddButton />
       </DashboardHeader>
-      <ActivityList activities={activities} />
+      <div className="divide-y divide-border rounded-md border">
+        <ActivityList activities={activities} />
+      </div>
     </Shell>
   )
 }

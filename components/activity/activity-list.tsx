@@ -14,11 +14,11 @@ export function ActivityList({ activities }: ActivityListProps) {
   return (
     <>
       {activities?.length ? (
-        <div className="divide-y divide-border rounded-md border">
+        <>
           {activities.map((activity) => (
             <ActivityItem key={activity.id} activity={activity} />
           ))}
-        </div>
+        </>
       ) : (
         <EmptyPlaceholder>
           <div className="flex h-20 w-20 items-center justify-center rounded-full bg-muted">
