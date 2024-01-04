@@ -5,6 +5,8 @@ import { getDashboardData } from "@/lib/api/dashboard"
 import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
 import { dateRangeParams } from "@/lib/utils"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { ActivityList } from "@/components/activity/activity-list"
 import { logColumns } from "@/components/activity/logs/logs-columns"
 import { LineChartComponent } from "@/components/charts/linechart"
 import { PieChartComponent } from "@/components/charts/piechart"
@@ -38,8 +40,11 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
       <DashboardHeader heading="Dashboard" text="Monitor your progress.">
         <DateRangePicker />
       </DashboardHeader>
-      <DashboardCards data={dashboardData} searchParams={searchParams} />
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <ScrollArea className="h-[17rem] border-b">
+          <ActivityList activities={dashboardData.userActivities} />
+        </ScrollArea>
+        <DashboardCards data={dashboardData} searchParams={searchParams} />
         <LineChartComponent data={dashboardData.activityCountByDate} />
         <PieChartComponent data={dashboardData.topActivities} />
       </div>

@@ -1,3 +1,4 @@
+import { getUserActivities } from "@/lib/api/activities"
 import {
   getActivityCountByDate,
   getDailyAverage,
@@ -24,6 +25,7 @@ export async function getDashboardData(
     mostLoggedActivity,
     activityCountByDate,
     topActivities,
+    userActivities,
   ] = await Promise.all([
     getLogs(userId, dateRange, "user"),
     getStreak(userId, "user"),
@@ -31,6 +33,7 @@ export async function getDashboardData(
     getMostLoggedActivity(userId, dateRange),
     getActivityCountByDate(userId, dateRange),
     getTopActivities(userId, dateRange),
+    getUserActivities(userId),
   ])
 
   return {
@@ -40,6 +43,7 @@ export async function getDashboardData(
     mostLoggedActivity,
     activityCountByDate,
     topActivities,
+    userActivities,
   }
 }
 
