@@ -1,15 +1,6 @@
 "use client"
 
-import * as React from "react"
-import { useRouter } from "next/navigation"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Activity } from "@prisma/client"
-import { HexColorPicker } from "react-colorful"
-import { useForm } from "react-hook-form"
-import * as z from "zod"
-
-import { cn } from "@/lib/utils"
-import { activityPatchSchema } from "@/lib/validations/activity"
+import { Icons } from "@/components/icons"
 import { buttonVariants } from "@/components/ui/button"
 import {
   Card,
@@ -23,7 +14,15 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
-import { Icons } from "@/components/icons"
+import { cn } from "@/lib/utils"
+import { activityPatchSchema } from "@/lib/validations/activity"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { Activity } from "@prisma/client"
+import { useRouter } from "next/navigation"
+import * as React from "react"
+import { HexColorPicker } from "react-colorful"
+import { useForm } from "react-hook-form"
+import * as z from "zod"
 
 interface ActivityEditFormProps extends React.HTMLAttributes<HTMLFormElement> {
   activity: Pick<Activity, "id" | "name" | "description" | "colorCode">
@@ -40,7 +39,7 @@ export function ActivityEditForm({
   const {
     handleSubmit,
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(activityPatchSchema),
     defaultValues: {
@@ -49,12 +48,9 @@ export function ActivityEditForm({
       colorCode: "",
     },
   })
-  const [isSaving, setIsSaving] = React.useState<boolean>(false)
   const [color, setColor] = React.useState(activity.colorCode || "#ffffff")
 
   async function onSubmit(data: FormData) {
-    setIsSaving(true)
-
     const response = await fetch(`/api/activities/${activity.id}`, {
       method: "PATCH",
       headers: {
@@ -66,8 +62,6 @@ export function ActivityEditForm({
         colorCode: color,
       }),
     })
-
-    setIsSaving(false)
 
     if (!response?.ok) {
       return toast({
@@ -133,9 +127,9 @@ export function ActivityEditForm({
           <button
             type="submit"
             className={cn(buttonVariants(), className)}
-            disabled={isSaving}
+            disabled={isSubmitting}
           >
-            {isSaving && (
+            {isSubmitting && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
             <span>Save changes</span>
