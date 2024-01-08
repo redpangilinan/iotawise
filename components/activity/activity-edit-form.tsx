@@ -40,7 +40,7 @@ export function ActivityEditForm({
   const {
     handleSubmit,
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(activityPatchSchema),
     defaultValues: {
@@ -49,12 +49,9 @@ export function ActivityEditForm({
       colorCode: "",
     },
   })
-  const [isSaving, setIsSaving] = React.useState<boolean>(false)
   const [color, setColor] = React.useState(activity.colorCode || "#ffffff")
 
   async function onSubmit(data: FormData) {
-    setIsSaving(true)
-
     const response = await fetch(`/api/activities/${activity.id}`, {
       method: "PATCH",
       headers: {
@@ -66,8 +63,6 @@ export function ActivityEditForm({
         colorCode: color,
       }),
     })
-
-    setIsSaving(false)
 
     if (!response?.ok) {
       return toast({
@@ -133,9 +128,9 @@ export function ActivityEditForm({
           <button
             type="submit"
             className={cn(buttonVariants(), className)}
-            disabled={isSaving}
+            disabled={isSubmitting}
           >
-            {isSaving && (
+            {isSubmitting && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
             <span>Save changes</span>
