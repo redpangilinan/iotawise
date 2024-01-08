@@ -1,6 +1,15 @@
 "use client"
 
-import { Icons } from "@/components/icons"
+import * as React from "react"
+import { useRouter } from "next/navigation"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { Activity } from "@prisma/client"
+import { HexColorPicker } from "react-colorful"
+import { useForm } from "react-hook-form"
+import * as z from "zod"
+
+import { cn } from "@/lib/utils"
+import { activityPatchSchema } from "@/lib/validations/activity"
 import { buttonVariants } from "@/components/ui/button"
 import {
   Card,
@@ -14,15 +23,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
-import { cn } from "@/lib/utils"
-import { activityPatchSchema } from "@/lib/validations/activity"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Activity } from "@prisma/client"
-import { useRouter } from "next/navigation"
-import * as React from "react"
-import { HexColorPicker } from "react-colorful"
-import { useForm } from "react-hook-form"
-import * as z from "zod"
+import { Icons } from "@/components/icons"
 
 interface ActivityEditFormProps extends React.HTMLAttributes<HTMLFormElement> {
   activity: Pick<Activity, "id" | "name" | "description" | "colorCode">
