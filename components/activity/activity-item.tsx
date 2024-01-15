@@ -6,6 +6,7 @@ import { Activity } from "@prisma/client"
 import { formatDate } from "@/lib/utils"
 import { Skeleton } from "@/components/ui/skeleton"
 import { ActivityOperations } from "@/components/activity/activity-operations"
+import { QuickLogButton } from "@/components/activity/logs/quick-log-button"
 
 interface ActivityItemProps {
   activity: Pick<
@@ -44,11 +45,19 @@ export function ActivityItem({ activity }: ActivityItemProps) {
           </div>
         ) : null}
       </div>
-      <ActivityOperations
-        activity={{
-          id: activity.id,
-        }}
-      />
+      <div className="flex gap-2">
+        <QuickLogButton
+          activityId={activity.id}
+          className="flex h-8 w-8 items-center justify-center rounded-md border transition-colors hover:bg-muted"
+          variant="outline"
+          size="icon"
+        />
+        <ActivityOperations
+          activity={{
+            id: activity.id,
+          }}
+        />
+      </div>
     </div>
   )
 }
