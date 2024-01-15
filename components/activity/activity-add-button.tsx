@@ -18,11 +18,7 @@ import { Icons } from "@/components/icons"
 
 interface ActivityAddButtonProps extends ButtonProps {}
 
-export function ActivityAddButton({
-  className,
-  variant,
-  ...props
-}: ActivityAddButtonProps) {
+export function ActivityAddButton({ ...props }: ActivityAddButtonProps) {
   const router = useRouter()
   const [showAddAlert, setShowAddAlert] = React.useState<boolean>(false)
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
@@ -67,7 +63,7 @@ export function ActivityAddButton({
 
   return (
     <>
-      <Button onClick={() => setShowAddAlert(true)}>
+      <Button onClick={() => setShowAddAlert(true)} {...props}>
         <Icons.add className="mr-2 h-4 w-4" />
         New activity
       </Button>
