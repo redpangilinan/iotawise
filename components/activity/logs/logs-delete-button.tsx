@@ -80,7 +80,7 @@ export function LogsDeleteButton({ logs }: LogsDeleteButtonProps) {
         <CredenzaContent>
           <CredenzaHeader>
             <CredenzaTitle>
-              Delete logs from {formatDate(logs.date.toLocaleDateString())}?
+              Delete logs from {formatDate(logs.date)}?
             </CredenzaTitle>
             <CredenzaDescription>
               This action cannot be undone.
