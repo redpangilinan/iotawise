@@ -138,10 +138,7 @@ export function Heatmap({ data, params }: HeatmapProps) {
             <CredenzaHeader>
               <CredenzaTitle>
                 Delete logs from{" "}
-                {selectedDate
-                  ? formatDate(selectedDate.toLocaleDateString())
-                  : ""}
-                ?
+                {selectedDate ? formatDate(selectedDate.toDateString()) : ""}?
               </CredenzaTitle>
               <CredenzaDescription>
                 This action cannot be undone.
