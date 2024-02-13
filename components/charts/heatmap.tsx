@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import CalendarHeatmap from "react-calendar-heatmap"
+import CalendarHeatmap, { ReactCalendarHeatmapValue } from "react-calendar-heatmap"
 
 import "react-calendar-heatmap/dist/styles.css"
 
@@ -122,13 +122,16 @@ export function Heatmap({ data, params }: HeatmapProps) {
         <CalendarHeatmap
           startDate={startDate}
           endDate={currentDate}
-          values={data}
+          values={data.map((value) => ({
+            ...value,
+            date: value.date.toISOString(),
+          }))}
           classForValue={(value) => getColorClass(value ? value.count : 0)}
-          titleForValue={getTitle}
-          onClick={(value) => {
+          titleForValue={(value) => getTitle(value as Value)}
+          onClick={(value: ReactCalendarHeatmapValue<string> | undefined) => {
             if (value) {
-              setSelectedLog(value)
-              setSelectedDate(value.date)
+              setSelectedLog(value as Value)
+              setSelectedDate(new Date(value.date))
               setShowDeleteAlert(true)
             }
           }}
