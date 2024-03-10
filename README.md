@@ -23,7 +23,7 @@ Iotawise is an open-source habit tracking app that lets you track daily habits a
 - [NextAuth.js](https://next-auth.js.org)
 - [Prisma](https://www.prisma.io) ORM
 - [Zod](https://zod.dev) Validations
-- [PlanetScale](https://planetscale.com) Database (MySQL)
+- [Neon](https://neon.tech/) Database (PostgreSQL)
 
 ## Running Locally
 

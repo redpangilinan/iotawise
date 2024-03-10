@@ -30,8 +30,8 @@ export async function getUserActivities(
       A.id,
       A.name,
       A.description,
-      A.color_code AS 'colorCode',
-      A.created_at AS 'createdAt',
+      A.color_code AS "colorCode",
+      A.created_at AS "createdAt",
       SUM(AL.count) AS total_count
     FROM
       activities A
