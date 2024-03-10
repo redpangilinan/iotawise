@@ -107,7 +107,10 @@ export function ActivityEditForm({
             )}
           </div>
           <div className="grid gap-3">
-            <Label htmlFor="description">Description</Label>
+            <Label htmlFor="description">
+              Description{" "}
+              <span className="text-muted-foreground">(optional)</span>
+            </Label>
             <Textarea
               id="description"
               className="w-full lg:w-[400px]"
