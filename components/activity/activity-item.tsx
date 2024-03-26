@@ -17,8 +17,8 @@ interface ActivityItemProps {
 
 export function ActivityItem({ activity }: ActivityItemProps) {
   return (
-    <div className="flex items-center justify-between p-4">
-      <div className="flex flex-col gap-4 md:flex-row md:items-center">
+    <div className="flex items-center justify-between gap-2 p-4">
+      <div className="flex flex-col gap-4">
         <div className="flex items-center gap-4 md:min-w-[8rem]">
           <div
             className="h-4 w-4 rounded-full shadow shadow-black dark:shadow-white"
@@ -45,7 +45,7 @@ export function ActivityItem({ activity }: ActivityItemProps) {
           </div>
         ) : null}
       </div>
-      <div className="flex gap-2">
+      <div className="flex flex-col gap-2 md:flex-row">
         <QuickLogButton
           activityId={activity.id}
           className="flex h-8 w-8 items-center justify-center rounded-md border transition-colors hover:bg-muted"
