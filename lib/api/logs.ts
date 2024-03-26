@@ -193,16 +193,6 @@ export async function getTopActivities(
     },
   })
 
-  if (logs.length === 0) {
-    return [
-      {
-        name: "N/A",
-        count: 1,
-        color: "#FFFFFF",
-      },
-    ]
-  }
-
   const topActivities = await Promise.all(
     logs.slice(0, 10).map(async (log) => {
       const activity = await db.activity.findUnique({

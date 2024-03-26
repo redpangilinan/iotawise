@@ -35,20 +35,35 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
   const dateRange = dateRangeParams(searchParams)
   const dashboardData = await getDashboardData(user.id, dateRange)
 
+  const activityData =
+    dashboardData.activityCountByDate.length > 0 &&
+    dashboardData.topActivities.length > 0
+
+  const layout = activityData
+    ? "grid grid-cols-1 gap-4 md:grid-cols-2"
+    : "grid grid-cols-1"
+  const scrollClass = activityData
+    ? "h-[17rem] rounded-lg border"
+    : "h-[25.1rem] rounded-lg border"
+
   return (
     <Shell>
       <DashboardHeader heading="Dashboard" text="Monitor your progress.">
         <DateRangePicker />
       </DashboardHeader>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <ScrollArea className="h-[17rem] rounded-lg border">
+      <div className={layout}>
+        <ScrollArea className={scrollClass}>
           <div className="divide-y divide-border">
             <ActivityList activities={dashboardData.userActivities} />
           </div>
         </ScrollArea>
-        <DashboardCards data={dashboardData} searchParams={searchParams} />
-        <LineChartComponent data={dashboardData.activityCountByDate} />
-        <PieChartComponent data={dashboardData.topActivities} />
+        {activityData && (
+          <>
+            <DashboardCards data={dashboardData} searchParams={searchParams} />
+            <LineChartComponent data={dashboardData.activityCountByDate} />
+            <PieChartComponent data={dashboardData.topActivities} />
+          </>
+        )}
       </div>
       <DataTable columns={logColumns} data={dashboardData.logs}>
         Log History
