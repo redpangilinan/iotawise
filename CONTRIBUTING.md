@@ -32,7 +32,19 @@ cp .env.example .env.local
 pnpm postinstall
 ```
 
-6. Start the development server.
+6. Start local Postgres server with Docker.
+
+```bash
+docker-compose up -d
+```
+
+7. Run the migrations.
+
+```bash
+pnpm prisma:migrate
+```
+
+8. Start the development server.
 
 ```bash
 pnpm dev
